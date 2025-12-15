@@ -139,7 +139,7 @@
             <div style="font-size: 2.5em; font-weight: bold; color: #007bff; margin-top: 10px;">
                 總分：<span id="final-score"></span>
             </div>
-            <p style="font-size: 0.9em; color: #888;">(每題 1.25 分)</p>
+            <p style="font-size: 0.9em; color: #888;">(每題2.5分)</p>
         </div>
 
         <div id="wrong-answer-analysis">
@@ -469,8 +469,8 @@
         document.getElementById('quiz-area').classList.add('hidden');
         document.getElementById('final-result').classList.remove('hidden');
         
-        // 1.25分計算
-        let finalScore = correctCount * 1.25;
+        // 2.5分計算
+        let finalScore = correctCount *2.5;
         
         document.getElementById('correct-count').innerText = correctCount;
         document.getElementById('total-count').innerText = examQuestions.length;
@@ -514,4 +514,5 @@
 </body>
 
 </html>
+
 
