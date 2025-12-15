@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TQC 網路管理實務 - 智慧備考系統</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", "Segoe UI", Arial, sans-serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 25px; font-size: 1.8em; }
+        
+        /* 進度條區域 */
+        .progress-section { margin-bottom: 30px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; }
+        .progress-bar-bg { background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.5s ease; text-align: center; color: white; font-size: 12px; line-height: 20px; }
+
+        /* 階段按鈕樣式 */
+        .stage-card { border: 2px solid transparent; border-radius: 10px; margin-bottom: 20px; transition: 0.2s; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
+        .stage-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .stage-btn { width: 100%; border: none; background: none; text-align: left; padding: 0; cursor: pointer; display: flex; align-items: stretch; }
+        .stage-icon { width: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; color: white; flex-shrink: 0; }
+        .stage-content { padding: 15px; flex-grow: 1; }
+        .stage-title { font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 4px; }
+        .stage-desc { font-size: 0.85em; color: #666; font-weight: normal; }
+        .stage-badge { display: inline-block; font-size: 0.75em; padding: 2px 8px; border-radius: 10px; background: #eee; color: #555; margin-top: 5px; }
+
+        /* 階段顏色定義 */
+        .s1 .stage-icon { background-color: #007bff; }
+        .s1.stage-card { border-color: #b8daff; }
+        
+        .s2 .stage-icon { background-color: #fd7e14; }
+        .s2.stage-card { border-color: #ffeeba; }
+        
+        .s3 .stage-icon { background-color: #6f42c1; }
+        .s3.stage-card { border-color: #d6d8db; }
+
+        .disabled-card { opacity: 0.6; filter: grayscale(1); pointer-events: none; }
+
+        /* 設定區塊 */
+        .settings-box { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px 15px; margin-bottom: 20px; text-align: right; font-size: 0.9em; display: flex; justify-content: space-between; align-items: center; }
+        .btn-reset { background: transparent; color: #dc3545; border: 1px solid #dc3545; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8em; }
+        .btn-reset:hover { background: #dc3545; color: white; }
+
+        /* 測驗區 (保持原樣，微調) */
+        .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .quit-btn { background: #6c757d; color: white; border: none; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9em; }
+        
+        .question-card { border: 1px solid #dee2e6; padding: 20px; margin-bottom: 20px; border-radius: 8px; background-color: #fafafa; }
+        .question-title { font-size: 1.25em; font-weight: 600; margin-bottom: 20px; color: #212529; line-height: 1.4; }
+        
+        .options label { display: block; margin: 10px 0; cursor: pointer; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: white; transition: 0.2s; position: relative; }
+        .options label:hover { border-color: #adb5bd; background-color: #f1f3f5; }
+        .options input:checked + span { font-weight: bold; color: #0056b3; }
+        
+        /* 結果樣式 */
+        .result-msg { margin-top: 15px; font-weight: bold; padding: 12px; border-radius: 6px; text-align: center; }
+        .correct { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
+        .wrong { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+
+        /* 按鈕區 */
+        .nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { background-color: #0d6efd; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 16px; flex: 1; font-weight: bold; transition: 0.2s; }
+        .btn:hover { background-color: #0b5ed7; }
+        .btn-prev { background-color: #6c757d; flex: 0 0 100px; }
+        .btn-prev:hover { background-color: #5c636a; }
+
+        .hidden { display: none !important; }
+        
+        /* 錯題分析列表 */
+        .analysis-item { border-left: 4px solid #dc3545; background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tag-new { background: #17a2b8; color: white; font-size: 0.7em; padding: 2px 5px; border-radius: 4px; vertical-align: middle; margin-right: 5px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="start-screen">
+        <h1>網路管理實務 - 智慧備考系統</h1>
+
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>第一遍覆蓋率 (未做題進度)</span>
+                <span id="coverage-text">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <div style="text-align: right; margin-top: 5px; font-size: 0.85em; color: #666;">
+                已做: <span id="done-count">0</span> / 總題數: <span id="total-pool-count">0</span> | 錯題庫: <span id="wrong-count">0</span>
+            </div>
+        </div>
+
+        <div class="settings-box">
+            <div>
+                <label style="margin-right:15px; cursor:pointer;"><input type="radio" name="submitMode" value="confirm" checked> 確認後送出</label>
+                <label style="cursor:pointer;"><input type="radio" name="submitMode" value="instant"> 點擊即送出</label>
+            </div>
+            <button class="btn-reset" onclick="resetAllData()">⚠️ 重置所有進度</button>
+        </div>
+
+        <div class="stage-card s1">
+            <button class="stage-btn" onclick="startExam('unanswered')">
+                <div class="stage-icon">1</div>
+                <div class="stage-content">
+                    <span class="stage-title">第一階段：消滅未做題</span>
+                    <span class="stage-desc">優先練習從未做過的題目。目標是將覆蓋率推到 100%。</span>
+                    <div><span class="stage-badge" id="badge-new-count">剩餘 0 題</span></div>
+                </div>
+            </button>
+        </div>
+
+        <div class="stage-card s2">
+            <button class="stage-btn" onclick="startExam('review_wrong')">
+                <div class="stage-icon">2</div>
+                <div class="stage-content">
+                    <span class="stage-title">第二階段：錯題大掃除</span>
+                    <span class="stage-desc">專攻歷史錯題。答對後權重會下降，直到完全掌握。</span>
+                    <div><span class="stage-badge" id="badge-wrong-count">待複習 0 題</span></div>
+                </div>
+            </button>
+        </div>
+
+        <div class="stage-card s3">
+            <button class="stage-btn" onclick="startExam('normal')">
+                <div class="stage-icon">3</div>
+                <div class="stage-content">
+                    <span class="stage-title">第三階段：全真模擬 (40題)</span>
+                    <span class="stage-desc">完全隨機抽選。考前 3 天衝刺用，模擬真實考試手感。</span>
+                </div>
+            </button>
+        </div>
+    </div>
+    
+    <div id="quiz-area" class="hidden">
+        <div class="header-bar">
+            <div>
+                <span id="current-mode-tag" style="background:#007bff; color:white; padding:2px 8px; border-radius:4px; font-size:0.8em; margin-right:10px;">模式</span>
+                <span style="font-weight:bold; color:#555;">第 <span id="current-q">1</span> / <span id="total-exam-q">40</span> 題</span>
+            </div>
+            <button class="quit-btn" onclick="quitExam()">暫停/返回</button>
+        </div>
+        
+        <div id="question-container"></div>
+
+        <div class="nav-buttons">
+            <button id="prev-btn" class="btn btn-prev hidden" onclick="prevQuestion()">上題</button>
+            <button id="submit-btn" class="btn" onclick="checkAnswer()">確定送出</button>
+            <button id="next-btn" class="btn hidden" onclick="nextQuestion()">下一題 ➡</button>
+        </div>
+    </div>
+
+    <div id="final-result" class="hidden">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color:#2c3e50;">測驗完成</h2>
+            <div style="font-size: 3em; font-weight: bold; color: #0d6efd; margin: 10px 0;">
+                <span id="final-score">0</span> <span style="font-size:0.4em; color:#999;">分</span>
+            </div>
+            <p>答對: <span id="correct-count">0</span> / <span id="total-count">0</span></p>
+        </div>
+
+        <div id="wrong-answer-analysis">
+            <h3 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">錯題檢討</h3>
+            <div id="analysis-list"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn" onclick="goHome()">返回首頁更新進度</button>
+        </div>
+    </div>
+</div>
+
+<script src="questions.js"></script>
+
+<script>
+    // --- 核心變數 ---
+    const QUESTIONS_PER_EXAM = 40; 
+    let examQuestions = []; 
+    let currentQuestionIndex = 0;
+    let correctCount = 0;
+    let userWrongAnswers = []; 
+    let answerHistory = {}; // 每一題的當下作答紀錄 {index: {userAns, isCorrect...}}
+    let submitMode = 'confirm';
+
+    // --- 初始化 ---
+    document.addEventListener('DOMContentLoaded', () => {
+        if (typeof questions === 'undefined') {
+            alert("找不到 questions.js，請確保檔案在同一目錄下。");
+            return;
+        }
+        updateDashboard();
+    });
+
+    // --- 資料存取層 (LocalStorage) ---
+    function getStoredData() {
+        const defaultData = {
+            weights: {}, // { id: weight } 1=normal, >1=wrong often
+            answeredIds: [] // [id1, id2...] List of IDs ever answered
+        };
+        const stored = localStorage.getItem('tqc_smart_data');
+        if (!stored) return defaultData;
+        
+        // 簡單的合併防止舊資料結構缺少欄位
+        let data = JSON.parse(stored);
+        if(!data.answeredIds) data.answeredIds = [];
+        return data;
+    }
+
+    function saveData(data) {
+        localStorage.setItem('tqc_smart_data', JSON.stringify(data));
+        updateDashboard();
+    }
+
+    // --- 儀表板與邏輯 ---
+    function updateDashboard() {
+        if (typeof questions === 'undefined') return;
+        
+        const data = getStoredData();
+        const totalQ = questions.length;
+        const doneCount = new Set(data.answeredIds).size; // 使用 Set 去重確保準確
+        const wrongCount = Object.values(data.weights).filter(w => w > 1).length;
+
+        // 更新進度條
+        const percentage = Math.round((doneCount / totalQ) * 100);
+        document.getElementById('progress-bar').style.width = percentage + '%';
+        document.getElementById('progress-bar').innerText = percentage + '%';
+        document.getElementById('coverage-text').innerText = percentage + '%';
+        
+        document.getElementById('done-count').innerText = doneCount;
+        document.getElementById('total-pool-count').innerText = totalQ;
+        document.getElementById('wrong-count').innerText = wrongCount;
+
+        // 更新按鈕上的徽章資訊
+        const remainingNew = totalQ - doneCount;
+        document.getElementById('badge-new-count').innerText = remainingNew > 0 ? `剩餘 ${remainingNew} 題` : "已完成所有題目！";
+        document.getElementById('badge-wrong-count').innerText = `待複習 ${wrongCount} 題`;
+
+        // 視覺回饋：如果全做完了，第一階段變綠色勾勾感(這裡簡單處理文字)
+        if(remainingNew === 0) {
+            document.querySelector('.s1 .stage-icon').innerHTML = '✓';
+            document.querySelector('.s1 .stage-icon').style.background = '#28a745';
+        }
+    }
+
+    // --- 開始測驗邏輯 ---
+    function startExam(mode) {
+        const data = getStoredData();
+        const answeredSet = new Set(data.answeredIds);
+        let pool = JSON.parse(JSON.stringify(questions)); // Deep copy
+        let selectedQuestions = [];
+        let modeTitle = "";
+
+        // 讀取設定
+        const radioInstant = document.querySelector('input[name="submitMode"][value="instant"]');
+        submitMode = radioInstant.checked ? 'instant' : 'confirm';
+
+        if (mode === 'unanswered') {
+            // 邏輯：只選 ID 不在 answeredSet 裡面的
+            let newPool = pool.filter(q => !answeredSet.has(q.id));
+            if (newPool.length === 0) {
+                alert("恭喜！您已經做過題庫中的所有題目了。\n建議進入「第二階段：錯題大掃除」或「第三階段：全真模擬」。");
+                return;
+            }
+            // 如果剩餘題目少於 40，就全出；否則隨機選 40 (或按順序選? 隨機比較好)
+            shuffleArray(newPool);
+            selectedQuestions = newPool.slice(0, QUESTIONS_PER_EXAM);
+            modeTitle = "第一階段：消滅未做題";
+
+        } else if (mode === 'review_wrong') {
+            // 邏輯：選 weight > 1 的
+            let wrongPool = pool.filter(q => (data.weights[q.id] || 1) > 1);
+            if (wrongPool.length === 0) {
+                alert("太強了！目前沒有累積的錯題。\n請去挑戰新題或直接進行模擬考。");
+                return;
+            }
+            // 錯題優先做權重高的
+            wrongPool.sort((a, b) => (data.weights[b.id] || 1) - (data.weights[a.id] || 1));
+            selectedQuestions = wrongPool.slice(0, QUESTIONS_PER_EXAM); // 也是一次做40題上限
+            modeTitle = "第二階段：錯題複習";
+
+        } else if (mode === 'normal') {
+            // 邏輯：全隨機
+            shuffleArray(pool);
+            selectedQuestions = pool.slice(0, QUESTIONS_PER_EXAM);
+            modeTitle = "第三階段：全真模擬";
+        }
+
+        // 初始化測驗狀態
+        examQuestions = selectedQuestions;
+        currentQuestionIndex = 0;
+        correctCount = 0;
+        userWrongAnswers = [];
+        answerHistory = {};
+
+        // UI 切換
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('quiz-area').classList.remove('hidden');
+        document.getElementById('current-mode-tag').innerText = modeTitle;
+        document.getElementById('total-exam-q').innerText = examQuestions.length;
+
+        renderQuestion();
+    }
+
+    // --- 渲染題目 ---
+    function renderQuestion() {
+        const q = examQuestions[currentQuestionIndex];
+        const container = document.getElementById('question-container');
+        document.getElementById('current-q').innerText = currentQuestionIndex + 1;
+
+        // 檢查歷史狀態
+        const history = answerHistory[currentQuestionIndex];
+        const isReviewed = (history && history.checked);
+
+        // 準備選項
+        let optionsHtml = '';
+        const keys = Object.keys(q.options).sort();
+        const isInstant = (submitMode === 'instant' && q.type === 'radio' && !isReviewed);
+
+        keys.forEach(key => {
+            let checkedAttr = '';
+            let disabledAttr = '';
+            let clickAction = isInstant ? `onclick="checkAnswer()"` : '';
+
+            // 恢復歷史狀態
+            if (isReviewed) {
+                if (history.userAns.includes(key)) checkedAttr = 'checked';
+                disabledAttr = 'disabled';
+                clickAction = ''; 
+            }
+
+            optionsHtml += `
+                <label>
+                    <input type="${q.type}" name="option" value="${key}" ${clickAction} ${checkedAttr} ${disabledAttr}>
+                    <span style="font-weight:bold; margin-right:5px;">${key}.</span>
+                    ${q.options[key]}
+                </label>
+            `;
+        });
+
+        // 標記這題是不是"新題" (不在已做清單中)
+        const data = getStoredData();
+        const isNew = !data.answeredIds.includes(q.id);
+        const newBadge = isNew ? `<span class="tag-new">NEW</span>` : ``;
+
+        container.innerHTML = `
+            <div class="question-card">
+                <div class="question-title">
+                    ${newBadge} ${q.id}. ${q.text}
+                </div>
+                <div class="options">${optionsHtml}</div>
+                <div id="result-msg" class="result-msg hidden"></div>
+            </div>
+        `;
+
+        // 按鈕狀態控制
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const submitBtn = document.getElementById('submit-btn');
+
+        currentQuestionIndex === 0 ? prevBtn.classList.add('hidden') : prevBtn.classList.remove('hidden');
+
+        if (isReviewed) {
+            showResultUI(history.isCorrect, q.answer);
+            submitBtn.classList.add('hidden');
+            
+            if (currentQuestionIndex < examQuestions.length - 1) {
+                nextBtn.classList.remove('hidden');
+                nextBtn.innerText = "下一題 ➡";
+                nextBtn.onclick = nextQuestion;
+            } else {
+                nextBtn.classList.remove('hidden');
+                nextBtn.innerText = "查看成績 🏁";
+                nextBtn.onclick = showFinalResult;
+            }
+        } else {
+            // 未作答
+            isInstant ? submitBtn.classList.add('hidden') : submitBtn.classList.remove('hidden');
+            nextBtn.classList.add('hidden');
+        }
+    }
+
+    // --- 核心：檢查答案與記錄 ---
+    function checkAnswer() {
+        const q = examQuestions[currentQuestionIndex];
+        const selectedEls = document.querySelectorAll('input[name="option"]:checked');
+        
+        if (answerHistory[currentQuestionIndex]?.checked) return;
+
+        let userAns = Array.from(selectedEls).map(el => el.value).sort();
+        if (userAns.length === 0) {
+            if(submitMode !== 'instant') alert("請先選擇答案！");
+            return;
+        }
+
+        const isCorrect = JSON.stringify(userAns) === JSON.stringify(q.answer);
+        
+        // 1. 更新內存狀態
+        if (isCorrect) correctCount++;
+        answerHistory[currentQuestionIndex] = { userAns, isCorrect, checked: true };
+        
+        if (!isCorrect) {
+            userWrongAnswers.push({ q, userAns });
+        }
+
+        // 2. 寫入永久資料庫 (LocalStorage)
+        updatePersistentData(q.id, isCorrect);
+
+        // 3. UI 反映
+        showResultUI(isCorrect, q.answer);
+        document.querySelectorAll('input[name="option"]').forEach(i => i.disabled = true);
+        document.getElementById('submit-btn').classList.add('hidden');
+
+        // 4. 自動跳轉
+        setTimeout(() => {
+            if (currentQuestionIndex < examQuestions.length - 1) {
+                nextQuestion();
+            } else {
+                showFinalResult();
+            }
+        }, 800);
+    }
+
+    function updatePersistentData(qId, isCorrect) {
+        let data = getStoredData();
+        
+        // 記錄 "已做過"
+        let idSet = new Set(data.answeredIds);
+        idSet.add(qId);
+        data.answeredIds = Array.from(idSet);
+
+        // 更新 "權重"
+        let w = data.weights[qId] || 1;
+        if (isCorrect) {
+            // 答對了，權重減輕，最低為 1
+            w = Math.max(1, w - 1); 
+        } else {
+            // 答錯了，權重增加
+            w = w + 2; // 錯一次加重一點，讓它更容易在錯題複習出現
+        }
+        data.weights[qId] = w;
+
+        saveData(data);
+    }
+
+    function showResultUI(isCorrect, ans) {
+        const div = document.getElementById('result-msg');
+        div.classList.remove('hidden');
+        if (isCorrect) {
+            div.innerHTML = "🎉 正確！";
+            div.className = "result-msg correct";
+        } else {
+            div.innerHTML = `❌ 錯誤！正確答案：${ans.join('')}`;
+            div.className = "result-msg wrong";
+        }
+    }
+
+    // --- 導航 ---
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            renderQuestion();
+        }
+    }
+    
+    function nextQuestion() {
+        if (currentQuestionIndex < examQuestions.length - 1) {
+            currentQuestionIndex++;
+            renderQuestion();
+        } else {
+            showFinalResult();
+        }
+    }
+
+    // --- 結算 ---
+    function showFinalResult() {
+        document.getElementById('quiz-area').classList.add('hidden');
+        document.getElementById('final-result').classList.remove('hidden');
+
+        const score = correctCount * 2.5; // 假設每題2.5分
+        document.getElementById('final-score').innerText = score;
+        document.getElementById('correct-count').innerText = correctCount;
+        document.getElementById('total-count').innerText = examQuestions.length;
+
+        const list = document.getElementById('analysis-list');
+        list.innerHTML = '';
+        
+        if (userWrongAnswers.length === 0) {
+            list.innerHTML = '<div style="text-align:center; padding:20px; color:#28a745;">✨ 太棒了！本次測驗全對！</div>';
+        } else {
+            userWrongAnswers.forEach((item, idx) => {
+                list.innerHTML += `
+                    <div class="analysis-item">
+                        <div style="font-weight:bold; margin-bottom:5px;">${idx+1}. ${item.q.text}</div>
+                        <div style="font-size:0.9em;">
+                            你的答案: <span style="color:#dc3545; font-weight:bold;">${item.userAns.join('')}</span> ➔ 
+                            正確答案: <span style="color:#198754; font-weight:bold;">${item.q.answer.join('')}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    function quitExam() {
+        if(confirm("確定要中斷測驗返回首頁嗎？(進度已保存)")) {
+            goHome();
+        }
+    }
+
+    function goHome() {
+        document.getElementById('quiz-area').classList.add('hidden');
+        document.getElementById('final-result').classList.add('hidden');
+        document.getElementById('start-screen').classList.remove('hidden');
+        updateDashboard();
+    }
+
+    function resetAllData() {
+        if(confirm("⚠️ 警告：這將會清除所有「已做題目紀錄」與「錯題權重」。\n\n確定要重新開始嗎？")) {
+            localStorage.removeItem('tqc_smart_data');
+            updateDashboard();
+            alert("已重置所有資料，祝您重新出發順利！");
+        }
+    }
+
+    // 工具: 洗牌算法
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+</script>
+
+</body>
+</html>
