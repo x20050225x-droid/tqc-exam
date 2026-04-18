@@ -24,8 +24,6 @@
         .subject-count { display: inline-block; background: #e9ecef; border-radius: 20px; padding: 2px 10px; margin-top: 8px; font-size: 0.8em; }
 
         /* 科目顏色 */
-        .subj-uml .subject-icon::before { content: "🖊️"; }
-        .subj-uml:hover, .subj-uml.active { border-color: #6f42c1; box-shadow: 0 0 0 3px rgba(111,66,193,0.2); }
         .subj-pm .subject-icon::before { content: "📊"; }
         .subj-pm:hover, .subj-pm.active { border-color: #28a745; box-shadow: 0 0 0 3px rgba(40,167,69,0.2); }
         .subj-ec .subject-icon::before { content: "🌐"; }
@@ -99,12 +97,6 @@
     <div id="subject-screen">
         <p style="text-align:center; color:#555; margin-bottom:4px;">請選擇要測驗的科目</p>
         <div class="subject-grid">
-            <div class="subject-card subj-uml" onclick="selectSubject('uml')">
-                <div class="subject-icon"></div>
-                <div class="subject-name">UML 圖學</div>
-                <div class="subject-info">物件導向分析與設計<br>繪圖符號與應用</div>
-                <div class="subject-count">60 題</div>
-            </div>
             <div class="subject-card subj-pm" onclick="selectSubject('pm')">
                 <div class="subject-icon"></div>
                 <div class="subject-name">專案管理</div>
@@ -199,14 +191,6 @@
 <script>
 // ===== 科目設定 =====
 const SUBJECTS = {
-    uml: {
-        name: 'UML 圖學',
-        icon: '🖊️',
-        getPool: () => (typeof questions !== 'undefined' ? questions : []),
-        examCount: 40,
-        storageKey: 'exam_weights_uml',
-        scorePerQ: (total) => +(100 / total).toFixed(2)
-    },
     pm: {
         name: '專案管理',
         icon: '📊',

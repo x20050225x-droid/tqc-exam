@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TQC 網路管理實務 - 智慧備考系統</title>
+    <title>跨境電商 & 專案管理 - 智慧備考系統</title>
     <style>
         body { font-family: "Microsoft JhengHei", "Segoe UI", Arial, sans-serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #333; }
         .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
@@ -37,6 +37,26 @@
         .s3.stage-card { border-color: #d6d8db; }
 
         .disabled-card { opacity: 0.6; filter: grayscale(1); pointer-events: none; }
+
+        /* 科目選擇 */
+        .subject-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px; }
+        .subject-card { border: 2px solid #dee2e6; border-radius: 12px; padding: 24px 16px; cursor: pointer; text-align: center; background: #fff; transition: 0.2s; }
+        .subject-card:hover { transform: translateY(-4px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
+        .subject-icon { font-size: 2.4em; margin-bottom: 10px; }
+        .subject-name { font-size: 1.1em; font-weight: bold; color: #2c3e50; margin-bottom: 6px; }
+        .subject-info { font-size: 0.82em; color: #6c757d; }
+        .subject-count { display: inline-block; background: #e9ecef; border-radius: 20px; padding: 2px 10px; margin-top: 8px; font-size: 0.8em; }
+        .subj-pm { border-color: #b8e0c8; }
+        .subj-pm:hover { border-color: #28a745; box-shadow: 0 0 0 3px rgba(40,167,69,0.2); }
+        .subj-ec { border-color: #ffd7b0; }
+        .subj-ec:hover { border-color: #fd7e14; box-shadow: 0 0 0 3px rgba(253,126,20,0.2); }
+
+        /* 科目徽章 */
+        .subject-badge { display: inline-flex; align-items: center; gap: 8px; border-radius: 8px; padding: 7px 14px; margin-bottom: 16px; font-weight: bold; font-size: 0.95em; }
+        .badge-pm { background: #e6f4ea; border: 1px solid #b8ddc8; color: #1a7a3a; }
+        .badge-ec { background: #fff3e6; border: 1px solid #ffd7a8; color: #b85c00; }
+        .back-btn { background: none; border: none; color: #6c757d; font-size: 0.82em; cursor: pointer; text-decoration: underline; margin-left: 8px; }
+        .back-btn:hover { color: #343a40; }
 
         /* 設定區塊 */
         .settings-box { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px 15px; margin-bottom: 20px; text-align: right; font-size: 0.9em; display: flex; justify-content: space-between; align-items: center; }
@@ -76,8 +96,33 @@
 <body>
 
 <div class="container">
-    <div id="start-screen">
-        <h1>網路管理實務 - 智慧備考系統</h1>
+
+    <!-- ===== 畫面 0：科目選擇 ===== -->
+    <div id="subject-screen">
+        <h1>智慧備考系統</h1>
+        <p style="text-align:center; color:#555; margin-bottom:4px;">請選擇要練習的科目</p>
+        <div class="subject-grid">
+            <div class="subject-card subj-pm" onclick="selectSubject('pm')">
+                <div class="subject-icon">📊</div>
+                <div class="subject-name">專案管理</div>
+                <div class="subject-info">PMP 概念、組織結構<br>流程群組與整合管理</div>
+                <div class="subject-count" id="count-pm">0 題</div>
+            </div>
+            <div class="subject-card subj-ec" onclick="selectSubject('ec')">
+                <div class="subject-icon">🌐</div>
+                <div class="subject-name">跨境電商</div>
+                <div class="subject-info">平台、理論、物流<br>通關與信賴機制</div>
+                <div class="subject-count" id="count-ec">0 題</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== 畫面 1：階段選擇 ===== -->
+    <div id="start-screen" class="hidden">
+        <h1>智慧備考系統</h1>
+        <div style="text-align:center;">
+            <span id="subject-badge" class="subject-badge"></span>
+        </div>
 
         <div class="progress-section">
             <div class="progress-label">
@@ -97,7 +142,7 @@
                 <label style="margin-right:15px; cursor:pointer;"><input type="radio" name="submitMode" value="confirm" checked> 確認後送出</label>
                 <label style="cursor:pointer;"><input type="radio" name="submitMode" value="instant"> 點擊即送出</label>
             </div>
-            <button class="btn-reset" onclick="resetAllData()">⚠️ 重置所有進度</button>
+            <button class="btn-reset" onclick="resetAllData()">⚠️ 重置此科目進度</button>
         </div>
 
         <div class="stage-card s1">
@@ -171,50 +216,85 @@
     </div>
 </div>
 
-<script src="questions.js"></script>
+<script src="questions_pm.js"></script>
+<script src="questions_ec.js"></script>
 
 <script>
+    // --- 科目設定 ---
+    const SUBJECTS = {
+        pm: {
+            name: '專案管理',
+            icon: '📊',
+            badgeClass: 'badge-pm',
+            pool: typeof questions_pm !== 'undefined' ? questions_pm : [],
+            storageKey: 'excm_data_pm'
+        },
+        ec: {
+            name: '跨境電商',
+            icon: '🌐',
+            badgeClass: 'badge-ec',
+            pool: typeof questions_ec !== 'undefined' ? questions_ec : [],
+            storageKey: 'excm_data_ec'
+        }
+    };
+
     // --- 核心變數 ---
-    const QUESTIONS_PER_EXAM = 40; 
-    let examQuestions = []; 
+    const QUESTIONS_PER_EXAM = 40;
+    let currentSubjectKey = null;
+    let questions = [];
+    let examQuestions = [];
     let currentQuestionIndex = 0;
     let correctCount = 0;
-    let userWrongAnswers = []; 
-    let answerHistory = {}; // 每一題的當下作答紀錄 {index: {userAns, isCorrect...}}
+    let userWrongAnswers = [];
+    let answerHistory = {};
     let submitMode = 'confirm';
 
     // --- 初始化 ---
     document.addEventListener('DOMContentLoaded', () => {
-        if (typeof questions === 'undefined') {
-            alert("找不到 questions.js，請確保檔案在同一目錄下。");
-            return;
-        }
-        updateDashboard();
+        document.getElementById('count-pm').textContent = SUBJECTS.pm.pool.length + ' 題';
+        document.getElementById('count-ec').textContent = SUBJECTS.ec.pool.length + ' 題';
     });
+
+    // --- 科目選擇 ---
+    function selectSubject(key) {
+        currentSubjectKey = key;
+        const subj = SUBJECTS[key];
+        questions = subj.pool;
+
+        const badge = document.getElementById('subject-badge');
+        badge.textContent = subj.icon + ' ' + subj.name;
+        badge.className = 'subject-badge ' + subj.badgeClass;
+        badge.innerHTML = subj.icon + ' ' + subj.name +
+            ' <button class="back-btn" onclick="goSubjectSelect()">切換科目</button>';
+
+        document.getElementById('subject-screen').classList.add('hidden');
+        document.getElementById('start-screen').classList.remove('hidden');
+        updateDashboard();
+    }
+
+    function goSubjectSelect() {
+        document.getElementById('start-screen').classList.add('hidden');
+        document.getElementById('subject-screen').classList.remove('hidden');
+    }
 
     // --- 資料存取層 (LocalStorage) ---
     function getStoredData() {
-        const defaultData = {
-            weights: {}, // { id: weight } 1=normal, >1=wrong often
-            answeredIds: [] // [id1, id2...] List of IDs ever answered
-        };
-        const stored = localStorage.getItem('tqc_smart_data');
+        const defaultData = { weights: {}, answeredIds: [] };
+        const stored = localStorage.getItem(SUBJECTS[currentSubjectKey].storageKey);
         if (!stored) return defaultData;
-        
-        // 簡單的合併防止舊資料結構缺少欄位
         let data = JSON.parse(stored);
-        if(!data.answeredIds) data.answeredIds = [];
+        if (!data.answeredIds) data.answeredIds = [];
         return data;
     }
 
     function saveData(data) {
-        localStorage.setItem('tqc_smart_data', JSON.stringify(data));
+        localStorage.setItem(SUBJECTS[currentSubjectKey].storageKey, JSON.stringify(data));
         updateDashboard();
     }
 
     // --- 儀表板與邏輯 ---
     function updateDashboard() {
-        if (typeof questions === 'undefined') return;
+        if (!currentSubjectKey || questions.length === 0) return;
         
         const data = getStoredData();
         const totalQ = questions.length;
@@ -343,11 +423,18 @@
         const isNew = !data.answeredIds.includes(q.id);
         const newBadge = isNew ? `<span class="tag-new">NEW</span>` : ``;
 
+        const multiHint = q.type === 'checkbox'
+            ? `<div style="font-size:0.8em;color:#fd7e14;font-weight:bold;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;padding:3px 8px;display:inline-block;margin-bottom:10px;">📝 複選題，請選所有正確答案</div>`
+            : '';
+        const chapterHtml = q.chapter ? `<div style="font-size:0.78em;color:#888;margin-bottom:6px;">${q.chapter}</div>` : '';
+
         container.innerHTML = `
             <div class="question-card">
+                ${chapterHtml}
                 <div class="question-title">
                     ${newBadge} ${q.id}. ${q.text}
                 </div>
+                ${multiHint}
                 <div class="options">${optionsHtml}</div>
                 <div id="result-msg" class="result-msg hidden"></div>
             </div>
@@ -393,7 +480,7 @@
             return;
         }
 
-        const isCorrect = JSON.stringify(userAns) === JSON.stringify(q.answer);
+        const isCorrect = JSON.stringify(userAns.sort()) === JSON.stringify([...q.answer].sort());
         
         // 1. 更新內存狀態
         if (isCorrect) correctCount++;
@@ -477,7 +564,7 @@
         document.getElementById('quiz-area').classList.add('hidden');
         document.getElementById('final-result').classList.remove('hidden');
 
-        const score = correctCount * 2.5; // 假設每題2.5分
+        const score = (correctCount / examQuestions.length * 100).toFixed(1);
         document.getElementById('final-score').innerText = score;
         document.getElementById('correct-count').innerText = correctCount;
         document.getElementById('total-count').innerText = examQuestions.length;
@@ -511,15 +598,21 @@
     function goHome() {
         document.getElementById('quiz-area').classList.add('hidden');
         document.getElementById('final-result').classList.add('hidden');
-        document.getElementById('start-screen').classList.remove('hidden');
-        updateDashboard();
+        if (currentSubjectKey) {
+            document.getElementById('start-screen').classList.remove('hidden');
+            updateDashboard();
+        } else {
+            document.getElementById('subject-screen').classList.remove('hidden');
+        }
     }
 
     function resetAllData() {
-        if(confirm("⚠️ 警告：這將會清除所有「已做題目紀錄」與「錯題權重」。\n\n確定要重新開始嗎？")) {
-            localStorage.removeItem('tqc_smart_data');
+        if (!currentSubjectKey) return;
+        const name = SUBJECTS[currentSubjectKey].name;
+        if (confirm(`⚠️ 警告：這將會清除「${name}」的所有已做題目紀錄與錯題權重。\n\n確定要重新開始嗎？`)) {
+            localStorage.removeItem(SUBJECTS[currentSubjectKey].storageKey);
             updateDashboard();
-            alert("已重置所有資料，祝您重新出發順利！");
+            alert("已重置完畢，祝您重新出發順利！");
         }
     }
 
