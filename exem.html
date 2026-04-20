@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUP-SC 專項測驗系統</title>
+    <style>
+        body { font-family: "Microsoft JhengHei", "Segoe UI", Arial, sans-serif; background-color: #e9ecef; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); position: relative; }
+        h1 { text-align: center; color: #2c3e50; margin-bottom: 25px; font-size: 1.8em; }
+
+        .progress-section { margin-bottom: 30px; background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .progress-label { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; font-size: 0.9em; }
+        .progress-bar-bg { background: #e9ecef; height: 20px; border-radius: 10px; overflow: hidden; }
+        .progress-bar-fill { background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.5s ease; text-align: center; color: white; font-size: 12px; line-height: 20px; }
+
+        .stage-card { border: 2px solid transparent; border-radius: 10px; margin-bottom: 20px; transition: 0.2s; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); overflow: hidden; }
+        .stage-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .stage-btn { width: 100%; border: none; background: none; text-align: left; padding: 0; cursor: pointer; display: flex; align-items: stretch; }
+        .stage-icon { width: 60px; display: flex; align-items: center; justify-content: center; font-size: 1.5em; color: white; flex-shrink: 0; }
+        .stage-content { padding: 15px; flex-grow: 1; }
+        .stage-title { font-weight: bold; font-size: 1.1em; display: block; margin-bottom: 4px; }
+        .stage-desc { font-size: 0.85em; color: #666; font-weight: normal; }
+        .stage-badge { display: inline-block; font-size: 0.75em; padding: 2px 8px; border-radius: 10px; background: #eee; color: #555; margin-top: 5px; }
+
+        .s1 .stage-icon { background-color: #007bff; }
+        .s1.stage-card { border-color: #b8daff; }
+        .s2 .stage-icon { background-color: #fd7e14; }
+        .s2.stage-card { border-color: #ffeeba; }
+        .s3 .stage-icon { background-color: #6f42c1; }
+        .s3.stage-card { border-color: #d6d8db; }
+
+        .settings-box { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 10px 15px; margin-bottom: 20px; text-align: right; font-size: 0.9em; display: flex; justify-content: space-between; align-items: center; }
+        .btn-reset { background: transparent; color: #dc3545; border: 1px solid #dc3545; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8em; }
+        .btn-reset:hover { background: #dc3545; color: white; }
+
+        .header-bar { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .quit-btn { background: #6c757d; color: white; border: none; padding: 6px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9em; }
+
+        .question-card { border: 1px solid #dee2e6; padding: 20px; margin-bottom: 20px; border-radius: 8px; background-color: #fafafa; }
+        .question-title { font-size: 1.25em; font-weight: 600; margin-bottom: 20px; color: #212529; line-height: 1.4; }
+
+        .options label { display: block; margin: 10px 0; cursor: pointer; padding: 15px; border-radius: 8px; border: 2px solid #e9ecef; background: white; transition: 0.2s; position: relative; }
+        .options label:hover { border-color: #adb5bd; background-color: #f1f3f5; }
+        .options input:checked + span { font-weight: bold; color: #0056b3; }
+
+        .result-msg { margin-top: 15px; font-weight: bold; padding: 12px; border-radius: 6px; text-align: center; }
+        .correct { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
+        .wrong { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+
+        .nav-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { background-color: #0d6efd; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; font-size: 16px; flex: 1; font-weight: bold; transition: 0.2s; }
+        .btn:hover { background-color: #0b5ed7; }
+        .btn-prev { background-color: #6c757d; flex: 0 0 100px; }
+        .btn-prev:hover { background-color: #5c636a; }
+
+        .hidden { display: none !important; }
+
+        .analysis-item { border-left: 4px solid #dc3545; background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .tag-new { background: #17a2b8; color: white; font-size: 0.7em; padding: 2px 5px; border-radius: 4px; vertical-align: middle; margin-right: 5px; }
+
+        .title-badge { display: inline-block; background: #e8f4fd; border: 1px solid #b8daff; color: #004085; border-radius: 8px; padding: 4px 14px; font-size: 0.9em; font-weight: bold; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ===== 畫面 1：階段選擇 ===== -->
+    <div id="start-screen">
+        <h1>SUP-SC 專項測驗系統</h1>
+        <div style="text-align:center; margin-bottom: 20px;">
+            <span class="title-badge">📘 補充單選題（SUP-SC）</span>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>第一遍覆蓋率 (未做題進度)</span>
+                <span id="coverage-text">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <div style="text-align: right; margin-top: 5px; font-size: 0.85em; color: #666;">
+                已做: <span id="done-count">0</span> / 總題數: <span id="total-pool-count">0</span> | 錯題庫: <span id="wrong-count">0</span>
+            </div>
+        </div>
+
+        <div class="settings-box">
+            <div>
+                <label style="margin-right:15px; cursor:pointer;"><input type="radio" name="submitMode" value="confirm" checked> 確認後送出</label>
+                <label style="cursor:pointer;"><input type="radio" name="submitMode" value="instant"> 點擊即送出</label>
+            </div>
+            <button class="btn-reset" onclick="resetAllData()">⚠️ 重置進度</button>
+        </div>
+
+        <div class="stage-card s1">
+            <button class="stage-btn" onclick="startExam('unanswered')">
+                <div class="stage-icon">1</div>
+                <div class="stage-content">
+                    <span class="stage-title">第一階段：消滅未做題</span>
+                    <span class="stage-desc">優先練習從未做過的題目。目標是將覆蓋率推到 100%。</span>
+                    <div><span class="stage-badge" id="badge-new-count">剩餘 0 題</span></div>
+                </div>
+            </button>
+        </div>
+
+        <div class="stage-card s2">
+            <button class="stage-btn" onclick="startExam('review_wrong')">
+                <div class="stage-icon">2</div>
+                <div class="stage-content">
+                    <span class="stage-title">第二階段：錯題大掃除</span>
+                    <span class="stage-desc">專攻歷史錯題。答對後權重會下降，直到完全掌握。</span>
+                    <div><span class="stage-badge" id="badge-wrong-count">待複習 0 題</span></div>
+                </div>
+            </button>
+        </div>
+
+        <div class="stage-card s3">
+            <button class="stage-btn" onclick="startExam('normal')">
+                <div class="stage-icon">3</div>
+                <div class="stage-content">
+                    <span class="stage-title">第三階段：全真模擬 (40題)</span>
+                    <span class="stage-desc">完全隨機抽選。考前衝刺用，模擬真實考試手感。</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <div id="quiz-area" class="hidden">
+        <div class="header-bar">
+            <div>
+                <span id="current-mode-tag" style="background:#007bff; color:white; padding:2px 8px; border-radius:4px; font-size:0.8em; margin-right:10px;">模式</span>
+                <span style="font-weight:bold; color:#555;">第 <span id="current-q">1</span> / <span id="total-exam-q">40</span> 題</span>
+            </div>
+            <button class="quit-btn" onclick="quitExam()">暫停/返回</button>
+        </div>
+
+        <div id="question-container"></div>
+
+        <div class="nav-buttons">
+            <button id="prev-btn" class="btn btn-prev hidden" onclick="prevQuestion()">上題</button>
+            <button id="submit-btn" class="btn" onclick="checkAnswer()">確定送出</button>
+            <button id="next-btn" class="btn hidden" onclick="nextQuestion()">下一題 ➡</button>
+        </div>
+    </div>
+
+    <div id="final-result" class="hidden">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h2 style="color:#2c3e50;">測驗完成</h2>
+            <div style="font-size: 3em; font-weight: bold; color: #0d6efd; margin: 10px 0;">
+                <span id="final-score">0</span> <span style="font-size:0.4em; color:#999;">分</span>
+            </div>
+            <p>答對: <span id="correct-count">0</span> / <span id="total-count">0</span></p>
+        </div>
+
+        <div id="wrong-answer-analysis">
+            <h3 style="border-bottom: 2px solid #eee; padding-bottom: 10px;">錯題檢討</h3>
+            <div id="analysis-list"></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn" onclick="goHome()">返回首頁更新進度</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const questions_sup_sc = [
+    {
+        id: "SUP-SC-001",
+        chapter: "第三章 專案組織",
+        text: "專案組織是屬於什麼性質的任務編組？",
+        type: "radio",
+        options: {"A":"半永久性","B":"循環性","C":"永久性","D":"臨時性"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-002",
+        chapter: "第三章 專案組織",
+        text: "下列哪一項不是本章節提到的專案組織型態？",
+        type: "radio",
+        options: {"A":"虛擬式組織","B":"專案式組織","C":"矩陣式組織","D":"功能式組織"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-003",
+        chapter: "第三章 專案組織",
+        text: "功能式組織的優點不包括下列哪一項？",
+        type: "radio",
+        options: {"A":"專案執行速度快","B":"專業技術不會因人員離開而遺失","C":"人員運用保有彈性","D":"現有組織結構維持不變"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-004",
+        chapter: "第三章 專案組織",
+        text: "功能式組織的優點中，「專業技術不會因人員離開而遺失」是指什麼？",
+        type: "radio",
+        options: {"A":"專案文件保存完整","B":"專案成員不會離職","C":"專案經理具有高度技術","D":"技術知識保留在功能部門內"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-005",
+        chapter: "第四章 專案管理過程",
+        text: "專案管理是運用知識、技能、______ 於專案活動以滿足顧客需求。",
+        type: "radio",
+        options: {"A":"流程和系統","B":"手段和策略","C":"工具和技術","D":"處理手法"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-006",
+        chapter: "第四章 專案管理過程",
+        text: "______ 是五大流程中，流程數最多的一個流程組。",
+        type: "radio",
+        options: {"A":"起始流程組","B":"規劃流程組","C":"執行流程組","D":"結案流程組"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-007",
+        chapter: "第五章 專案整合管理",
+        text: "專案管理所產生的經驗教訓，通常都是放在組織的知識庫，被PMI歸類在：",
+        type: "radio",
+        options: {"A":"專案管理資訊系統","B":"企業環境因素","C":"組織的知識庫","D":"組織流程資產"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-008",
+        chapter: "第五章 專案整合管理",
+        text: "在執行專案活動中所產生的原始觀察和衡量資料，如實際完成工作的百分比、技術績效衡量資料、專案活動預定和實際的開始和結束日期、變更需求數、和不良品數，PMI稱之為：",
+        type: "radio",
+        options: {"A":"WWW","B":"WPD","C":"WPI","D":"WPR"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-009",
+        chapter: "第五章 專案整合管理",
+        text: "在專案整合管理的六個過程中，屬於「監督與控制」流程組的是哪兩個？",
+        type: "radio",
+        options: {"A":"發展專案章程和結束專案或階段","B":"監視和管制專案工作和執行整合變更控制","C":"指導和管理專案執行和結束專案或階段","D":"發展專案章程和發展專案管理計畫書"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-010",
+        chapter: "第五章 專案整合管理",
+        text: "擬定授權專案正式成立的文件和記載滿足利害關係人的需要和期望的原始需求的過程，稱為______。",
+        type: "radio",
+        options: {"A":"結束專案","B":"指導和管理專案執行","C":"發展專案管理計畫書","D":"發展專案章程"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-011",
+        chapter: "第五章 專案整合管理",
+        text: "專案章程是由授權者所核發的的文件。",
+        type: "radio",
+        options: {"A":"起碼二次","B":"可以多次","C":"僅此一次","D":"無限制次數"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-012",
+        chapter: "第五章 專案整合管理",
+        text: "專案章程正式核定專案成立和指派______，以及賦予其與專案相關的決策權和領導權，並賦予其運用組織資源以執行專案的權力。",
+        type: "radio",
+        options: {"A":"發起人","B":"贊助人","C":"專案經理","D":"專案成員"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-013",
+        chapter: "第五章 專案整合管理",
+        text: "PMBOK(2008)認為專案章程應該包括一些內容，但以下何者錯誤？",
+        type: "radio",
+        options: {"A":"描述欲完成產品或服務的SOW","B":"專案高層次需求和詳細準確的細部規格","C":"主要利害關係人的期望和影響","D":"專案啟動者或贊助者和指定的專案經理"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-014",
+        chapter: "第五章 專案整合管理",
+        text: "______是告知專案團隊，提供專案團隊如何達成目標的指引。",
+        type: "radio",
+        options: {"A":"專案管理計畫書","B":"專案章程","C":"顧客合約","D":"工作說明書"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-015",
+        chapter: "第五章 專案整合管理",
+        text: "______是專案執行過程中幾個必須滿足的重要日期，如工程設計圖、地基、主結構等何時完成。",
+        type: "radio",
+        options: {"A":"專案網圖","B":"里程碑","C":"資源日曆","D":"基線"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-016",
+        chapter: "第五章 專案整合管理",
+        text: "流程改善計畫書是屬於十大知識中的哪一種知識領域？",
+        type: "radio",
+        options: {"A":"品質","B":"整合","C":"時程","D":"成本"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-017",
+        chapter: "第五章 專案整合管理",
+        text: "「指導和管理專案執行」過程中的活動包括，但何者不是？",
+        type: "radio",
+        options: {"A":"蒐集和報告工作績效資料","B":"執行生產交付標的物的活動","C":"發展專案章程，指定專案經理","D":"執行完成專案需求的所有活動"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-018",
+        chapter: "第五章 專案整合管理",
+        text: "「指導和管理專案執行」的輸入包含以下何者？",
+        type: "radio",
+        options: {"A":"工作績效資料","B":"變更申請","C":"交付標的物","D":"專案管理計畫書"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-019",
+        chapter: "第五章 專案整合管理",
+        text: "何者不是「指導和管理專案執行」的輸出？",
+        type: "radio",
+        options: {"A":"工作績效資料","B":"變更申請","C":"交付標的物","D":"核准的變更申請"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-020",
+        chapter: "第五章 專案整合管理",
+        text: "作為______的一部分，專案管理資訊系統提供下列工具：排程工具、工作授權系統、構型管理系統、資訊收集與發佈系統，或做為其他線上自動化系統的進入介面。",
+        type: "radio",
+        options: {"A":"企業資源規劃系統","B":"組織流程資產","C":"銷售點系統","D":"企業環境因素"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-021",
+        chapter: "第五章 專案整合管理",
+        text: "指導和管理專案執行過程中，蒐集和報告的是什麼？",
+        type: "radio",
+        options: {"A":"工作績效評估(WPE)","B":"工作績效資料(WPD)","C":"工作績效資訊(WPI)","D":"工作績效報告(WPR)"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-022",
+        chapter: "第五章 專案整合管理",
+        text: "監視和控制流程組主要落在PDCA循環的哪些階段？",
+        type: "radio",
+        options: {"A":"Plan和Do","B":"Do和Plan","C":"Plan和Act","D":"Check和Act"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-023",
+        chapter: "第五章 專案整合管理",
+        text: "組織流程資產在運用時應如何處理？",
+        type: "radio",
+        options: {"A":"只適用於大型專案","B":"只能由高階主管決定如何使用","C":"完全照搬不做任何修改","D":"依專案的特性作適當的修改和裁剪"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-024",
+        chapter: "第五章 專案整合管理",
+        text: "企業環境因素是指什麼？",
+        type: "radio",
+        options: {"A":"組織到目前所累積建立的規定和程序所形成組織的專業和技能","B":"專案團隊成員提出的改變要求","C":"規劃和執行專案過程審視組織內外部環境因素對於專案的影響和限制","D":"專案非常重要的文件，包括許多附屬計畫"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-025",
+        chapter: "第五章 專案整合管理",
+        text: "______是指來自於利害關係人非預料到額外的變更請求，這些請求是在專案範疇之外，因而導致專案範疇擴大。",
+        type: "radio",
+        options: {"A":"範疇失控","B":"變更需求","C":"範疇蔓延","D":"變更失序"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-026",
+        chapter: "第五章 專案整合管理",
+        text: "何者是「監視和管制專案工作」的輸入？",
+        type: "radio",
+        options: {"A":"工作績效資料","B":"工作績效資訊","C":"工作績效智慧","D":"工作績效報告"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-027",
+        chapter: "第五章 專案整合管理",
+        text: "啟動流程組的兩個主要輸出是什麼？",
+        type: "radio",
+        options: {"A":"風險登記冊和品質計畫","B":"預算表和時程表","C":"溝通計畫和採購計畫","D":"專案章程和利害關係人登錄表"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-028",
+        chapter: "第五章 專案整合管理",
+        text: "「專案團隊整理過去專案和本專案的經驗學習檔案並予以建檔儲存，以提供後續專案之參考。」請問這是以下哪一種工作？",
+        type: "radio",
+        options: {"A":"專案管理計畫書更新","B":"企業環境因素更新","C":"組織流程資產更新","D":"專案文件更新"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-029",
+        chapter: "第四章 專案管理過程",
+        text: "規劃流程組如同PDCA循環中的哪一個階段？",
+        type: "radio",
+        options: {"A":"Check階段","B":"Do階段","C":"Plan階段","D":"Act階段"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-030",
+        chapter: "第五章 專案整合管理",
+        text: "工作績效報告WPR是下列哪一個流程的輸出？",
+        type: "radio",
+        options: {"A":"指導和管理專案執行","B":"發展專案章程","C":"發展專案管理計畫書","D":"監視和管制專案工作"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-031",
+        chapter: "第五章 專案整合管理",
+        text: "關於變更申請，下列何者是「執行整合變更控制」的輸出？",
+        type: "radio",
+        options: {"A":"首次提出的變更申請","B":"確認的變更申請","C":"專案章程變更","D":"核准的變更申請"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-032",
+        chapter: "第五章 專案整合管理",
+        text: "發展專案章程的主要目的是什麼？",
+        type: "radio",
+        options: {"A":"正式授權專案的啟動","B":"減少專案團隊規模","C":"增加專案預算","D":"延長專案時程"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-033",
+        chapter: "第五章 專案整合管理",
+        text: "組織流程資產更新的內容可能包括什麼？",
+        type: "radio",
+        options: {"A":"經驗學習檔案、專案結束資訊和正式接收文件等","B":"只包括專案時程資訊","C":"只包括專案預算資訊","D":"只包括專案失敗的案例"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-034",
+        chapter: "第五章 專案整合管理",
+        text: "______是為制定決策、採取行動或引起關注而彙編工作績效資訊(WPI)所形成的實體或電子專案文件。",
+        type: "radio",
+        options: {"A":"工作績效資料","B":"工作績效報告","C":"專案文件","D":"專案管理計畫書"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-035",
+        chapter: "第五章 專案整合管理",
+        text: "哪一種交付標的才可以當作「結束專案或階段」的輸入？",
+        type: "radio",
+        options: {"A":"確認的交付標的","B":"專案執行後的交付標的","C":"被接受(驗收)的交付標的","D":"外包商認可的交付標的"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-036",
+        chapter: "第五章 專案整合管理",
+        text: "結束專案或階段的輸出不包括哪一項？",
+        type: "radio",
+        options: {"A":"組織流程資產更新","B":"專案檔案","C":"移交最終產品、服務、或成果","D":"變更申請"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-037",
+        chapter: "第五章 專案整合管理",
+        text: "專案管理五大流程組不包括哪一項？",
+        type: "radio",
+        options: {"A":"規劃流程群組","B":"執行流程群組","C":"設計流程群組","D":"啟動流程群組"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-038",
+        chapter: "第五章 專案整合管理",
+        text: "啟動流程組在專案中發生幾次？",
+        type: "radio",
+        options: {"A":"每週一次","B":"每月一次","C":"多次","D":"只發生一次"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-039",
+        chapter: "第五章 專案整合管理",
+        text: "工作分解結構(WBS)的主要功能是什麼？",
+        type: "radio",
+        options: {"A":"減少專案團隊人數","B":"將專案分解成可管理的工作包","C":"增加專案的複雜度","D":"延長專案時程"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-040",
+        chapter: "第三章 專案組織",
+        text: "專案工作一般屬於什麼性質？",
+        type: "radio",
+        options: {"A":"只有IT部門的工作","B":"只有行政部門的工作","C":"不屬於任一功能部門的例行性工作","D":"功能部門的例行性工作"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-041",
+        chapter: "第三章 專案組織",
+        text: "專案式團隊的缺點包括下列哪一項？",
+        type: "radio",
+        options: {"A":"榮譽感高","B":"工作容易聚焦","C":"管理成本偏高","D":"成員只有一個老闆"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-042",
+        chapter: "第三章 專案組織",
+        text: "在三種矩陣式組織中，哪一種專案經理擁有最大權力？",
+        type: "radio",
+        options: {"A":"弱矩陣","B":"功能矩陣","C":"強矩陣","D":"平衡矩陣"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-043",
+        chapter: "第二章 組織策略與專案組合管理",
+        text: "1)是指在一組可行投資組合中，挑選出某風險水準下，預期報酬最大之投資組合；2)或某預期報酬下，總風險最低的投資組合，並將挑選出之投資組合連線。",
+        type: "radio",
+        options: {"A":"前緣模式","B":"多重權重評分模式","C":"輪廓模式","D":"還本期法"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-044",
+        chapter: "第二章 組織策略與專案組合管理",
+        text: "某企業有四個專案進行比較，採用專案交叉比較法得出結果如下圖。請問哪的專案比較好？",
+        type: "radio",
+        options: {"A":"專案A","B":"專案D","C":"專案C","D":"專案B"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-045",
+        chapter: "第一章 緒論",
+        text: "專案管理的定義：統合運用管理知識、技術、工具、方法於任何專案活動上，使專案的交付標的物能符合或超越專案的需求與期望的一種專門技術 (PMBOK, 2012)。請問此段敘述的對象為何？",
+        type: "radio",
+        options: {"A":"利害關係人","B":"高階主管","C":"顧客","D":"社會大眾"},
+        answer: ["A"]
+    },
+    {
+        id: "SUP-SC-046",
+        chapter: "第一章 緒論",
+        text: "下列何者不可視為專案？",
+        type: "radio",
+        options: {"A":"工程建設","B":"產品研發","C":"企業導入ERP","D":"小會計阿花做結帳"},
+        answer: ["D"]
+    },
+    {
+        id: "SUP-SC-047",
+        chapter: "第一章 緒論",
+        text: "對專案而言，所謂「暫時性」的意思是？",
+        type: "radio",
+        options: {"A":"專案的工期短","B":"專案可以隨時叫停","C":"每個專案都有其開始點與結束點","D":"專案資源很多"},
+        answer: ["C"]
+    },
+    {
+        id: "SUP-SC-048",
+        chapter: "第一章 緒論",
+        text: "一組互相依賴的組成部份，透過共同運作以達成該系統的目標，稱為：",
+        type: "radio",
+        options: {"A":"專案","B":"系統","C":"計畫","D":"任務"},
+        answer: ["B"]
+    },
+    {
+        id: "SUP-SC-049",
+        chapter: "第一章 緒論",
+        text: "要徑法(Critical Path Method, CPM)是哪一家公司所首先開發？",
+        type: "radio",
+        options: {"A":"杜邦","B":"小蘋果","C":"百度","D":"股溝"},
+        answer: ["A"]
+    }
+];
+
+// --- 核心變數 ---
+const QUESTIONS_PER_EXAM = 40;
+const STORAGE_KEY = 'exem_data_sup_sc';
+const questions = questions_sup_sc;
+
+let examQuestions = [];
+let currentQuestionIndex = 0;
+let correctCount = 0;
+let userWrongAnswers = [];
+let answerHistory = {};
+let submitMode = 'confirm';
+
+// --- 初始化 ---
+document.addEventListener('DOMContentLoaded', () => {
+    updateDashboard();
+});
+
+// --- 資料存取層 ---
+function getStoredData() {
+    const defaultData = { weights: {}, answeredIds: [] };
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (!stored) return defaultData;
+    let data = JSON.parse(stored);
+    if (!data.answeredIds) data.answeredIds = [];
+    return data;
+}
+
+function saveData(data) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    updateDashboard();
+}
+
+// --- 儀表板 ---
+function updateDashboard() {
+    const data = getStoredData();
+    const totalQ = questions.length;
+    const doneCount = new Set(data.answeredIds).size;
+    const wrongCount = Object.values(data.weights).filter(w => w > 1).length;
+
+    const percentage = Math.round((doneCount / totalQ) * 100);
+    document.getElementById('progress-bar').style.width = percentage + '%';
+    document.getElementById('progress-bar').innerText = percentage + '%';
+    document.getElementById('coverage-text').innerText = percentage + '%';
+    document.getElementById('done-count').innerText = doneCount;
+    document.getElementById('total-pool-count').innerText = totalQ;
+    document.getElementById('wrong-count').innerText = wrongCount;
+
+    const remainingNew = totalQ - doneCount;
+    document.getElementById('badge-new-count').innerText = remainingNew > 0 ? `剩餘 ${remainingNew} 題` : "已完成所有題目！";
+    document.getElementById('badge-wrong-count').innerText = `待複習 ${wrongCount} 題`;
+
+    if (remainingNew === 0) {
+        document.querySelector('.s1 .stage-icon').innerHTML = '✓';
+        document.querySelector('.s1 .stage-icon').style.background = '#28a745';
+    }
+}
+
+// --- 開始測驗 ---
+function startExam(mode) {
+    const data = getStoredData();
+    const answeredSet = new Set(data.answeredIds);
+    let pool = JSON.parse(JSON.stringify(questions));
+    let selectedQuestions = [];
+    let modeTitle = "";
+
+    const radioInstant = document.querySelector('input[name="submitMode"][value="instant"]');
+    submitMode = radioInstant.checked ? 'instant' : 'confirm';
+
+    if (mode === 'unanswered') {
+        let newPool = pool.filter(q => !answeredSet.has(q.id));
+        if (newPool.length === 0) {
+            alert("恭喜！您已經做過題庫中的所有題目了。\n建議進入「第二階段：錯題大掃除」或「第三階段：全真模擬」。");
+            return;
+        }
+        shuffleArray(newPool);
+        selectedQuestions = newPool.slice(0, QUESTIONS_PER_EXAM);
+        modeTitle = "第一階段：消滅未做題";
+
+    } else if (mode === 'review_wrong') {
+        let wrongPool = pool.filter(q => (data.weights[q.id] || 1) > 1);
+        if (wrongPool.length === 0) {
+            alert("太強了！目前沒有累積的錯題。\n請去挑戰新題或直接進行模擬考。");
+            return;
+        }
+        wrongPool.sort((a, b) => (data.weights[b.id] || 1) - (data.weights[a.id] || 1));
+        selectedQuestions = wrongPool.slice(0, QUESTIONS_PER_EXAM);
+        modeTitle = "第二階段：錯題複習";
+
+    } else if (mode === 'normal') {
+        shuffleArray(pool);
+        selectedQuestions = pool.slice(0, QUESTIONS_PER_EXAM);
+        modeTitle = "第三階段：全真模擬";
+    }
+
+    examQuestions = selectedQuestions;
+    currentQuestionIndex = 0;
+    correctCount = 0;
+    userWrongAnswers = [];
+    answerHistory = {};
+
+    document.getElementById('start-screen').classList.add('hidden');
+    document.getElementById('quiz-area').classList.remove('hidden');
+    document.getElementById('current-mode-tag').innerText = modeTitle;
+    document.getElementById('total-exam-q').innerText = examQuestions.length;
+
+    renderQuestion();
+}
+
+// --- 渲染題目 ---
+function renderQuestion() {
+    const q = examQuestions[currentQuestionIndex];
+    const container = document.getElementById('question-container');
+    document.getElementById('current-q').innerText = currentQuestionIndex + 1;
+
+    const history = answerHistory[currentQuestionIndex];
+    const isReviewed = (history && history.checked);
+
+    let optionsHtml = '';
+    const keys = Object.keys(q.options).sort();
+    const isInstant = (submitMode === 'instant' && q.type === 'radio' && !isReviewed);
+
+    keys.forEach(key => {
+        let checkedAttr = '';
+        let disabledAttr = '';
+        let clickAction = isInstant ? `onclick="checkAnswer()"` : '';
+
+        if (isReviewed) {
+            if (history.userAns.includes(key)) checkedAttr = 'checked';
+            disabledAttr = 'disabled';
+            clickAction = '';
+        }
+
+        optionsHtml += `
+            <label>
+                <input type="${q.type}" name="option" value="${key}" ${clickAction} ${checkedAttr} ${disabledAttr}>
+                <span style="font-weight:bold; margin-right:5px;">${key}.</span>
+                ${q.options[key]}
+            </label>
+        `;
+    });
+
+    const data = getStoredData();
+    const isNew = !data.answeredIds.includes(q.id);
+    const newBadge = isNew ? `<span class="tag-new">NEW</span>` : ``;
+    const chapterHtml = q.chapter ? `<div style="font-size:0.78em;color:#888;margin-bottom:6px;">${q.chapter}</div>` : '';
+
+    container.innerHTML = `
+        <div class="question-card">
+            ${chapterHtml}
+            <div class="question-title">
+                ${newBadge} ${q.id}. ${q.text}
+            </div>
+            <div class="options">${optionsHtml}</div>
+            <div id="result-msg" class="result-msg hidden"></div>
+        </div>
+    `;
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const submitBtn = document.getElementById('submit-btn');
+
+    currentQuestionIndex === 0 ? prevBtn.classList.add('hidden') : prevBtn.classList.remove('hidden');
+
+    if (isReviewed) {
+        showResultUI(history.isCorrect, q.answer);
+        submitBtn.classList.add('hidden');
+        if (currentQuestionIndex < examQuestions.length - 1) {
+            nextBtn.classList.remove('hidden');
+            nextBtn.innerText = "下一題 ➡";
+            nextBtn.onclick = nextQuestion;
+        } else {
+            nextBtn.classList.remove('hidden');
+            nextBtn.innerText = "查看成績 🏁";
+            nextBtn.onclick = showFinalResult;
+        }
+    } else {
+        isInstant ? submitBtn.classList.add('hidden') : submitBtn.classList.remove('hidden');
+        nextBtn.classList.add('hidden');
+    }
+}
+
+// --- 檢查答案 ---
+function checkAnswer() {
+    const q = examQuestions[currentQuestionIndex];
+    const selectedEls = document.querySelectorAll('input[name="option"]:checked');
+
+    if (answerHistory[currentQuestionIndex]?.checked) return;
+
+    let userAns = Array.from(selectedEls).map(el => el.value).sort();
+    if (userAns.length === 0) {
+        if (submitMode !== 'instant') alert("請先選擇答案！");
+        return;
+    }
+
+    const isCorrect = JSON.stringify(userAns.sort()) === JSON.stringify([...q.answer].sort());
+
+    if (isCorrect) correctCount++;
+    answerHistory[currentQuestionIndex] = { userAns, isCorrect, checked: true };
+
+    if (!isCorrect) userWrongAnswers.push({ q, userAns });
+
+    updatePersistentData(q.id, isCorrect);
+
+    showResultUI(isCorrect, q.answer);
+    document.querySelectorAll('input[name="option"]').forEach(i => i.disabled = true);
+    document.getElementById('submit-btn').classList.add('hidden');
+
+    setTimeout(() => {
+        if (currentQuestionIndex < examQuestions.length - 1) {
+            nextQuestion();
+        } else {
+            showFinalResult();
+        }
+    }, 800);
+}
+
+function updatePersistentData(qId, isCorrect) {
+    let data = getStoredData();
+    let idSet = new Set(data.answeredIds);
+    idSet.add(qId);
+    data.answeredIds = Array.from(idSet);
+
+    let w = data.weights[qId] || 1;
+    if (isCorrect) {
+        w = Math.max(1, w - 1);
+    } else {
+        w = w + 2;
+    }
+    data.weights[qId] = w;
+    saveData(data);
+}
+
+function showResultUI(isCorrect, ans) {
+    const div = document.getElementById('result-msg');
+    div.classList.remove('hidden');
+    if (isCorrect) {
+        div.innerHTML = "🎉 正確！";
+        div.className = "result-msg correct";
+    } else {
+        div.innerHTML = `❌ 錯誤！正確答案：${ans.join('')}`;
+        div.className = "result-msg wrong";
+    }
+}
+
+// --- 導航 ---
+function prevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+    }
+}
+
+function nextQuestion() {
+    if (currentQuestionIndex < examQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+    } else {
+        showFinalResult();
+    }
+}
+
+// --- 結算 ---
+function showFinalResult() {
+    document.getElementById('quiz-area').classList.add('hidden');
+    document.getElementById('final-result').classList.remove('hidden');
+
+    const score = (correctCount / examQuestions.length * 100).toFixed(1);
+    document.getElementById('final-score').innerText = score;
+    document.getElementById('correct-count').innerText = correctCount;
+    document.getElementById('total-count').innerText = examQuestions.length;
+
+    const list = document.getElementById('analysis-list');
+    list.innerHTML = '';
+
+    if (userWrongAnswers.length === 0) {
+        list.innerHTML = '<div style="text-align:center; padding:20px; color:#28a745;">✨ 太棒了！本次測驗全對！</div>';
+    } else {
+        userWrongAnswers.forEach((item, idx) => {
+            list.innerHTML += `
+                <div class="analysis-item">
+                    <div style="font-weight:bold; margin-bottom:5px;">${idx+1}. ${item.q.text}</div>
+                    <div style="font-size:0.9em;">
+                        你的答案: <span style="color:#dc3545; font-weight:bold;">${item.userAns.join('')}</span> ➔
+                        正確答案: <span style="color:#198754; font-weight:bold;">${item.q.answer.join('')}</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+}
+
+function quitExam() {
+    if (confirm("確定要中斷測驗返回首頁嗎？(進度已保存)")) {
+        goHome();
+    }
+}
+
+function goHome() {
+    document.getElementById('quiz-area').classList.add('hidden');
+    document.getElementById('final-result').classList.add('hidden');
+    document.getElementById('start-screen').classList.remove('hidden');
+    updateDashboard();
+}
+
+function resetAllData() {
+    if (confirm("⚠️ 警告：這將會清除所有 SUP-SC 的已做題目紀錄與錯題權重。\n\n確定要重新開始嗎？")) {
+        localStorage.removeItem(STORAGE_KEY);
+        updateDashboard();
+        alert("已重置完畢，祝您重新出發順利！");
+    }
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+</script>
+
+</body>
+</html>
