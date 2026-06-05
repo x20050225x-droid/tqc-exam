@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux 網路管理題庫系統</title>
+<style>
+:root {
+  --primary: #4f46e5;
+  --primary-light: #818cf8;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --border: #e2e8f0;
+  --radius: 12px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* ===== LAYOUT ===== */
+.screen { display: none; padding: 24px 16px; max-width: 800px; margin: 0 auto; }
+.screen.active { display: block; }
+
+/* ===== HEADER ===== */
+.app-header { text-align: center; padding: 32px 16px 24px; }
+.app-header h1 { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+.app-header p { color: var(--muted); margin-top: 6px; }
+
+/* ===== CARD ===== */
+.card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 24px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+
+/* ===== CATEGORY GRID ===== */
+.cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+@media (max-width: 480px) { .cat-grid { grid-template-columns: 1fr; } }
+.cat-btn { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 2px solid var(--border); border-radius: var(--radius); background: var(--card); cursor: pointer; transition: all .15s; font-size: .9rem; }
+.cat-btn:hover { border-color: var(--primary-light); background: #f0f0ff; }
+.cat-btn.selected { border-color: var(--primary); background: #eef2ff; }
+.cat-num { width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #fff; font-size: .75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.cat-btn.selected .cat-num { background: var(--primary); }
+
+/* ===== SETTINGS ===== */
+.setting-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.setting-row:last-child { border-bottom: none; }
+.setting-label { font-size: .9rem; }
+.setting-label small { display: block; color: var(--muted); font-size: .78rem; }
+input[type=range] { width: 120px; accent-color: var(--primary); }
+.range-val { min-width: 40px; text-align: center; font-weight: 600; color: var(--primary); }
+input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 12px 24px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+.btn-primary { background: var(--primary); color: #fff; width: 100%; }
+.btn-primary:hover { background: #4338ca; }
+.btn-primary:disabled { background: #c7d2fe; cursor: not-allowed; }
+.btn-outline { background: transparent; border: 2px solid var(--primary); color: var(--primary); }
+.btn-outline:hover { background: #eef2ff; }
+.btn-sm { padding: 8px 16px; font-size: .85rem; }
+.btn-danger { background: var(--danger); color: #fff; }
+.btn-danger:hover { background: #dc2626; }
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap { background: var(--border); border-radius: 999px; height: 8px; margin-bottom: 4px; }
+.progress-bar { height: 8px; border-radius: 999px; background: var(--primary); transition: width .3s; }
+.progress-info { display: flex; justify-content: space-between; font-size: .82rem; color: var(--muted); margin-bottom: 16px; }
+
+/* ===== TIMER ===== */
+.timer { font-size: 1.3rem; font-weight: 700; padding: 6px 14px; border-radius: 8px; background: #f1f5f9; }
+.timer.warn { background: #fef3c7; color: #92400e; }
+.timer.danger { background: #fee2e2; color: #991b1b; animation: pulse .5s infinite alternate; }
+@keyframes pulse { from { opacity: 1; } to { opacity: .6; } }
+
+/* ===== QUIZ HEADER ===== */
+.quiz-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.question-label { font-size: .85rem; color: var(--muted); font-weight: 500; }
+.multiple-badge { background: #fef3c7; color: #92400e; font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+
+/* ===== QUESTION CARD ===== */
+.question-text { font-size: 1rem; line-height: 1.7; white-space: pre-wrap; margin-bottom: 20px; }
+.extra-content { background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: .82rem; font-family: monospace; white-space: pre-wrap; max-height: 160px; overflow-y: auto; margin-bottom: 16px; color: var(--muted); }
+
+/* ===== OPTIONS ===== */
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 2px solid var(--border); border-radius: 10px; cursor: pointer; transition: all .15s; font-size: .93rem; line-height: 1.5; }
+.option:hover:not(.disabled) { border-color: var(--primary-light); background: #f0f0ff; }
+.option.selected { border-color: var(--primary); background: #eef2ff; }
+.option.correct { border-color: var(--success); background: #ecfdf5; }
+.option.wrong { border-color: var(--danger); background: #fef2f2; }
+.option.show-correct { border-color: var(--success); background: #ecfdf5; }
+.option.disabled { cursor: default; }
+.opt-label { width: 26px; height: 26px; flex-shrink: 0; border-radius: 6px; background: var(--border); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .82rem; }
+.option.selected .opt-label { background: var(--primary); color: #fff; }
+.option.correct .opt-label { background: var(--success); color: #fff; }
+.option.wrong .opt-label { background: var(--danger); color: #fff; }
+.option.show-correct .opt-label { background: var(--success); color: #fff; }
+.opt-text { flex: 1; }
+
+/* ===== ANSWER AREA ===== */
+.answer-area { margin-top: 16px; }
+.answer-feedback { padding: 12px 14px; border-radius: 8px; font-size: .9rem; margin-bottom: 12px; }
+.answer-feedback.correct { background: #ecfdf5; color: #065f46; border-left: 4px solid var(--success); }
+.answer-feedback.wrong { background: #fef2f2; color: #991b1b; border-left: 4px solid var(--danger); }
+.nav-btns { display: flex; gap: 10px; }
+.nav-btns .btn { flex: 1; }
+
+/* ===== RESULTS ===== */
+.score-circle { width: 140px; height: 140px; border-radius: 50%; background: conic-gradient(var(--success) calc(var(--pct) * 3.6deg), var(--border) 0deg); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; position: relative; }
+.score-inner { width: 110px; height: 110px; border-radius: 50%; background: var(--card); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.score-number { font-size: 2rem; font-weight: 700; color: var(--primary); }
+.score-label { font-size: .75rem; color: var(--muted); }
+.cat-results { margin-top: 16px; }
+.cat-result-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.cat-result-name { font-size: .85rem; flex: 1; }
+.cat-result-bar-wrap { width: 120px; height: 8px; background: var(--border); border-radius: 999px; }
+.cat-result-bar { height: 8px; border-radius: 999px; background: var(--success); }
+.cat-result-score { font-size: .82rem; font-weight: 600; color: var(--muted); min-width: 50px; text-align: right; }
+
+/* ===== REVIEW ===== */
+.review-item { margin-bottom: 16px; }
+.review-q { font-size: .9rem; line-height: 1.6; margin-bottom: 8px; white-space: pre-wrap; }
+.review-opts { display: flex; flex-direction: column; gap: 6px; }
+.review-opt { display: flex; gap: 8px; font-size: .85rem; padding: 6px 10px; border-radius: 8px; }
+.review-opt.r-correct { background: #ecfdf5; color: #065f46; }
+.review-opt.r-wrong { background: #fef2f2; color: #991b1b; }
+.review-opt.r-neutral { background: #f8fafc; }
+.badge-correct { background: var(--success); color: #fff; font-size: .7rem; padding: 1px 6px; border-radius: 999px; }
+.badge-wrong { background: var(--danger); color: #fff; font-size: .7rem; padding: 1px 6px; border-radius: 999px; }
+.badge-cat { background: #e0e7ff; color: var(--primary); font-size: .72rem; padding: 2px 8px; border-radius: 999px; font-weight: 600; }
+.review-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.review-qnum { font-size: .78rem; color: var(--muted); }
+
+/* ===== SELECT ALL ROW ===== */
+.select-all-row { display: flex; gap: 8px; margin-bottom: 10px; }
+
+/* ===== EMPTY STATE ===== */
+.empty { text-align: center; padding: 40px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ========== HOME SCREEN ========== -->
+<div id="screen-home" class="screen active">
+  <div class="app-header">
+    <h1>Linux 網路管理題庫</h1>
+    <p>共 300 題，7 大類別</p>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:12px;">選擇題目類別</div>
+    <div class="select-all-row">
+      <button class="btn btn-outline btn-sm" onclick="selectAll(true)">全選</button>
+      <button class="btn btn-outline btn-sm" onclick="selectAll(false)">取消全選</button>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:12px;">作答設定</div>
+    <div class="setting-row">
+      <div class="setting-label">題目數量<small>（所選類別範圍內）</small></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <input type="range" id="range-count" min="5" max="100" value="30" oninput="document.getElementById('val-count').textContent=this.value">
+        <span class="range-val" id="val-count">30</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">每題秒數限制<small>（0 = 不限時）</small></div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <input type="range" id="range-time" min="0" max="120" step="5" value="0" oninput="updateTimerLabel()">
+        <span class="range-val" id="val-time">不限時</span>
+      </div>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">隨機排列題目順序</div>
+      <input type="checkbox" id="chk-shuffle" checked>
+    </div>
+    <div class="setting-row">
+      <div class="setting-label">答題後立即顯示解答</div>
+      <input type="checkbox" id="chk-reveal" checked>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" id="btn-start" onclick="startQuiz()">開始作答</button>
+</div>
+
+<!-- ========== QUIZ SCREEN ========== -->
+<div id="screen-quiz" class="screen">
+  <div class="quiz-topbar">
+    <span class="question-label" id="q-label">第 1 題 / 共 30 題</span>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <span class="badge-cat" id="q-cat">第一類</span>
+      <span class="timer" id="timer" style="display:none">60</span>
+    </div>
+  </div>
+  <div class="progress-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+  <div class="progress-info">
+    <span id="progress-text">0 / 30</span>
+    <span id="score-inline">得分 0 / 0</span>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;">
+      <span id="multiple-badge" class="multiple-badge" style="display:none">複選題</span>
+    </div>
+    <div class="question-text" id="q-text"></div>
+    <div class="extra-content" id="q-extra" style="display:none"></div>
+    <div class="options" id="q-options"></div>
+    <div class="answer-area" id="answer-area" style="display:none">
+      <div class="answer-feedback" id="answer-feedback"></div>
+      <div class="nav-btns">
+        <button class="btn btn-outline" id="btn-prev" onclick="prevQuestion()">上一題</button>
+        <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()">下一題</button>
+      </div>
+    </div>
+    <div id="submit-area" style="margin-top:16px;">
+      <button class="btn btn-primary" id="btn-submit" onclick="submitAnswer()" disabled>確認作答</button>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:8px;">
+    <button class="btn btn-outline btn-sm" onclick="quitQuiz()" style="flex:1">結束測驗</button>
+    <button class="btn btn-outline btn-sm" id="btn-flag" onclick="flagQuestion()" style="flex:1">標記此題</button>
+  </div>
+</div>
+
+<!-- ========== RESULT SCREEN ========== -->
+<div id="screen-result" class="screen">
+  <div class="app-header">
+    <h1>測驗結果</h1>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <div class="score-circle" id="score-circle">
+      <div class="score-inner">
+        <div class="score-number" id="score-num">0/0</div>
+        <div class="score-label">得分</div>
+      </div>
+    </div>
+    <div id="score-desc" style="font-size:.95rem;color:var(--muted);margin-top:8px;"></div>
+  </div>
+
+  <div class="card">
+    <div style="font-weight:600;margin-bottom:12px;">各類別成績</div>
+    <div class="cat-results" id="cat-results"></div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+      <div style="font-weight:600;">答錯題目複習</div>
+      <span id="wrong-count-badge" class="badge-wrong"></span>
+    </div>
+    <div id="review-list"></div>
+  </div>
+
+  <div style="display:flex;gap:10px;margin-top:8px;">
+    <button class="btn btn-primary" onclick="goHome()" style="flex:1">回首頁</button>
+    <button class="btn btn-outline" onclick="retryWrong()" id="btn-retry-wrong" style="flex:1">重練錯題</button>
+  </div>
+</div>
+
+<script>
+/*__QUESTIONS_DATA__*/
+
+// ===== STATE =====
+let state = {
+  pool: [],
+  idx: 0,
+  selected: [],
+  submitted: false,
+  score: 0,
+  answered: 0,
+  record: [],
+  flagged: new Set(),
+  timerSec: 0,
+  timerInterval: null,
+  revealNow: true,
+  catStats: {},
+};
+
+// ===== INIT =====
+function init() {
+  const grid = document.getElementById('cat-grid');
+  grid.innerHTML = '';
+  QUIZ_DATA.categories.forEach(cat => {
+    const count = QUIZ_DATA.questions.filter(q => q.category === cat.id).length;
+    const btn = document.createElement('div');
+    btn.className = 'cat-btn selected';
+    btn.dataset.catId = cat.id;
+    btn.innerHTML = `<div class="cat-num">${cat.id}</div><div style="flex:1;font-size:.85rem;">${cat.name}<br><small style="color:var(--muted)">${count} 題</small></div>`;
+    btn.addEventListener('click', () => toggleCat(btn, cat.id));
+    grid.appendChild(btn);
+  });
+}
+
+function toggleCat(btn, catId) {
+  btn.classList.toggle('selected');
+  updateStartBtn();
+}
+
+function selectAll(val) {
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    if (val) b.classList.add('selected');
+    else b.classList.remove('selected');
+  });
+  updateStartBtn();
+}
+
+function updateStartBtn() {
+  const selected = [...document.querySelectorAll('.cat-btn.selected')].map(b => +b.dataset.catId);
+  const avail = QUIZ_DATA.questions.filter(q => selected.includes(q.category)).length;
+  const btn = document.getElementById('btn-start');
+  btn.disabled = avail === 0;
+  const maxRange = Math.min(avail, 100);
+  const rangeEl = document.getElementById('range-count');
+  rangeEl.max = maxRange;
+  if (+rangeEl.value > maxRange) { rangeEl.value = maxRange; document.getElementById('val-count').textContent = maxRange; }
+}
+
+function updateTimerLabel() {
+  const v = +document.getElementById('range-time').value;
+  document.getElementById('val-time').textContent = v === 0 ? '不限時' : `${v} 秒`;
+}
+
+// ===== START =====
+function startQuiz() {
+  const selectedCats = [...document.querySelectorAll('.cat-btn.selected')].map(b => +b.dataset.catId);
+  if (selectedCats.length === 0) return;
+
+  const count = +document.getElementById('range-count').value;
+  const doShuffle = document.getElementById('chk-shuffle').checked;
+  state.timerSec = +document.getElementById('range-time').value;
+  state.revealNow = document.getElementById('chk-reveal').checked;
+
+  let pool = QUIZ_DATA.questions.filter(q => selectedCats.includes(q.category));
+  if (doShuffle) pool = shuffle(pool);
+  pool = pool.slice(0, count);
+
+  state.pool = pool;
+  state.idx = 0;
+  state.score = 0;
+  state.answered = 0;
+  state.record = [];
+  state.flagged = new Set();
+  state.catStats = {};
+
+  selectedCats.forEach(c => { state.catStats[c] = { right: 0, total: 0 }; });
+
+  showScreen('quiz');
+  renderQuestion();
+}
+
+// ===== RENDER QUESTION =====
+function renderQuestion() {
+  const q = state.pool[state.idx];
+  state.selected = [];
+  state.submitted = false;
+
+  document.getElementById('q-label').textContent = `第 ${state.idx + 1} 題 / 共 ${state.pool.length} 題`;
+  document.getElementById('q-cat').textContent = q.categoryName;
+  document.getElementById('progress-bar').style.width = `${(state.idx / state.pool.length) * 100}%`;
+  document.getElementById('progress-text').textContent = `${state.idx} / ${state.pool.length}`;
+  document.getElementById('score-inline').textContent = `得分 ${state.score} / ${state.answered}`;
+
+  document.getElementById('multiple-badge').style.display = q.isMultiple ? 'inline-block' : 'none';
+
+  // Split question into stem and extra content
+  const parts = q.question.split('\n');
+  const stem = parts[0];
+  const extra = parts.slice(1).join('\n').trim();
+  document.getElementById('q-text').textContent = stem;
+  const extraEl = document.getElementById('q-extra');
+  if (extra) { extraEl.textContent = extra; extraEl.style.display = 'block'; }
+  else { extraEl.style.display = 'none'; }
+
+  // Render options
+  const optEl = document.getElementById('q-options');
+  optEl.innerHTML = '';
+  const labels = ['A', 'B', 'C', 'D'];
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'option';
+    div.dataset.idx = i;
+    div.innerHTML = `<div class="opt-label">${labels[i]}</div><div class="opt-text">${escHtml(opt)}</div>`;
+    div.addEventListener('click', () => selectOption(i, q.isMultiple));
+    optEl.appendChild(div);
+  });
+
+  document.getElementById('answer-area').style.display = 'none';
+  document.getElementById('submit-area').style.display = 'block';
+  document.getElementById('btn-submit').disabled = true;
+  document.getElementById('btn-prev').style.display = state.idx > 0 ? 'inline-flex' : 'none';
+  document.getElementById('btn-next').textContent = state.idx < state.pool.length - 1 ? '下一題' : '查看結果';
+  document.getElementById('btn-flag').textContent = state.flagged.has(state.idx) ? '取消標記' : '標記此題';
+
+  // Timer
+  clearInterval(state.timerInterval);
+  const timerEl = document.getElementById('timer');
+  if (state.timerSec > 0) {
+    timerEl.style.display = 'inline-block';
+    let rem = state.timerSec;
+    timerEl.textContent = rem;
+    timerEl.className = 'timer';
+    state.timerInterval = setInterval(() => {
+      rem--;
+      timerEl.textContent = rem;
+      if (rem <= 5) timerEl.className = 'timer danger';
+      else if (rem <= 10) timerEl.className = 'timer warn';
+      if (rem <= 0) { clearInterval(state.timerInterval); autoSubmit(); }
+    }, 1000);
+  } else {
+    timerEl.style.display = 'none';
+  }
+}
+
+function autoSubmit() {
+  if (!state.submitted) {
+    if (state.selected.length === 0) {
+      // Mark as wrong with no selection
+      state.selected = [];
+    }
+    submitAnswer();
+  }
+}
+
+// ===== SELECT OPTION =====
+function selectOption(i, isMultiple) {
+  if (state.submitted) return;
+  if (isMultiple) {
+    const pos = state.selected.indexOf(i);
+    if (pos === -1) state.selected.push(i);
+    else state.selected.splice(pos, 1);
+  } else {
+    state.selected = [i];
+  }
+  updateOptionStyles();
+  document.getElementById('btn-submit').disabled = state.selected.length === 0;
+}
+
+function updateOptionStyles() {
+  document.querySelectorAll('#q-options .option').forEach((el, i) => {
+    el.classList.toggle('selected', state.selected.includes(i));
+  });
+}
+
+// ===== SUBMIT =====
+function submitAnswer() {
+  clearInterval(state.timerInterval);
+  state.submitted = true;
+  const q = state.pool[state.idx];
+  const labels = ['A','B','C','D'];
+  const correctLetters = q.answer.split('');
+  const correctIndices = correctLetters.map(l => labels.indexOf(l)).filter(i => i >= 0);
+
+  // Sort selected for comparison
+  const selSorted = [...state.selected].sort();
+  const corSorted = [...correctIndices].sort();
+  const isRight = JSON.stringify(selSorted) === JSON.stringify(corSorted);
+
+  state.answered++;
+  if (isRight) state.score++;
+
+  if (!state.catStats[q.category]) state.catStats[q.category] = { right: 0, total: 0 };
+  state.catStats[q.category].total++;
+  if (isRight) state.catStats[q.category].right++;
+
+  state.record.push({ q, selected: [...state.selected], correct: correctIndices, isRight });
+
+  // Style options
+  document.querySelectorAll('#q-options .option').forEach((el, i) => {
+    el.classList.add('disabled');
+    el.style.pointerEvents = 'none';
+    const isSelected = state.selected.includes(i);
+    const isCorrect = correctIndices.includes(i);
+    if (isSelected && isCorrect) el.classList.add('correct');
+    else if (isSelected && !isCorrect) el.classList.add('wrong');
+    else if (!isSelected && isCorrect) el.classList.add('show-correct');
+  });
+
+  document.getElementById('submit-area').style.display = 'none';
+
+  if (state.revealNow) {
+    const fb = document.getElementById('answer-feedback');
+    if (isRight) {
+      fb.className = 'answer-feedback correct';
+      fb.textContent = '回答正確！';
+    } else {
+      fb.className = 'answer-feedback wrong';
+      fb.textContent = `回答錯誤。正確答案：${q.answer}`;
+    }
+    document.getElementById('answer-area').style.display = 'block';
+  } else {
+    // Auto advance without showing answer
+    setTimeout(() => nextQuestion(), 600);
+  }
+
+  document.getElementById('score-inline').textContent = `得分 ${state.score} / ${state.answered}`;
+}
+
+// ===== NAVIGATE =====
+function nextQuestion() {
+  if (state.idx >= state.pool.length - 1) {
+    showResult();
+  } else {
+    state.idx++;
+    renderQuestion();
+  }
+}
+
+function prevQuestion() {
+  if (state.idx > 0) { state.idx--; renderQuestion(); }
+}
+
+function flagQuestion() {
+  if (state.flagged.has(state.idx)) state.flagged.delete(state.idx);
+  else state.flagged.add(state.idx);
+  document.getElementById('btn-flag').textContent = state.flagged.has(state.idx) ? '取消標記' : '標記此題';
+}
+
+function quitQuiz() {
+  if (confirm('確定要結束測驗嗎？')) {
+    clearInterval(state.timerInterval);
+    if (state.answered > 0) showResult();
+    else goHome();
+  }
+}
+
+// ===== RESULT =====
+function showResult() {
+  clearInterval(state.timerInterval);
+  showScreen('result');
+
+  const total = state.answered;
+  const pct = total > 0 ? Math.round(state.score / total * 100) : 0;
+  document.getElementById('score-num').textContent = `${state.score}/${total}`;
+  document.getElementById('score-circle').style.setProperty('--pct', pct);
+  document.getElementById('score-desc').textContent = pct >= 80 ? '優秀！繼續保持！' : pct >= 60 ? '及格，仍有進步空間。' : '需要多加練習。';
+
+  // Category stats
+  const catEl = document.getElementById('cat-results');
+  catEl.innerHTML = '';
+  Object.entries(state.catStats).forEach(([catId, stat]) => {
+    const cat = QUIZ_DATA.categories.find(c => c.id === +catId);
+    if (!cat || stat.total === 0) return;
+    const p = Math.round(stat.right / stat.total * 100);
+    catEl.innerHTML += `
+      <div class="cat-result-row">
+        <div class="cat-result-name">${cat.name}</div>
+        <div class="cat-result-bar-wrap"><div class="cat-result-bar" style="width:${p}%"></div></div>
+        <div class="cat-result-score">${stat.right}/${stat.total}</div>
+      </div>`;
+  });
+
+  // Wrong answers review
+  const wrongs = state.record.filter(r => !r.isRight);
+  document.getElementById('wrong-count-badge').textContent = `${wrongs.length} 題`;
+  document.getElementById('btn-retry-wrong').style.display = wrongs.length > 0 ? 'inline-flex' : 'none';
+
+  const reviewEl = document.getElementById('review-list');
+  if (wrongs.length === 0) {
+    reviewEl.innerHTML = '<div class="empty">全部答對！太棒了！</div>';
+  } else {
+    reviewEl.innerHTML = wrongs.map((r, idx) => {
+      const labels = ['A','B','C','D'];
+      const optsHtml = r.q.options.map((opt, i) => {
+        const isSel = r.selected.includes(i);
+        const isCor = r.correct.includes(i);
+        let cls = 'r-neutral';
+        if (isSel && isCor) cls = 'r-correct';
+        else if (isSel && !isCor) cls = 'r-wrong';
+        else if (!isSel && isCor) cls = 'r-correct';
+        return `<div class="review-opt ${cls}"><strong>${labels[i]}.</strong> ${escHtml(opt)}</div>`;
+      }).join('');
+      const stem = r.q.question.split('\n')[0];
+      return `
+        <div class="review-item card">
+          <div class="review-header">
+            <span class="review-qnum">第 ${idx + 1} 錯題</span>
+            <span class="badge-cat">${r.q.categoryName}</span>
+            <span class="badge-wrong">正確: ${r.q.answer}</span>
+          </div>
+          <div class="review-q">${escHtml(stem)}</div>
+          <div class="review-opts">${optsHtml}</div>
+        </div>`;
+    }).join('');
+  }
+}
+
+function retryWrong() {
+  const wrongs = state.record.filter(r => !r.isRight).map(r => r.q);
+  if (wrongs.length === 0) return;
+  state.pool = shuffle(wrongs);
+  state.idx = 0;
+  state.score = 0;
+  state.answered = 0;
+  state.record = [];
+  state.flagged = new Set();
+  state.catStats = {};
+  QUIZ_DATA.categories.forEach(c => { state.catStats[c.id] = { right: 0, total: 0 }; });
+  showScreen('quiz');
+  renderQuestion();
+}
+
+function goHome() {
+  clearInterval(state.timerInterval);
+  showScreen('home');
+}
+
+// ===== UTILS =====
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(`screen-${name}`).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ===== BOOT =====
+init();
+updateStartBtn();
+updateTimerLabel();
+</script>
+</body>
+</html>
