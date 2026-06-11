@@ -1,739 +1,3633 @@
 const questions = [
-    // --- 第一部分：符號辨識與基礎規則 (Draw-01 ~ Draw-10) ---
     {
-        id: "Draw-01",
-        text: "在繪製活動圖 (Activity Diagram) 時，若要表達「依據不同條件，選擇執行不同路徑」（例如：金額>1000走A路徑，否則走B路徑），應使用下列哪個符號？",
-        type: "radio",
-        options: {
-            A: "實心圓點",
-            B: "空心菱形 (Decision Node)",
-            C: "粗黑線條 (Fork Node)",
-            D: "矩形"
+        "id": "1-01",
+        "text": "下列哪一種 ERP 系統發展的演進歷程是正確的？",
+        "options": {
+            "A": "ERP → EERP（Extended ERP）→ MRP I → MRP II",
+            "B": "MRP I → MRP II → ERP → EERP",
+            "C": "MRP II → ERP → MRP I → EERP",
+            "D": "MRP I → ERP → MRP II → EERP"
         },
-        answer: ["B"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-02",
-        text: "在活動圖中，若要表示兩個或多個活動可以「同時平行處理」(Parallel Processing)，應使用什麼符號將流程分開？",
-        type: "radio",
-        options: {
-            A: "決策節點 (菱形)",
-            B: "分岔節點 (Fork Node, 粗黑線條)",
-            C: "結合節點 (Join Node)",
-            D: "信號發送"
+        "id": "1-02",
+        "text": "下列哪些為 ERP 系統的主要效益？(複選)",
+        "options": {
+            "A": "企業流程自動化",
+            "B": "即時存取管理資訊",
+            "C": "協助改變產品結構",
+            "D": "使用電子通訊及電子商務改進供應鍵管理"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-03",
-        text: "在使用個案圖 (Use Case Diagram) 中，若使用個案 A 的功能「一定」會用到使用個案 B 的功能（如：訂購一定會用到檢查庫存），兩者之間應畫上什麼關係線？",
-        type: "radio",
-        options: {
-            A: "虛線箭頭 + <<extend>>",
-            B: "虛線箭頭 + <<include>>",
-            C: "實線 + 空心三角形",
-            D: "實線"
+        "id": "1-03",
+        "text": "美國營運管理協會 APICS 對 ERP 下了明確定義，它跟傳統 MRPII有一些不同點，下列哪一項不是其中之一？",
+        "options": {
+            "A": "關聯式資料庫",
+            "B": "點對點架構",
+            "C": "第四代語言",
+            "D": "主從架構"
         },
-        answer: ["B"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-04",
-        text: "關於強韌圖 (Robustness Diagram) 的繪圖規則，下列哪一種連接是「錯誤」且不被允許的？",
-        type: "radio",
-        options: {
-            A: "參與者 (Actor) 連接 邊界物件 (Boundary)",
-            B: "邊界物件 (Boundary) 連接 控制物件 (Control)",
-            C: "邊界物件 (Boundary) 直接連接 實體物件 (Entity)",
-            D: "控制物件 (Control) 連接 實體物件 (Entity)"
+        "id": "1-04",
+        "text": "封閉迴路物料需求規劃（Closed-loop MRP）在物料需求規劃 MRP基礎上加入考量下列哪一項，以檢視排程的合理性？",
+        "options": {
+            "A": "庫存需求規畫（Inventory Requirement Planning）",
+            "B": "生產規畫（Production Planning）",
+            "C": "產能需求規畫（Capacity Requirement Planning）",
+            "D": "採購需求規畫（Procurement Requirement Planning）"
         },
-        answer: ["C"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-05",
-        text: "在循序圖 (Sequence Diagram) 中，若要表達物件 A 傳送訊息給物件 B 後，「必須等待」物件 B 回傳結果才能繼續執行，應使用哪種箭頭符號？",
-        type: "radio",
-        options: {
-            A: "實線 + 實心箭頭 (Synchronous)",
-            B: "實線 + 開放箭頭 (Asynchronous)",
-            C: "虛線 + 開放箭頭",
-            D: "虛線 + 實心箭頭"
+        "id": "1-05",
+        "text": "依 APICS（1995）為企業資源規劃系統提出的定義，是以下列哪一項為導向之資訊系統？",
+        "options": {
+            "A": "管理會計導向的系統",
+            "B": "財務會計導向的系統",
+            "C": "生產規劃導向的系統",
+            "D": "生產控制導向的系統"
         },
-        answer: ["A"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-06",
-        text: "在循序圖中，位於生命線 (Lifeline) 上的「細長矩形」代表什麼意義？",
-        type: "radio",
-        options: {
-            A: "物件已銷毀",
-            B: "物件正在休眠",
-            C: "控制焦點 (Focus of Control) / 活化期，表示物件正在執行動作",
-            D: "物件的屬性定義"
+        "id": "1-06",
+        "text": "下列哪一項不是執行物料需求規劃（MRP）的主要依據？",
+        "options": {
+            "A": "生產排程",
+            "B": "物料庫存",
+            "C": "主生產計劃（MPS）",
+            "D": "物料表（BOM）"
         },
-        answer: ["C"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-07",
-        text: "若要在循序圖中表達「迴圈 (Loop)」或「重複執行」的邏輯，應使用哪種互動片段 (Combined Fragment)？",
-        type: "radio",
-        options: {
-            A: "alt",
-            B: "opt",
-            C: "loop",
-            D: "break"
+        "id": "1-07",
+        "text": "關於 ERP 系統的演進，下列哪一項正確？",
+        "options": {
+            "A": "EERP --> MRPII --> MRP --> ERP",
+            "B": "MRP --> MRPII --> ERP --> EERP",
+            "C": "MRPII --> MRP --> EERP --> ERP",
+            "D": "ERP --> MRPII --> MRP --> EERP"
         },
-        answer: ["C"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-08",
-        text: "在溝通圖 (Communication Diagram) 中，為了表達訊息發生的先後順序，必須在訊息名稱前加上什麼？",
-        type: "radio",
-        options: {
-            A: "時間戳記 (Timestamp)",
-            B: "順序編號 (如 1, 1.1, 2...)",
-            C: "優先權重 (High/Low)",
-            D: "不需要標示，看線條長度決定"
+        "id": "1-08",
+        "text": "下列哪些是 ERP 系統的特性？(複選)",
+        "options": {
+            "A": "即時",
+            "B": "整合",
+            "C": "採取多層式主從（client-server）架構",
+            "D": "多模組的資訊系統"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-09",
-        text: "在行為狀態機圖 (State Machine Diagram) 中，用來觸發狀態轉換 (Transition) 的要素通常包含哪三部分？",
-        type: "radio",
-        options: {
-            A: "名稱、屬性、操作",
-            B: "事件 (Event)、條件 [Guard]、動作 (Action)",
-            C: "進入、離開、做",
-            D: "起點、終點、中點"
+        "id": "1-09",
+        "text": "下列哪些是 ERP 系統供應商？(複選)",
+        "options": {
+            "A": "SAP",
+            "B": "Oracle",
+            "C": "鼎新",
+            "D": "漢康"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-10",
-        text: "在狀態機圖中，若某個動作是在物件「進入」該狀態時要立即執行一次，應標示為？",
-        type: "radio",
-        options: {
-            A: "do / 動作",
-            B: "exit / 動作",
-            C: "entry / 動作",
-            D: "event / 動作"
+        "id": "1-10",
+        "text": "APICS 定義 ERP 是哪一種導向的資訊系統？",
+        "options": {
+            "A": "功能",
+            "B": "部門",
+            "C": "財務會計",
+            "D": "技術"
         },
-        answer: ["C"]
-    },
-
-    // --- 第二部分：物件互動與結構 (Draw-11 ~ Draw-20) ---
-    {
-        id: "Draw-11",
-        text: "在繪製「應用程式核心 (AC) 循序圖」時，主要互動的物件通常不包含下列何者？",
-        type: "radio",
-        options: {
-            A: "控制物件 (Control Object)",
-            B: "實體物件 (Entity Object)",
-            C: "詳細的 GUI 元件 (如 Button, TextBox)",
-            D: "參與者 (Actor，偶爾出現)"
-        },
-        answer: ["C"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-12",
-        text: "在 AC 循序圖中，當控制物件需要存取資料庫資料時，它通常會發送訊息給哪種物件？",
-        type: "radio",
-        options: {
-            A: "邊界物件 (Boundary)",
-            B: "實體物件 (Entity)",
-            C: "另一個控制物件",
-            D: "外部系統"
+        "id": "1-11",
+        "text": "下列哪些是導入 ERP 系統的效益？(複選)",
+        "options": {
+            "A": "增加營業收入與利潤",
+            "B": "提升資金的週轉率",
+            "C": "增加交貨準確率",
+            "D": "加強整合系統，減少增加 IT 花費"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-13",
-        text: "在使用者介面塑模中，用來具體呈現介面「視覺配置」與「元件佈局」(如按鈕放哪裡、清單長怎樣) 的圖形稱為？",
-        type: "radio",
-        options: {
-            A: "介面架構圖",
-            B: "介面藍圖 (UI Blueprint)",
-            C: "類別圖",
-            D: "狀態圖"
+        "id": "1-12",
+        "text": "下列關於 ERP 系統的最佳化實務（Best Practice）對企業所產生的效益，哪一項正確？",
+        "options": {
+            "A": "降低存貨周轉率",
+            "B": "增加人力的成本",
+            "C": "增加時程、提高品質",
+            "D": "因為資訊的整合，可縮短決策所需要的時間"
         },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-14",
-        text: "在 PAC 模式的介面架構圖中，負責處理「輸入/輸出」及「視覺呈現」的是哪一個部分？",
-        type: "radio",
-        options: {
-            A: "Presentation (表達)",
-            B: "Abstraction (摘述)",
-            C: "Control (控制)",
-            D: "Data (資料)"
+        "id": "1-13",
+        "text": "下列哪一項是 ERP 系統導入失敗的可能原因？",
+        "options": {
+            "A": "ERP 是一套資訊系統，故導入時不需考量公司整體策略，由資訊部門主導即可",
+            "B": "高階主管的全力支持",
+            "C": "各部門關鍵使用者積極的參與",
+            "D": "良好的變革管理"
         },
-        answer: ["A"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-15",
-        text: "關於「介面詞彙 (UI Vocabulary)」的用途，下列敘述何者正確？",
-        type: "radio",
-        options: {
-            A: "用來畫出介面的流程圖",
-            B: "用來詳細定義介面元件的屬性(如資料型態、長度、預設值)",
-            C: "用來取代資料庫設計",
-            D: "用來描述使用者的操作習慣"
+        "id": "1-14",
+        "text": "物料需求規劃（Material Requirements Planning, MRP）主要是由四個基本功能所組成，下列哪一項不屬於 MRP 的基本功能？",
+        "options": {
+            "A": "工單管理（Work order）",
+            "B": "物料清單展開（Bill of material processing explosion）",
+            "C": "即時管理系統（Just In Time, JIT）",
+            "D": "經濟訂購量（Economic Order Quantity, EOQ）"
         },
-        answer: ["B"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-16",
-        text: "在類別圖中，若類別 A 是類別 B 的一種 (例如：卡車 Is-a 車子)，應使用什麼符號表示「一般化/繼承」關係？",
-        type: "radio",
-        options: {
-            A: "虛線箭頭",
-            B: "實線 + 空心菱形",
-            C: "實線 + 實心菱形",
-            D: "實線 + 空心三角形箭頭 (指向父類別)"
+        "id": "1-15",
+        "text": "從 1970 年代到 21 世紀，ERP 的演化歷程大致可以分為四個階段，下列哪一個階段是在於將市場的需求重點轉為滿足顧客多樣化的個別需求，創造高附加價值的大量客製化的生產方式？",
+        "options": {
+            "A": "1970 ~ 1980（MRP）",
+            "B": "1980 ~ 1990（MRPII）",
+            "C": "1990 ~ 2000（ERP）",
+            "D": "2000 ~（EERP）"
         },
-        answer: ["D"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-17",
-        text: "在類別圖中，若要表示「整體與部分」的強烈擁有關係(Composition)，即整體消失、部分也會消失，應使用什麼符號？",
-        type: "radio",
-        options: {
-            A: "實線 + 空心菱形",
-            B: "實線 + 實心菱形 (畫在整體端)",
-            C: "虛線 + 箭頭",
-            D: "實線 + 箭頭"
+        "id": "1-16",
+        "text": "一般而言，可將導入 ERP 系統的效益分為有形與無形效益兩方面，下列哪一項不包括在 ERP 系統所帶來的有形效益內？",
+        "options": {
+            "A": "增加營業收入與利潤",
+            "B": "企業流程與系統作業之整合性",
+            "C": "降低採購成本",
+            "D": "增加交貨準確率"
         },
-        answer: ["B"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-18",
-        text: "在類別圖中，若兩個類別之間只是暫時的「使用」關係 (Dependency)，例如由參數傳遞，應使用什麼符號？",
-        type: "radio",
-        options: {
-            A: "實線",
-            B: "虛線 + 箭頭",
-            C: "雙線",
-            D: "粗體線"
+        "id": "1-17",
+        "text": "目前 ERP 系統除提供基本的作業模組功能外，也提供其他主要延伸功能來和 ERP 搭配，期望可以提升更高的附加價值給予企業主，下列哪一項不是其主要的延伸功能之一？",
+        "options": {
+            "A": "數位學習（e-Learning）",
+            "B": "供應鏈管理（SCM）",
+            "C": "顧客關係管理（CRM）",
+            "D": "電子商務（EC）"
         },
-        answer: ["B"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-19",
-        text: "在類別圖的屬性區塊中，若屬性前方標示「-」符號，代表其可見度 (Visibility) 為何？",
-        type: "radio",
-        options: {
-            A: "Public (公開)",
-            B: "Private (私有)",
-            C: "Protected (保護)",
-            D: "Package (套件)"
+        "id": "1-18",
+        "text": "對 ERP 系統採用的基本技術而言，目前的主流趨勢是下列哪一種架構居多？",
+        "options": {
+            "A": "雲端計算架構",
+            "B": "集中式架構",
+            "C": "分散式架構",
+            "D": "多層式主從架構"
         },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-20",
-        text: "在類別圖中，若某個屬性是「衍生屬性」(Derived Attribute)，即其值是由其他屬性計算而得(如年齡由生日推算)，應在屬性名稱前加上什麼符號？",
-        type: "radio",
-        options: {
-            A: "*",
-            B: "/",
-            C: "#",
-            D: "&"
+        "id": "1-19",
+        "text": "根據台灣區 249 家導入 ERP 的企業分析結果（2004，中華企業資源規劃協會，台灣地區企業導入 ERP 系統管理議題之實證調查），導入 ERP 系統時可能遇到的問題很多，下列哪一項為最多企業可能面臨到的問題？",
+        "options": {
+            "A": "供應商技術能力不足",
+            "B": "落後專案所規劃的進度",
+            "C": "使用單位未能明確說明其需求",
+            "D": "顧問不了解公司業務程序"
         },
-        answer: ["B"]
-    },
-
-    // --- 第三部分：進階判斷與應用 (Draw-21 ~ Draw-30) ---
-    {
-        id: "Draw-21",
-        text: "若一個類別名稱以「斜體字」表示，這通常代表它是什麼類別？",
-        type: "radio",
-        options: {
-            A: "抽象類別 (Abstract Class)",
-            B: "靜態類別 (Static Class)",
-            C: "介面 (Interface)",
-            D: "列舉 (Enum)"
-        },
-        answer: ["A"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-22",
-        text: "在類別圖的關聯線上，若標示「1..*」，這代表什麼意思？",
-        type: "radio",
-        options: {
-            A: "多重性 (Multiplicity)：至少 1 個，多則不限",
-            B: "多重性：0 個或 1 個",
-            C: "這是一個備註",
-            D: "這是一個運算式"
+        "id": "1-20",
+        "text": "關於 ERP 系統功能架構，下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "網路伺服器提供使用者透過瀏覽器存取 ERP 系統資料",
+            "B": "即使有了雲端系統架構，ERP 系統目前仍僅能利用軟體的遠端方式操控，且企業內一定得安裝相關伺服器",
+            "C": "資料庫伺服器通常儲存企業營運相關的資料",
+            "D": "應用程式伺服器為 ERP 系統模組安裝之處，但無法擴充數目以分擔負荷量"
         },
-        answer: ["A"]
+        "answer": [
+            "A",
+            "C"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-23",
-        text: "當兩個類別之間存在「多對多」關係時，通常需要建立什麼來存放該關係的屬性？",
-        type: "radio",
-        options: {
-            A: "介面 (Interface)",
-            B: "關聯類別 (Association Class)",
-            C: "繼承關係",
-            D: "列舉"
+        "id": "1-21",
+        "text": "根據美國作業管理學會（APICS）的定義：一個會計導向的資訊系統，用來規劃和確認為了接受、製造、運送和結算客戶訂單所需的整個企業資源，稱為下列哪一項？",
+        "options": {
+            "A": "物料需求規劃（MRP）",
+            "B": "製造資源規劃（MRP II）",
+            "C": "企業資源規劃（ERP）",
+            "D": "企業系統規劃（BSP）"
         },
-        answer: ["B"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-24",
-        text: "若要描述系統中「訂單」物件從「建立」、「付款」到「出貨」的生命週期狀態變化，最適合畫哪一種圖？",
-        type: "radio",
-        options: {
-            A: "類別圖",
-            B: "使用個案圖",
-            C: "狀態機圖 (State Machine Diagram)",
-            D: "部署圖"
+        "id": "1-22",
+        "text": "大多數的文獻都從下列哪一項作為 ERP 發展的源頭，但實際上ERP 系統整合了企業管理的五大功能並且形成一個企業的整體資訊系統？",
+        "options": {
+            "A": "物料需求規劃（MRP）",
+            "B": "製造資源規劃（MRP II）",
+            "C": "管理資訊系統（MIS）",
+            "D": "企業系統規劃（BSP）"
         },
-        answer: ["C"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-25",
-        text: "若要描述「使用者」點擊按鈕後，介面如何呼叫控制器，控制器如何存取資料庫的「詳細互動流程」，最適合畫哪一種圖？",
-        type: "radio",
-        options: {
-            A: "循序圖 (Sequence Diagram)",
-            B: "類別圖 (Class Diagram)",
-            C: "部署圖 (Deployment Diagram)",
-            D: "介面架構圖"
+        "id": "1-23",
+        "text": "一個具有即時與整合特性的 ERP 系統，至少能滿足在特定情境設定之下的流程，下列流程順序哪一項正確？",
+        "options": {
+            "A": "接單 → 排程 → 採購 → 驗收 → 付款 → 發料 → 製造→ 出貨",
+            "B": "接單 → 採購 → 排程 → 驗收 → 付款 → 發料 → 製造→ 出貨",
+            "C": "接單 → 採購 → 排程 → 驗收 → 付款 → 製造 → 發料→ 出貨",
+            "D": "接單 → 排程 → 採購 → 驗收 → 付款 → 製造 → 發料→ 出貨"
         },
-        answer: ["A"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-26",
-        text: "關於「實體物件 (Entity Object)」在循序圖中的生命線位置，通常會排在畫面的？",
-        type: "radio",
-        options: {
-            A: "最左側 (最先處理)",
-            B: "最右側 (通常被控制物件呼叫)",
-            C: "中間",
-            D: "不一定"
+        "id": "1-24",
+        "text": "Callaway（1999）曾提出導入 ERP 系統具有有形與無形效益，下列哪一項不是無形效益？",
+        "options": {
+            "A": "即時提供管理決策資訊",
+            "B": "提升生產力",
+            "C": "資訊收集的正確性與完整性",
+            "D": "企業流程與系統作業的整合性"
         },
-        answer: ["B"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-27",
-        text: "在 Net-PAC 模式中，用來連接與協調 Presentation (表達) 與 Abstraction (摘述) 的元件是？",
-        type: "radio",
-        options: {
-            A: "Control (控制)",
-            B: "Model (模型)",
-            C: "View (視圖)",
-            D: "Database (資料庫)"
+        "id": "1-25",
+        "text": "ERP 系統使用者企業與 ERP 顧問在資訊與知識上的不對稱，經常成為導入 ERP 系統的重大障礙。下列哪一項是 ERP 系統失敗的原因之一？",
+        "options": {
+            "A": "高階主管的支持",
+            "B": "使用者的配合度高",
+            "C": "稱職的建置顧問",
+            "D": "企業人事流動率高"
         },
-        answer: ["A"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-28",
-        text: "在類別圖中，若屬性有「底線 (Underline)」(如 <u>taxRate</u>)，代表它是？",
-        type: "radio",
-        options: {
-            A: "靜態屬性 (Static/Class Attribute)，所有物件共用",
-            B: "私有屬性",
-            C: "唯讀屬性",
-            D: "主鍵"
+        "id": "1-26",
+        "text": "ERP 系統專案實施的風險程度定義為“改變或不確定造成累積的影響”及“影響專案成功或使其未達成目標的潛在事件”，下列哪一項風險程度類別會影響公司競爭力與獲利？",
+        "options": {
+            "A": "使用者的參與度不足",
+            "B": "高階主管的支持度不佳",
+            "C": "資訊系統造成公司營運衝擊",
+            "D": "整體企業策略使用技術過於集中"
         },
-        answer: ["A"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-29",
-        text: "若要將循序圖轉換為溝通圖 (Communication Diagram)，循序圖中的「生命線」會變成溝通圖中的什麼？",
-        type: "radio",
-        options: {
-            A: "連結 (Link)",
-            B: "物件節點 (Object Node)",
-            C: "訊息箭頭",
-            D: "邊界"
+        "id": "1-27",
+        "text": "從 ERP 系統功能完整性的角度來看，一個 ERP 產品至少應該將企業整個產銷循環包含在內，其中從訂單、採購、存貨、出貨到收款等產銷循環為下列哪一種產業？",
+        "options": {
+            "A": "買賣業",
+            "B": "服務業",
+            "C": "製造業",
+            "D": "物流業"
         },
-        answer: ["B"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-30",
-        text: "在進行「物件結構塑模」時，最後產出的最重要圖表是？",
-        type: "radio",
-        options: {
-            A: "活動圖",
-            B: "使用個案圖",
-            C: "類別圖 (Class Diagram)",
-            D: "循序圖"
+        "id": "1-28",
+        "text": "關於 ERP 發展的各個階段與其使用到的資訊架構與技術，下列哪一項錯誤？",
+        "options": {
+            "A": "第三代 ERP 常用到主從式（Client／Server）架構，及常使用第四代程式語言來撰寫相關程式",
+            "B": "第三代 ERP 重視組織間的協調，力求企業的最佳化實務，以極力主張使用 XML 化物件導向資料庫取代常見的關聯式資料庫",
+            "C": "ERP II 重視 Internet 的運用，Web-based 的相關設計亦是使用的重點之一",
+            "D": "ERP II 同樣重視企業間的協同合作，3-Tier 的架構與 Web Services 的混搭自然也在使用之列"
         },
-        answer: ["C"]
-    },
-
-    // --- 第四部分：填空觀念延伸 - 靜態與動態 (Draw-31 ~ Draw-32) ---
-    {
-        id: "Draw-31",
-        text: "填空題提到的「使用者介面靜態結構塑模」，主要應使用下列哪一種工具來呈現介面的視覺配置與元件佈局？",
-        type: "radio",
-        options: {
-            A: "介面藍圖 (UI Blueprint)",
-            B: "循序圖 (Sequence Diagram)",
-            C: "狀態機圖 (State Machine Diagram)",
-            D: "活動圖 (Activity Diagram)"
-        },
-        answer: ["A"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-32",
-        text: "若要進行「動線規劃」與介面間的切換邏輯（動態行為塑模），應優先繪製哪一種圖？",
-        type: "radio",
-        options: {
-            A: "類別圖 (Class Diagram)",
-            B: "部署圖 (Deployment Diagram)",
-            C: "UI 循序圖 或 行為狀態機圖",
-            D: "介面詞彙表"
+        "id": "1-29",
+        "text": "關於 Shang & Seddon 2000 年提出區分 ERP 效益的架構，可分成五大面向及其二十一項效益，下列敘述哪一項錯誤？",
+        "options": {
+            "A": "改善決策制定與涵蓋更完善之資源管理屬於管理面的效益提升",
+            "B": "促進企業學習、建立共同願景屬於組織面的效益提升",
+            "C": "促進產品差異化／客製化、建立成本領導屬於策略面的效益提升",
+            "D": "降低成本、延長存貨周轉時間與銷貨反應時間屬於營運面的效益提升"
         },
-        answer: ["C"]
-    },
-
-    // --- 第五部分：填空觀念延伸 - 循序圖物件類型 (Draw-33 ~ Draw-36) ---
-    {
-        id: "Draw-33",
-        text: "在繪製循序圖時，代表「與使用者直接互動的畫面或週邊設備」的「介面物件 (Boundary Object)」，通常使用什麼圖示？",
-        type: "radio",
-        options: {
-            A: "圓形加上箭頭",
-            B: "圓形左側有一條短直線 (類似 '├-O' 形狀)",
-            C: "圓形上方有箭頭 (類似轉向符號)",
-            D: "一般的矩形"
-        },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-34",
-        text: "在循序圖中，用來表示「負責協調運作、處理邏輯」的「控制物件 (Control Object)」，其標準圖示為何？",
-        type: "radio",
-        options: {
-            A: "圓形加上箭頭 (類似轉向符號)",
-            B: "圓形下方有一條橫線 (類似 'T' 形狀)",
-            C: "圓形左側有一條短直線",
-            D: "空心菱形"
+        "id": "1-30",
+        "text": "關於 ERP 導入常見失敗因素，下列哪一項錯誤？",
+        "options": {
+            "A": "高階主管不支持，專案人員以及使用者教育訓練不足",
+            "B": "顧問專業能力不足，顧問公司經驗不足",
+            "C": "流程考量過於嚴謹，系統導入時須就管理面與使用面互做確認乃至於耗時甚鉅",
+            "D": "企業需求分析不完善，使用者抗拒"
         },
-        answer: ["A"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-35",
-        text: "在循序圖中，代表「系統資料或資料庫資料表」的「實體物件 (Entity Object)」，其標準圖示為何？",
-        type: "radio",
-        options: {
-            A: "圓形下方有一條橫線 (類似 'Ω' 或 'T' 加上底線)",
-            B: "圓形加上箭頭",
-            C: "一般的矩形",
-            D: "圓柱體"
+        "id": "1-31",
+        "text": "關於 ERP 系統常用的架構層次，下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "在連接底層考慮使用 VPN（Virtual Private Network），可以保障公司經營團隊與董事會間財務資料以及內部一些商業機密資料較不會被網路監聽與剽竊",
+            "B": "使用的作業系統上比較重視初始建置時成本，日後持有或維護等成本則視為公司每年攤列開銷，不應當作 ERP 決策時考量因素",
+            "C": "在應用開發語言與使用資料庫上，主要是以配合公司舊有MIS 環境與應用軟體系統為考量，以便在 ERP 導入與整合後能與之前運作保持一致性",
+            "D": "針對辦公室流程使用 workflow 架構取代 e-mail 來做訊息傳遞，最主要是前者有較佳的傳遞確認性與保證"
         },
-        answer: ["A"]
+        "answer": [
+            "A",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-36",
-        text: "關於循序圖的繪圖規則，下列哪一種訊息傳遞路徑是「不建議」甚至錯誤的？",
-        type: "radio",
-        options: {
-            A: "參與者 -> 介面物件",
-            B: "介面物件 -> 控制物件",
-            C: "參與者 -> 實體物件 (直接跳過介面與控制)",
-            D: "控制物件 -> 實體物件"
+        "id": "1-32",
+        "text": "關於 ERP 系統應用三層式架構的對應說明，下列哪些正確？(複選)",
+        "options": {
+            "A": "銷售人員確認後的訂單儲存於訂單資料架構中，此訂單架構屬於資料層（Data Tier）",
+            "B": "生產線測試人員透過工作機檯或工業用電腦輸入檢測作業項目，此種輸入表單視為展示層（Presentation Tier）",
+            "C": "庫存人員透過查詢功能檢查到安全存量相關數據，其中計算安全存量的相關運算機制通常放置於商業層（Business Tier）／應用層（Application Tier）",
+            "D": "業務人員透過手機查詢客戶資料，其中手機觸控運作，係屬於商業層（Business Tier）／應用層（Application Tier）"
         },
-        answer: ["C"]
-    },
-
-    // --- 第六部分：填空觀念延伸 - 類別與關聯 (Draw-37 ~ Draw-38) ---
-    {
-        id: "Draw-37",
-        text: "當我們在類別圖中發現兩個類別之間是「多對多 (M:N)」關係時，為了保存該關係的屬性（如：訂購數量），必須畫出什麼？",
-        type: "radio",
-        options: {
-            A: "一個新的介面",
-            B: "一個關聯類別 (Association Class)，並用虛線連至關聯線上",
-            C: "一條雙向箭頭",
-            D: "直接在其中一個類別增加屬性"
-        },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-38",
-        text: "在類別圖中，若要將「關聯類別」連接到兩個類別之間的關聯線上，應使用什麼線條？",
-        type: "radio",
-        options: {
-            A: "實線",
-            B: "虛線",
-            C: "雙線",
-            D: "粗體線"
+        "id": "1-33",
+        "text": "誠如「資訊孤島」所言，各部門自體的管理資訊系統（Management Information System, MIS）極致發展下，反而不盡然對公司的整體利益更有助力。而在 ERP 整合規劃的思考下，卻較能實現公司的最大利益。這是因為重視資源規劃的 ERP 較分而治之的 MIS 更能提供下列哪一種特質，使企業利益得以實現？",
+        "options": {
+            "A": "資訊的分享",
+            "B": "流程的統一",
+            "C": "資料的整合",
+            "D": "組織的強化"
         },
-        answer: ["B"]
-    },
-
-    // --- 第七部分：繪圖時機與情境判斷 (Draw-39 ~ Draw-42) ---
-    {
-        id: "Draw-39",
-        text: "若老師要求你：「請畫出一張圖，描述系統中『訂單』物件從『建立』、『審核』、『出貨』到『結案』的狀態變化過程」，你該畫哪張圖？",
-        type: "radio",
-        options: {
-            A: "活動圖 (Activity Diagram)",
-            B: "使用個案圖 (Use Case Diagram)",
-            C: "狀態機圖 (State Machine Diagram)",
-            D: "溝通圖 (Communication Diagram)"
-        },
-        answer: ["C"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-40",
-        text: "若題目要求：「請畫圖表達使用者登入系統時，介面物件、控制物件與資料庫物件之間傳遞訊息的詳細時間順序」，最適合的是？",
-        type: "radio",
-        options: {
-            A: "循序圖 (Sequence Diagram)",
-            B: "類別圖 (Class Diagram)",
-            C: "活動圖 (Activity Diagram)",
-            D: "部署圖 (Deployment Diagram)"
+        "id": "1-34",
+        "text": "ERP 系統成功關鍵要素脫離不了人，下列哪些人會影響到 ERP 系統導入的成敗？(複選)",
+        "options": {
+            "A": "高階主管",
+            "B": "建置顧問",
+            "C": "使用者",
+            "D": "專案主持人"
         },
-        answer: ["A"]
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-41",
-        text: "若要描述系統的「功能需求」以及「誰(使用者)可以使用這些功能」，最優先繪製的是？",
-        type: "radio",
-        options: {
-            A: "使用個案圖 (Use Case Diagram)",
-            B: "類別圖 (Class Diagram)",
-            C: "循序圖 (Sequence Diagram)",
-            D: "強韌圖 (Robustness Diagram)"
+        "id": "1-35",
+        "text": "ERP 系統主要功能為將企業營運中各流程中所需的資料即時整合並匯入哪一個模組中？",
+        "options": {
+            "A": "銷售模組",
+            "B": "會計模組",
+            "C": "製造模組",
+            "D": "庫存模組"
         },
-        answer: ["A"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-42",
-        text: "若要描述一個複雜的商業流程（例如：請購流程，包含判斷金額大小走不同路徑、多部門平行簽核），應使用哪種圖？",
-        type: "radio",
-        options: {
-            A: "狀態機圖",
-            B: "活動圖 (Activity Diagram)",
-            C: "物件圖",
-            D: "類別圖"
+        "id": "1-36",
+        "text": "現今流行的多層式（Multi-Tier）架構是建立在下列哪一種基礎之上？",
+        "options": {
+            "A": "網頁基礎（Web Based）",
+            "B": "集中式架構（Central Computer）",
+            "C": "大型主機架構（Mainframe）",
+            "D": "主從式架構（Client/Server）"
         },
-        answer: ["B"]
-    },
-
-    // --- 第八部分：繪圖細節與符號意義 (Draw-43 ~ Draw-54) ---
-    {
-        id: "Draw-43",
-        text: "在類別圖中，若看到一條連線，端點是「空心三角形」且指向類別 A，另一端連著類別 B，這代表？",
-        type: "radio",
-        options: {
-            A: "B 是 A 的一部分 (聚合)",
-            B: "B 繼承了 A (一般化/泛化)",
-            C: "B 關聯到 A",
-            D: "B 依賴 A"
-        },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-44",
-        text: "在活動圖 (Activity Diagram) 中，一個實心的黑色圓點通常代表什麼？",
-        type: "radio",
-        options: {
-            A: "決策點",
-            B: "流程結束",
-            C: "初始節點 (Initial Node) / 流程開始",
-            D: "活動合併"
+        "id": "1-37",
+        "text": "ERP 系統的整合特性包含了下列哪些？(複選)",
+        "options": {
+            "A": "資料的整合",
+            "B": "資料與流程的整合",
+            "C": "客戶與供應商的整合",
+            "D": "金流與物流的整合"
         },
-        answer: ["C"]
+        "answer": [
+            "A",
+            "B"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-45",
-        text: "在活動圖中，一個「牛眼」符號（實心圓外加一圈空心圓）代表什麼？",
-        type: "radio",
-        options: {
-            A: "活動開始",
-            B: "活動結束 (Final Node)",
-            C: "信號接收",
-            D: "時間事件"
+        "id": "1-38",
+        "text": "ERP 與企業最主要的績效目標：增加企業利潤的關係為下列哪一項？",
+        "options": {
+            "A": "導入 ERP 系統就可以幫助企業增加利潤",
+            "B": "導入 ERP 系統無法幫助企業增加利潤",
+            "C": "可以經由 ERP 來提升營運作業效率提升企業競爭力，以滿足客戶超越競爭者而增加獲利能力",
+            "D": "導入 ERP 和企業利潤無關"
         },
-        answer: ["B"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-46",
-        text: "在使用個案圖中，若要表示「查詢成績」功能『可以』(Optional) 額外執行「列印成績單」功能，應使用哪種關係？",
-        type: "radio",
-        options: {
-            A: "<<include>> (包含)",
-            B: "<<extend>> (擴充)",
-            C: "<<use>>",
-            D: "<<copy>>"
+        "id": "2-01",
+        "text": "下列哪一種設計包含了模組功能、資料模式和使用者介面等內容，如資料流程圖（DFD）、實體關聯模型（ER-Model）等？",
+        "options": {
+            "A": "細部設計",
+            "B": "整合性設計",
+            "C": "實體設計",
+            "D": "概念性設計"
         },
-        answer: ["B"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-47",
-        text: "在使用個案圖中，若「租車」與「還車」兩個功能都『必須』執行「檢查身分」這個共同步驟，應使用哪種關係？",
-        type: "radio",
-        options: {
-            A: "<<include>> (包含)",
-            B: "<<extend>> (擴充)",
-            C: "<<link>>",
-            D: "<<inherit>>"
+        "id": "2-02",
+        "text": "下列哪一項不是大多數企業避免進行 ERP 客製化的主要原因？",
+        "options": {
+            "A": "與原系統整合性問題",
+            "B": "會增加風險管理上的不便",
+            "C": "會增加系統導入成本或軟體安裝成本",
+            "D": "必須額外耗費精神或人力維護客製化的系統"
         },
-        answer: ["A"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-48",
-        text: "在繪製類別圖時，若某個類別是「執行完畢後不需要儲存」的（如：控制類別），它屬於哪種性質？",
-        type: "radio",
-        options: {
-            A: "永存類別 (Persistent Class)",
-            B: "暫存類別 (Transient Class)",
-            C: "抽象類別 (Abstract Class)",
-            D: "介面 (Interface)"
+        "id": "2-03",
+        "text": "專案控管週期的順序為下列哪一項？(1)訂定目標、(2)離差測量、(3)檢討與修正、(4)學習提升",
+        "options": {
+            "A": "（1）→（2）→（3）→（4）",
+            "B": "（1）→（3）→（2）→（4）",
+            "C": "（1）→（4）→（2）→（3）",
+            "D": "（4）→（1）→（2）→（3）"
         },
-        answer: ["B"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-49",
-        text: "在系統實作中，「實體類別 (Entity Class)」通常會被映射/實作為什麼？",
-        type: "radio",
-        options: {
-            A: "使用者介面的表單",
-            B: "資料庫中的資料表 (Table)",
-            C: "系統的主程式",
-            D: "網路通訊協定"
+        "id": "2-04",
+        "text": "下列哪些屬於 ERP 導入專案規劃階段的工作？(複選)",
+        "options": {
+            "A": "訂定專案範圍",
+            "B": "組織專案團隊",
+            "C": "評估顧問公司",
+            "D": "訓練種子人員"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-50",
-        text: "下列哪一種圖形「不屬於」UML 的互動圖 (Interaction Diagram)？",
-        type: "radio",
-        options: {
-            A: "循序圖 (Sequence Diagram)",
-            B: "溝通圖 (Communication Diagram)",
-            C: "類別圖 (Class Diagram)",
-            D: "互動概觀圖 (Interaction Overview Diagram)"
+        "id": "2-05",
+        "text": "一個完整的 ERP 評選過程，至少需要包含下列哪些步驟？1. 建立企業願景與策略；2. 建立 ERP 系統導入的目標；3. 收集 ERP 供應商相關資料；4. 評選 ERP 系統供應商；5. 評選 ERP 導入顧問公司；6. 簽訂導入合約。",
+        "options": {
+            "A": "12345",
+            "B": "123456",
+            "C": "2345",
+            "D": "1345"
         },
-        answer: ["C"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-51",
-        text: "在類別圖中，若屬性寫著 `+ name : String`，前面的 `+` 號代表什麼權限？",
-        type: "radio",
-        options: {
-            A: "Private (私有)",
-            B: "Public (公開)",
-            C: "Protected (保護)",
-            D: "Package (套件)"
+        "id": "2-06",
+        "text": "下列哪一項非導入 ERP 在「營運作業」的績效？",
+        "options": {
+            "A": "決策時間縮短",
+            "B": "決策品質提升",
+            "C": "跨部門分享資訊",
+            "D": "員工生產力提高"
         },
-        answer: ["B"]
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-52",
-        text: "在類別圖中，若操作寫著 `update(amount : Integer) : Boolean`，其中 `Boolean` 代表什麼？",
-        type: "radio",
-        options: {
-            A: "輸入參數的型別",
-            B: "操作的名稱",
-            C: "回傳值的型別 (Return Type)",
-            D: "可見度"
+        "id": "2-07",
+        "text": "系統設計是系統導入的重點工作。在細部設計部分，下列哪些是常使用的工具？(複選)",
+        "options": {
+            "A": "PERT（Program Evaluation and Review Technique）",
+            "B": "IDEF（ICAM Definition Languages）",
+            "C": "ARIS（Architecture of Integrated Information System）",
+            "D": "OOA／OOD（Object-Oriented Analysis & Design）"
         },
-        answer: ["C"]
+        "answer": [
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-53",
-        text: "在循序圖中，若要表示「刪除物件」或「物件生命週期結束」，應在生命線尾端畫上什麼符號？",
-        type: "radio",
-        options: {
-            A: "黑色實心圓",
-            B: "大大的 X",
-            C: "正方形",
-            D: "三角形"
+        "id": "2-08",
+        "text": "下列關於 ERP 系統專案導入執行團隊人員的職責敘述，哪一項錯誤？",
+        "options": {
+            "A": "專案委員會必須是具有統籌決策權責的人員所組成，通常為總經理及各事業部主管",
+            "B": "專案經理應該由通盤瞭解公司作業需求且具有決策能力的人來擔任",
+            "C": "模組負責人通常由處級或理級主管擔任",
+            "D": "End User 負責該模組上線的成敗"
         },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-54",
-        text: "在活動圖的「泳道 (Swimlane)」設計中，每個泳道上方通常標示的是什麼？",
-        type: "radio",
-        options: {
-            A: "執行的時間點",
-            B: "負責執行該活動的組織單位或角色 (如：營業部、會計)",
-            C: "資料的型態",
-            D: "活動的優先順序"
+        "id": "2-09",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "當需求分析的結果顯示企業現行作業與 ERP 系統供應商所提供的系統作業流程不同時，有兩個作法，分別是客製化開發部分流程與調整企業現行流程",
+            "B": "企業流程再造（BPR）是一個很複雜且工程浩大的工作。企業推動 BPR 時，不需要額外的人力與成本",
+            "C": "ERP 系統供應商所提供的系統可透過模組選擇，讓系統本身具有一定的應用彈性",
+            "D": "要進行客製化時，應該以外掛模組的方式來進行"
         },
-        answer: ["B"]
-    },
-
-    // --- 第九部分：整合應用與總結 (Draw-55 ~ Draw-60) ---
-    {
-        id: "Draw-55",
-        text: "若要在類別圖中表示「部門」與「員工」的關係，且部門消失時，員工資料依然保留（非強烈相依），應使用哪種關係？",
-        type: "radio",
-        options: {
-            A: "組合 (Composition) - 實心菱形",
-            B: "聚合 (Aggregation) - 空心菱形",
-            C: "繼承 (Generalization)",
-            D: "實現 (Realization)"
-        },
-        answer: ["B"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-56",
-        text: "當繪製狀態圖時，若同一個事件在不同狀態下會觸發不同的動作，這主要是在描述物件的什麼特性？",
-        type: "radio",
-        options: {
-            A: "多型 (Polymorphism) 或 動態行為",
-            B: "繼承 (Inheritance)",
-            C: "封裝 (Encapsulation)",
-            D: "靜態結構"
+        "id": "2-10",
+        "text": "下列專案風險管理的步驟，正確的順序為下列哪一項？A. 風險認定、B. 風險評估、C. 風險排序、D. 風險規劃、E. 風險解決、F.風險追蹤",
+        "options": {
+            "A": "ABCDEF",
+            "B": "ADBCEF",
+            "C": "CBAEDF",
+            "D": "BADFEC"
         },
-        answer: ["A"]
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-57",
-        text: "在 Net-PAC 介面架構圖中，各個 PAC 代理人 (Agent) 之間主要透過哪一部分進行溝通？",
-        type: "radio",
-        options: {
-            A: "Presentation (表達)",
-            B: "Abstraction (摘述)",
-            C: "Control (控制)",
-            D: "直接互相呼叫"
+        "id": "2-11",
+        "text": "基本上，一個典型的 ERP 系統導入案會經過七個階段，下列哪一項為正確順序？(1)初始評估、(2)系統上線、(3)系統建置、(4)專案準備、(5)企業藍圖規劃、(6)系統上線規劃、(7)持續改善",
+        "options": {
+            "A": "(1) → (4) → (3) → (5) → (2) → (6) → (7)",
+            "B": "(1) → (4) → (5) → (3) → (6) → (2) → (7)",
+            "C": "(1) → (4) → (2) → (3) → (5) → (6) → (7)",
+            "D": "(1) → (4) → (2) → (3) → (6) → (5) → (7)"
         },
-        answer: ["C"]
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-58",
-        text: "在循序圖中，若要強調訊息是「非同步」的（發送後不等待回應，直接往下執行），應畫成？",
-        type: "radio",
-        options: {
-            A: "實線 + 實心箭頭",
-            B: "實線 + 開放式箭頭 (Open Arrowhead)",
-            C: "虛線 + 實心箭頭",
-            D: "雙線箭頭"
+        "id": "2-12",
+        "text": "滾動式導入（Roll-out）是一個部門一個部門或是一個區域一個區域（Site by site）的導入，最後再推展到全公司。部門／區域的導入可以是全面性，也可以是逐步導入，因此其導入速度較慢；下列哪些為滾動式導入的優點？(複選)",
+        "options": {
+            "A": "成本較易控制",
+            "B": "累積一個完整的導入經驗將有助於後續的推展",
+            "C": "風險較低",
+            "D": "專案成員的激勵動機最大"
         },
-        answer: ["B"]
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
     },
     {
-        id: "Draw-59",
-        text: "在繪製「使用個案圖」時，參與者 (Actor) 一定要畫成火柴人嗎？",
-        type: "radio",
-        options: {
-            A: "一定要，這是唯一標準",
-            B: "不一定，若代表外部系統，也可以畫成標示 <<actor>> 的矩形類別圖示",
-            C: "不行，只能用文字描述",
-            D: "隨便畫都可以"
+        "id": "2-13",
+        "text": "關於 ERP 系統建置的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "指將 ERP 安裝在硬體設備上，並且依企業的作業流程啟動模組、設定參數、建立基本資料以備系統運作的工作",
+            "B": "大多是在顧問公司的輔導下來進行的",
+            "C": "當建置合約簽定後，即可開始系統建置的過程",
+            "D": "是將使用者需求轉化為系統規格文件，以作為上一階段系統實作的依據"
         },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
     },
     {
-        id: "Draw-60",
-        text: "總結來說，若要進行「物件導向分析與設計 (OOAD)」，圖形的繪製順序通常建議為何？（參考 Ch5~Ch9 流程）",
-        type: "radio",
-        options: {
-            A: "類別圖 -> 循序圖 -> 使用個案圖",
-            B: "使用個案圖/活動圖 (需求) -> 循序圖 (互動) -> 類別圖 (結構)",
-            C: "部署圖 -> 類別圖 -> 活動圖",
-            D: "資料庫 schema -> 程式碼 -> 補畫圖"
+        "id": "2-14",
+        "text": "隨著資訊系統委外市場快速成長，委外服務也細分成很多種，下列敘述哪一項較正確？",
+        "options": {
+            "A": "合包（Co-sourcing）是一種長期合作關係，雙方先為此關係進行投資，再依據預先擬定的協議分享利益",
+            "B": "內包（Insourcing）是一種短期的策略性解決方案，原因在於解決迫切的問題，但與企業規劃前景的策略發展過程無關",
+            "C": "利益關係（Benefit-based relationships）為一種確保產值的應變措施，藉由改善某區域的營運，以承攬來自其他部門的工作",
+            "D": "服務外包（Outsourcing the service）是一種仔細選擇和約僱專業的外部服務供應商，並在必要時，因應服務供應商的專業累積，創新擴大服務層面"
         },
-        answer: ["B"]
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-15",
+        "text": "如附圖所示，基本上專案管理流程可大致歸納為附圖的八大步驟，請依正確流程順序排列之？",
+        "options": {
+            "A": "(3)(7)(1)(8)(4)(6)(5)(2)",
+            "B": "(1)(7)(3)(8)(4)(6)(5)(2)",
+            "C": "(3)(7)(1)(4)(8)(5)(6)(2)",
+            "D": "(1)(7)(3)(8)(6)(4)(5)(2)"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-16",
+        "text": "下列哪些為企業導入 ERP 系統的可能原因？(複選)",
+        "options": {
+            "A": "改善資訊的正確性與及時性",
+            "B": "有助於公司的上市上櫃",
+            "C": "同業已導入類似系統",
+            "D": "進行企業再造流程"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-17",
+        "text": "關於 ERP 系統供應商的最後評選階段，下列敘述哪一項錯誤？",
+        "options": {
+            "A": "評選組織人員時，可以資訊人員技術上的考量作為唯一依據，並應避免使用者需求凌駕資訊人員",
+            "B": "一般認為評選供應商最合理作法是：成立評選委員會廣納各方意見，然後用投票或共識決方式選出合格或理想供應商，再交由高階主管裁決",
+            "C": "評選階段最主要考慮的三件事是：評選的組織與人員、評選的方法或程序以及評選的標準",
+            "D": "評選供應商需要考慮的因素有許多，其中包括和企業作業流程相結合、考慮公司的遠景與策略等"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-18",
+        "text": "ERP 系統建置顧問評選時，最主要考慮的有哪些方面？(1)對系統的熟悉程度、(2)人事費用是否符合預算、(3)對產業的了解程度、(4)企業導入 ERP 系統時是否同時進行型流程再造的工作",
+        "options": {
+            "A": "12",
+            "B": "134",
+            "C": "234",
+            "D": "1234"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-19",
+        "text": "一個企業之 ERP 系統導入案會歷經些許階段，有些導入案最終失敗，有些則是成功，下列哪些是導入案的成功關鍵因素？(複選)",
+        "options": {
+            "A": "管理階層對專案的參與和支持",
+            "B": "確實規劃資料轉換",
+            "C": "繁複的專案組織",
+            "D": "簡單、清楚而且可測量的目標"
+        },
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-20",
+        "text": "關於 ERP 系統建置後的售後服務，應包含下列哪些？(複選)",
+        "options": {
+            "A": "問題分析與解決",
+            "B": "新增修補程式（Patch）",
+            "C": "使用者社群（User's club）",
+            "D": "員工的持續教育訓練"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-21",
+        "text": "ERP 系統建置的大致程序主要可以包含附圖中的五項，下列哪一項為正確順序？(1)配合企業流程選擇模組和參數設定、(2)規劃運算架構（Computing architecture）、(3)將所需資料輸入系統、(4)軟硬體安裝（Installation）、(5)系統測試和準備上線",
+        "options": {
+            "A": "24531",
+            "B": "21435",
+            "C": "23415",
+            "D": "24135"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-22",
+        "text": "ERP 系統的導入可以分為三個階段，下列導入順序哪一項正確？",
+        "options": {
+            "A": "系統評選決策 → 運作及持續改進 → 系統建置過程",
+            "B": "系統建置過程 → 系統評選決策 → 運作及持續改進",
+            "C": "運作及持續改進 → 系統建置過程 → 系統評選決策",
+            "D": "系統評選決策 → 系統建置過程 → 運作及持續改進"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-23",
+        "text": "在評選 ERP 系統供應商時，必須考慮幾點因素，下列哪一項不是須考慮因素？",
+        "options": {
+            "A": "組織與人員",
+            "B": "方法或程序",
+            "C": "內容和標準",
+            "D": "品牌知名度"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-24",
+        "text": "不論國內或國外之 ERP 系統供應商，建置顧問的評選是十分重要，下列哪一項不是評選 ERP 建置顧問的主要考慮因素？",
+        "options": {
+            "A": "導入企業不可更換指派的建置顧問",
+            "B": "對系統的熟悉程度",
+            "C": "對導入企業的相關產業了解程度",
+            "D": "是否同時要進行企業流程再造（BPR）"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-25",
+        "text": "一般來說，ERP 系統開發生命週期可分為幾個階段來進行，包含系統的規劃、分析、設計、建構與運作維護，下列哪一項不是國內ERP 供應商鼎新公司的導入步驟？",
+        "options": {
+            "A": "專案計畫",
+            "B": "系統精進",
+            "C": "上線準備",
+            "D": "制度規劃"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-26",
+        "text": "下列哪一個階段的主要工作是將新系統安裝在組織的實際作業環境中，並在實際作業的環境上進行接收測試（accept test）？",
+        "options": {
+            "A": "系統建構",
+            "B": "正式上線運作",
+            "C": "系統轉移",
+            "D": "系統設計"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-27",
+        "text": "大多數的 ERP 供應商都為了自己的產品發展出建置的方法論（methodology）或建置程序，並發展出一些工具，作為建置的指導與輔助。下列哪一家公司發展出一套線上輔助工具 AIM（Advance Implementation Method）來協助企業導入 ERP 系統？",
+        "options": {
+            "A": "Oracle",
+            "B": "SAP",
+            "C": "IBM",
+            "D": "鼎新"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-28",
+        "text": "下列哪一個階段的主要工作是為整個 ERP 系統建置專案擬定一個詳細而完整的計畫，並提出包含所有各階段過程的計畫書？",
+        "options": {
+            "A": "系統建構",
+            "B": "系統轉移",
+            "C": "系統規劃",
+            "D": "系統設計"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-29",
+        "text": "ERP 導入的策略通常可分為三種，包含逐步式（Step by Step）、大躍進式（Big-Bang）與複製式（Roll-Out）。下列哪一項不是大躍進式（Big-Bang）的優點？",
+        "options": {
+            "A": "人力資源所需較少",
+            "B": "縮短整個專案的時間",
+            "C": "整合後的功效可馬上顯現",
+            "D": "專案成員的衝勁與動機比較高"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-30",
+        "text": "在 ERP 系統導入中，對於專案小組成員的教育訓練是非常重要的一環，足以影響整個專案導入的成效。教育訓練的工作可分為幾個方面，下列哪一項的重點在於教導最新的經營管理觀念？",
+        "options": {
+            "A": "系統功能",
+            "B": "企業流程",
+            "C": "專案管理",
+            "D": "時程掌控"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-31",
+        "text": "一般 ERP 供應商所提供的系統都具備一套完整的功能，而且透過模組選擇與參數設定的方式，本身已具有一定的應用彈性。除非企業有非常特殊的作業程序，並與企業的核心競爭力有關，一般認為儘量避免哪一種方式較為合宜？",
+        "options": {
+            "A": "資訊化",
+            "B": "正規化",
+            "C": "客製化",
+            "D": "模組化"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-32",
+        "text": "所有具經驗的企業都同意，在 ERP 建置工作結束系統正式營運時，真正的挑戰才正要開始。除了維持系統的正常運作之外，還有哪些主要工作需要持續進行？(複選)",
+        "options": {
+            "A": "使用者意見的收集",
+            "B": "系統維護與調整",
+            "C": "系統績效的評量",
+            "D": "系統改進與擴充計畫"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-33",
+        "text": "ERP 系統導入的專案控管是一項連貫所有階段的重要工作，而專案控管的步驟可分為訂定目標、離差測量、修正與檢討及學習提昇等四個階段。下列哪些是屬於離差測量階段很好的輔助工具？(複選)",
+        "options": {
+            "A": "意見回饋",
+            "B": "定期開會",
+            "C": "加強學習",
+            "D": "導入排程計劃"
+        },
+        "answer": [
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-34",
+        "text": "下列哪些是 ERP 系統導入的成功關鍵因素？(複選)",
+        "options": {
+            "A": "專職的專案成員",
+            "B": "有效的變革管理",
+            "C": "落實教育訓練",
+            "D": "高階主管的參與和支持"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-35",
+        "text": "導入 ERP 常會產生兩項成本，一是無法量化但卻難以避免的人為因素成本，另一則是能估算出來的可量化成本。在可量化成本中，有兩者較密切的與使用者可能的抗拒（人的抗拒）有關，為下列哪兩項？(複選)",
+        "options": {
+            "A": "軟硬體成本",
+            "B": "訓練與變革管理成本",
+            "C": "企業流程再造成本",
+            "D": "數據資料轉換成本"
+        },
+        "answer": [
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-36",
+        "text": "現今 ERP 導入常見的一個問題是企業面對瞬息萬變的市場現狀與客戶回應，往往需要快速調整其作業方式或部分 ERP 系統細節，此種狀況在早期 ERP 系統的規劃設計時反而不常見。試問此種發展，通常是基於考量系統需提升哪一種特質的原因？",
+        "options": {
+            "A": "Flexibility（系統彈性，靈活性）",
+            "B": "Usability（優使性）",
+            "C": "Manageability（管理性）",
+            "D": "Scalability（規模彈性，規模可擴充性）"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-37",
+        "text": "假設 AB&B 公司已有部分組織有不錯執行效益的 MIS 系統正在使用，而該公司通常在網路及行動的連通上亦算是業界翹楚。公司內部的組織因極度網路化，是以公司的組織非以地域性為主，而是藉由網路的銜接，某一部門的人員可散居世界各地卻透過網路共同協同工作。此時 AB&B 公司希望在既有資訊發展的基礎上，導入 ERP系統，此時您將會建議使用下列哪一種導入方式？",
+        "options": {
+            "A": "全面性導入（Big Bang）",
+            "B": "漸進式導入的逐廠區方式（Site by site, Roll-out）",
+            "C": "漸進式導入的逐功能／模組方式（Step by step）",
+            "D": "先期式導入（pilot-study）模式"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-38",
+        "text": "關於 ASAP 導入期程，下列哪一項為正確順序？（1）專案準備（2）企業藍圖規劃（3）初始評估（4）系統上線規劃（5）系統建置（6）持續改善（7）系統上線",
+        "options": {
+            "A": "3125476",
+            "B": "1234567",
+            "C": "3125467",
+            "D": "1235467"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-39",
+        "text": "下列就市面上常見 ERP 軟體供應商與其所用導入方法的配對，哪些正確？(複選)",
+        "options": {
+            "A": "Oracle 公司的 AIM 方法",
+            "B": "安達信（Anderson）顧問公司的 BIM（企業整合方法論）",
+            "C": "J. D. Edward 公司的 REP 方法",
+            "D": "鼎新公司的 TIM 導入方法論"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-40",
+        "text": "ERP 的導入過程，專案小組扮演著一個舉足輕重的角色。此專案小組的建立，應該在下列哪一個時期為之？",
+        "options": {
+            "A": "初始評估期",
+            "B": "專案準備期",
+            "C": "系統上線規劃期",
+            "D": "企業藍圖規劃期"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-41",
+        "text": "ERP 導入後期效益良莠與否，往往與其 BPR 的舉措息息相關。而在 ERP 的導入期程中，通常妥善決策並確認企業流程的期程應於哪一個期程？",
+        "options": {
+            "A": "專案準備期",
+            "B": "系統上線規劃期",
+            "C": "企業藍圖規劃期",
+            "D": "系統建置期"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-42",
+        "text": "諸多國際組織在 XML 基礎上，投入大量資源以研訂全球各產業之共通電子商務應用標準規範及對應的應用領域，下列哪一項正確？",
+        "options": {
+            "A": "ebXML 之於線上學習",
+            "B": "RosettaNet 之於網路業者",
+            "C": "IFX（Interactive Financial eXchange）之於運輸業",
+            "D": "HL7 （Health Level Seven）之於醫療業"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-43",
+        "text": "請就下列傳統 ERP 系統常見建置程序排定其合適的順序？（1）建立報表（2）定義資料表格及作業流程（3）測試與轉換（4）建構整體資訊作業環境",
+        "options": {
+            "A": "4213",
+            "B": "2431",
+            "C": "2413",
+            "D": "4231"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-44",
+        "text": "下列哪一個工作並不適合於系統設計與開發（系統建置）期間進行？",
+        "options": {
+            "A": "系統流程確認與差異比對",
+            "B": "執行系統整合測試",
+            "C": "建立授權架構與權限管理機制",
+            "D": "一般使用者操作教材開發／撰寫"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-45",
+        "text": "ERP 系統功能模組細部參數的調校、庫存安全存量或前置時間的細部調整，應該可以配合應用顧問與技術顧問在下列哪一個期程進行？",
+        "options": {
+            "A": "企業藍圖規劃期",
+            "B": "系統建置期",
+            "C": "系統上線期",
+            "D": "持續改善期"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-46",
+        "text": "在評選 ERP 系統時需要將 ERP 系統供應商長期競爭力納入考量因素是因為下列哪一項？",
+        "options": {
+            "A": "將 ERP 系統選購視為一次性的採購",
+            "B": "將 ERP 系統選購視為一個建立長期經營夥伴關係",
+            "C": "可以取得具成本優勢的系統",
+            "D": "可以取得功能較符合企業需求的系統"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-47",
+        "text": "ERP 經常伴隨著企業流程再造（BPR）議題，二者之間較合理的關係為下列哪一項？",
+        "options": {
+            "A": "ERP 與 BPR 同時進行",
+            "B": "先 ERP 再 BPR",
+            "C": "先 BPR 再 ERP",
+            "D": "BPR 與 ERP 無關"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-48",
+        "text": "ERP 系統的導入策略可以分為三種：逐步式（Step by Step）、大躍進式（Big-Bang）和複製式（Roll-Out），其中對組織資源協調與控制較有利的方法為下列哪一項？",
+        "options": {
+            "A": "逐步式（Step by Step）",
+            "B": "大躍進式（Big-Bang）",
+            "C": "複製式（Roll-Out）",
+            "D": "三者都可以"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-49",
+        "text": "ERP 系統的導入策略可以分為三種：逐步式（Step by Step）、大躍進式（Big-Bang）和複製式（Roll-Out），其中所需時程較短的為下列哪一項？",
+        "options": {
+            "A": "逐步式（Step by Step）",
+            "B": "大躍進式（Big-Bang）",
+            "C": "複製式（Roll-Out）",
+            "D": "三者都可以"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-50",
+        "text": "ERP 系統的導入策略可以分為三種：逐步式（Step by Step）、大躍進式（Big-Bang）和複製式（Roll-Out），其中容易忽略各據點特有流程的為下列哪一項？",
+        "options": {
+            "A": "逐步式（Step by Step）",
+            "B": "大躍進式（Big-Bang）",
+            "C": "複製式（Roll-Out）",
+            "D": "三者都可以"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-51",
+        "text": "ERP 系統的導入策略可以分為三種：逐步式（Step by Step）、大躍進式（Big-Bang）和複製式（Roll-Out），其中會在新舊模組的銜接耗費較多時間與成本的為下列哪一項？",
+        "options": {
+            "A": "逐步式（Step by Step）",
+            "B": "大躍進式（Big-Bang）",
+            "C": "複製式（Roll-Out）",
+            "D": "三者都可以"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-52",
+        "text": "很多 ERP 軟體供應商建議客戶安裝三套 ERP 系統，分別為下列哪些？(複選)",
+        "options": {
+            "A": "開發用系統",
+            "B": "測試用系統",
+            "C": "正式運作系統",
+            "D": "教育訓練用系統"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "2-53",
+        "text": "在 ERP 系統導入流程中企業藍圖規劃的重點在於下列哪一項？",
+        "options": {
+            "A": "確認企業經營策略",
+            "B": "確認目前營運模式與組織架構",
+            "C": "確認過去營運模式與組織架構",
+            "D": "確認未來營運模式與組織架構"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-54",
+        "text": "在 ERP 系統導入流程中成立專案組織是在哪一個階段的工作？",
+        "options": {
+            "A": "企業藍圖規劃",
+            "B": "專案準備",
+            "C": "系統建置",
+            "D": "系統上線規劃"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "2-55",
+        "text": "在評選 ERP 系統時，對系統彈性的要求可以透過哪些方式來達成？(複選)",
+        "options": {
+            "A": "透過模組選擇",
+            "B": "透過參數設定",
+            "C": "透過客製化程式",
+            "D": "透過維護合約"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-01",
+        "text": "關於途程單（routing）的敘述，下列哪些正確？(複選)",
+        "options": {
+            "A": "產品的製造過程會記錄於途程單之中",
+            "B": "途程單記載了產品製造過程中所需要的人力和機器設備",
+            "C": "在執行粗略產能計畫（RCCP）時，可參考途程單來計算主生產排程的可行性",
+            "D": "途程單是以作業（operation）為基本單位來描述產品加工過程"
+        },
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-02",
+        "text": "無論是否有任何供需的改變，所有物料皆重新規劃與推算的物料需求規劃方式屬於下列哪一項？",
+        "options": {
+            "A": "重規劃（regenerative planning）",
+            "B": "規劃時間幅度內的淨變規劃（net change planning in planning horizon）",
+            "C": "淨變規劃（net change planning）",
+            "D": "系統神經質（system nervousness）"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-03",
+        "text": "下列哪一項不屬於物料需求規劃所需要的資料？",
+        "options": {
+            "A": "物料庫存",
+            "B": "在製品情況",
+            "C": "主生產排程",
+            "D": "產品結構"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-04",
+        "text": "企業進行採購時，選擇供應商的考慮因素不包含下列哪一項？",
+        "options": {
+            "A": "產品供貨能力",
+            "B": "管理制度",
+            "C": "供應商之規模",
+            "D": "技術能力"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-05",
+        "text": "物料表（Bill of Material，BOM）就使用目的而言，不包含下列哪一項？",
+        "options": {
+            "A": "製造用物料表",
+            "B": "計畫用物料表",
+            "C": "工程用物料表",
+            "D": "修繕用物料表"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-06",
+        "text": "經濟訂購量（Economic Order Quantity, EOQ），屬於下列哪些存量管理模式？(複選)",
+        "options": {
+            "A": "主生產排程（MPS）管理模式",
+            "B": "定量訂購模式",
+            "C": "定期訂購模式",
+            "D": "及時訂購模式"
+        },
+        "answer": [
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-07",
+        "text": "會計作業流程的階段有：（1）登記會計分錄；（2）過帳；（3）試算；（4）調整；（5）編制報表；（6）結帳，其順序為下列哪一項？",
+        "options": {
+            "A": "1 → 2 → 3 → 4 → 5 → 6",
+            "B": "1 → 2 → 3 → 4 → 6 → 5",
+            "C": "1 → 2 → 4 → 3 → 5 → 6",
+            "D": "1 → 3 → 4 → 2 → 6 → 5"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-08",
+        "text": "以預先指定材料、直接人工和製造費用的標準分攤率，在計算成本時直接使用既定的標準來計算生產成本的方式稱為下列哪一項？",
+        "options": {
+            "A": "責任會計法",
+            "B": "逆溯成本法",
+            "C": "標準成本法",
+            "D": "分批成本法"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-09",
+        "text": "工作說明書之內容包含下列哪些項目？(複選)",
+        "options": {
+            "A": "關係與職責",
+            "B": "工作摘要",
+            "C": "企業組織架構",
+            "D": "績效標準"
+        },
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-10",
+        "text": "下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "合約採購是指不限定商品，只要購買超過一定金額，就給予優惠",
+            "B": "計畫採購是指合約內容包含金額和商品，但不訂出詳細的規格和交期",
+            "C": "在 SAP 的 R/3 中所提供的要項協議，可分為顧客契約與出貨協議",
+            "D": "大宗採購在合約中會包含產品、金額與交期，並依既定的時程交付產品給顧客"
+        },
+        "answer": [
+            "A",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-11",
+        "text": "下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "會計可分為財務會計與管理會計，其中財務會計不需遵守法令規定",
+            "B": "不是所有的企業活動都需要登載會計分錄，只有對資產、負債或業主權益發生影響，有確定的事項才可以列入會計帳冊",
+            "C": "會計程序中登記會計分錄、過帳與調整是期末結帳時應做的工作",
+            "D": "黑字倒閉是指現金管理不良而導致股東價值為正的企業，因無法償付到期債務而結束營業"
+        },
+        "answer": [
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-12",
+        "text": "下列哪一項非為料件的檢驗等級之分類？",
+        "options": {
+            "A": "全檢",
+            "B": "抽檢",
+            "C": "免檢",
+            "D": "待檢"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-13",
+        "text": "同一件產品會因為不同的目的而有不同的物料表（BOM）存在，下列哪一項非 BOM 的類型？",
+        "options": {
+            "A": "工程用 BOM",
+            "B": "計畫用 BOM",
+            "C": "報關用 BOM",
+            "D": "製造用 BOM"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-14",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "MRP 是屬於推式管理",
+            "B": "JIT 是屬零工式生產（Job Shop）為基礎",
+            "C": "JIT 是屬於拉式管理",
+            "D": "豐田式生產的兩大支柱是 JIT 與自動化"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-15",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "製造命令的來源是 MRP 所產生的預排製令（planned order）",
+            "B": "製造命令是用來授權製造單位在特定時間內生產指定數量的產品之文件",
+            "C": "製造命令又稱為標準工單（standard work order）",
+            "D": "維修工單指將產品拆解回原物料的工單"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-16",
+        "text": "關於原物料供應商選擇的考量因素，下列哪一項錯誤？",
+        "options": {
+            "A": "佣金回扣",
+            "B": "產品供貨能力",
+            "C": "技術能力",
+            "D": "管理制度"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-17",
+        "text": "下列常見的交貨方式，哪一項錯誤？",
+        "options": {
+            "A": "第三方物流",
+            "B": "完全交貨",
+            "C": "分批交貨",
+            "D": "併單交貨"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-18",
+        "text": "在 ERP 系統中，有關客戶主檔的敘述下列哪一項錯誤？",
+        "options": {
+            "A": "客戶主檔資料包括了客戶基本資料、銷售與財務資料",
+            "B": "可以將客戶分類，以利搜尋",
+            "C": "客戶信用等級或信用額度是屬於客戶基本資料",
+            "D": "客戶基本資料件建立後要定期維護"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-19",
+        "text": "收款程序不包含哪一個作業？",
+        "options": {
+            "A": "開立發票",
+            "B": "收款",
+            "C": "請款",
+            "D": "清算"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-20",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "損益表呈現企業在某一段期間內經營的成果",
+            "B": "現金流量表是彙總一整個會計週期的現金流量",
+            "C": "資產負債表是表達企業在某一段期間內的財務狀況",
+            "D": "會計恆等式為資產 = 負債 + 股東權益"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-21",
+        "text": "應付帳款管理不包含哪一個步驟？",
+        "options": {
+            "A": "應付帳款立帳",
+            "B": "結算作業",
+            "C": "付款作業",
+            "D": "應付帳款追蹤"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-22",
+        "text": "下列關於應收帳款的敘述，哪一項錯誤？",
+        "options": {
+            "A": "月結 60 天是指應收帳款成立 60 天後即應向顧客收取貨款",
+            "B": "應收帳款平均收回時間太長，會增加「壞帳」的風險",
+            "C": "採用標準成本的企業於收款時，會計分錄是借記：銷貨收入貸記：應收帳款",
+            "D": "採用標準成本的企業於出貨時，會計分錄是借記：銷貨成本貸記：存貨"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-23",
+        "text": "關於固定資產管理的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "製造業的固定資產通常占資產的比重不高",
+            "B": "固定資產的取得有購買、自建和租賃",
+            "C": "將固定資產的成本分攤於受益期間稱為折舊",
+            "D": "固定資產處分的方式主要是報廢"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-24",
+        "text": "企業所辦理的訓練，若依訓練時機區分，下列哪一項不是？",
+        "options": {
+            "A": "職前訓練",
+            "B": "在職訓練",
+            "C": "職外訓練",
+            "D": "職內訓練"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-25",
+        "text": "關於人力資源管理的特性與資訊系統的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "人力資源管理在組織中是屬於幕僚性的工作",
+            "B": "人力資源的工作始於招募",
+            "C": "一個有制度的組織會為員工提出生涯發展的規劃",
+            "D": "PeopleSoft 在被 Oracle 購併前，在人力資源資訊系統廠商中已有高能見度"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-26",
+        "text": "在 ERP 系統資訊內，下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "物料主檔是以料件（Item）為處理單位",
+            "B": "存貨管理流程主要包括有：派車、採購、收料、庫存管理、發料和出貨等",
+            "C": "計畫用物料表（Planning BOM）包含模組物件表（Modular BOM）、共用件物料表（Common parts BOM）、選配件等",
+            "D": "工程用物料表（Engineering BOM）可說是物料表的基礎"
+        },
+        "answer": [
+            "A",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-27",
+        "text": "關於 ERP 系統的採購系統流程，下列哪一項是正確的流程排列順序？(1)選定供應商、(2)付款、(3)確認請購需求、(4)決定供應來源、(5)確認發票、(6)追蹤採購單處理流程、(7)採購單處理、(8)採購品收訖",
+        "options": {
+            "A": "31467852",
+            "B": "34176852",
+            "C": "52347618",
+            "D": "56781342"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-28",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "管理會計大致上涵蓋：（1）產品的成本資訊；（2）管理計畫與控制資訊；（3）提供決策資訊；（4）績效衡量等",
+            "B": "管理會計與傳統會計主要區別之處，在於管理會計只注重對成本的數量管理，卻不在意成本的前因後果追蹤",
+            "C": "ERP 系統同樣能夠彌補企業在業務流程中技術與功能不足的缺點",
+            "D": "財務管理的功能主要是對會計作業的數據加以分析，從而進行相對應的預測、管理和控制活動"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-29",
+        "text": "甲公司以 20 萬購入某機器設備，預計可用五年，且每年以 30%為其遞減折舊率，該機器如以定率遞減法計算折舊，則第三年需攤提的折舊金額為多少元？（請四捨五入到小數第二位）",
+        "options": {
+            "A": "6.86 萬元",
+            "B": "4.20 萬元",
+            "C": "2.94 萬元",
+            "D": "9.80 萬元"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-30",
+        "text": "企業為因應內外在環境變化所進行的各種監測與調控的過程，和透過變革管理與其他如工作設計、工作滿意度調查和組織氣候調查等措施，來達成企業發展的目的，這應該較屬於以下人力資源管理內的哪一項？",
+        "options": {
+            "A": "績效管理",
+            "B": "組織發展",
+            "C": "員工協助",
+            "D": "考勤管理"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-31",
+        "text": "針對企業的員工教育訓練工作而言，一個理想的教育訓練計畫包含下列哪些步驟？(1)評估需求、(2)設定目標、(3)擬定計畫、(4)事前分析、(5)實施訓練、(6)評估結果、(7)事後分析",
+        "options": {
+            "A": "234567",
+            "B": "12346",
+            "C": "12356",
+            "D": "1234567"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-32",
+        "text": "最近在產業界所流行的一種彈性福利計畫，又被稱為自助式的福利計劃（Cafeteria benefit plan），是指下列哪一項？",
+        "options": {
+            "A": "指組織綜合各種福利項目，用統一規格方式在員工身上實行",
+            "B": "將福利分為獎金與休假兩種類別，並讓員工自行擇一",
+            "C": "指讓員工從組織所提供的各種福利項目中，自行選擇並組成自己所需要的福利項目",
+            "D": "由員工互相評估，決定是否能享有公司各種福利項目"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-33",
+        "text": "在人力資源管理範圍內，下列哪些是屬於績效評估（Performance evaluation）的步驟？(複選)",
+        "options": {
+            "A": "提供回饋",
+            "B": "決定績效標準",
+            "C": "確認企業目標",
+            "D": "評估績效"
+        },
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-34",
+        "text": "關於人力資源資訊系統（Human Resource Information System,HRIS），下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "和其他模組之間的整合性不高",
+            "B": "可以結合門禁管制和薪資自動轉帳系統",
+            "C": "不是一項必備模組，員工人數不多時可以人工紙本管理方式取代即可",
+            "D": "也是 ERP 系統的核心模組之一"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-35",
+        "text": "關於人力資源管理的各項名詞解釋和定義，下列哪一項較為正確？",
+        "options": {
+            "A": "員工協助主要是指透過較正規化的教育、工作經驗與師徒關係，來幫助員工對未來進行生涯規劃的制度",
+            "B": "薪資是大多數員工加入組織的主要目的之一",
+            "C": "透過員工訓練過程，我們得以對組織的運作及員工個人表現有充分了解，並對組織的經營與管理提供有價值的參考資訊，作為改進各類人事作業及其他功能活動的基礎，強化組織的競爭力",
+            "D": "薪資與福利管理是組織留住人才的唯一憑藉"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-36",
+        "text": "在 ERP 系統中，於長期合約的『計畫採購』內，較不需要明訂下列哪一項工作內容？",
+        "options": {
+            "A": "金額",
+            "B": "產品",
+            "C": "採購訂單",
+            "D": "交期"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-37",
+        "text": "一般的 ERP 系統中，是以允諾可用量（Available To Promise,ATP）為基礎來查核可用量，假設某一 A 公司之 B 材料在規劃期間內的存貨量是 79 件，計畫扣料項有 55 件，計畫收料項則有10 件，ATP 應該是多少件數？",
+        "options": {
+            "A": "14",
+            "B": "34",
+            "C": "144",
+            "D": "124"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-38",
+        "text": "如附圖所示，在出貨排程中有 A、B、C、D 四項時間，下列哪些正確？(複選)",
+        "options": {
+            "A": "A：物料裝載時間",
+            "B": "B：運輸規劃前置時間",
+            "C": "C：裝載時間",
+            "D": "D：運送時間"
+        },
+        "answer": [
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-39",
+        "text": "顧客契約是一種特別指定產品數量與價格的概要協定。一般而言，根據約定項目之不同，顧客契約可以細分為主約（Master contract）及下列哪幾項？(複選)",
+        "options": {
+            "A": "附屬契約（Accessory contract）",
+            "B": "服務契約（Service contract）",
+            "C": "數量契約（Quantity contract）",
+            "D": "價值契約（Value contract）"
+        },
+        "answer": [
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-40",
+        "text": "需求反映策略（Demand Response Strategy）可以劃分為以下四種方式：存貨生產（Make To Stock, MTS）、接單後生產（Make To Order, MTO）、接單後裝配（Assembly To Order, ATO）、接單後設計（Engineer To Order, ETO），請問關於這四種方法的敘述，下列哪些正確？(複選)",
+        "options": {
+            "A": "MTS：滿足銷售訂單的前置時間較短，所以可以提供顧客最好的服務水準",
+            "B": "MTO：根據顧客的功能需求描述加以量身訂做，因此滿足銷售訂單的前置時間較短",
+            "C": "ATO：所生產的成品屬少量多樣，除能快速回應顧客需求外，並且使供應商的成品存貨降至最低",
+            "D": "ETO：根據顧客在訂單上所指定的成品規格加以生產，因此企業所承受的存貨成本壓力較低"
+        },
+        "answer": [
+            "A",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-41",
+        "text": "顧客主檔資料主要是記錄企業所面對顧客的相關資料，其主要包括三項不同的資料結構，下列哪一項不包括？",
+        "options": {
+            "A": "一般性資料（General data）",
+            "B": "產品與服務資料（Product and service）",
+            "C": "公司代碼資料（Company code data）",
+            "D": "銷售與配銷資料（Sales and distribution data）"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-42",
+        "text": "銷售資訊系統在 ERP 系統中可列為下列哪一項下之次系統？",
+        "options": {
+            "A": "財務資訊系統",
+            "B": "顧客資訊系統",
+            "C": "物流資訊系統",
+            "D": "人力資訊系統"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-43",
+        "text": "關於交貨方式的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "訂單合併（Order combination）：將多張訂單轉至同一張交貨文件上",
+            "B": "局部交貨（Partial delivery）：將一張訂單切分為數張不同的交貨文件上",
+            "C": "完全交貨（Complete delivery）：將一張訂單的數量完全地轉置到同一張交貨文件上",
+            "D": "局部交貨（Partial delivery）：將多張訂單切分為數張不同的交貨文件上"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-44",
+        "text": "企業流程再造通常可以經由降低成本和提高生產力以增加組織的效益，郵件遞送成本應屬於下列哪一項效益內？",
+        "options": {
+            "A": "生產力提升的效益",
+            "B": "其他節餘效益",
+            "C": "人力資源資訊系統使用的效益",
+            "D": "外包所產生的成本降低效益"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-45",
+        "text": "一般而言，在導入 ERP 系統的各項模組時，通常哪一模組的導入時間會較其他模組為晚？",
+        "options": {
+            "A": "會計與財務模組",
+            "B": "生產與運籌模組",
+            "C": "銷售與配送模組",
+            "D": "人力資源模組"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-46",
+        "text": "在作生產規劃時，企業可以使用計畫物料表（PBOM）來估計各料件組的需求量，但在實際生產時，每一張製造命令的物料結構必須是確定的。在下列 ERP 供應商的系統中，哪一項在作需求規劃時並不用模組加以區分？",
+        "options": {
+            "A": "SAP",
+            "B": "鼎新",
+            "C": "Oracle",
+            "D": "IBM"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-47",
+        "text": "在製品管理對企業的管理與決策有相當的重要性，下列哪些為其基本目標？(複選)",
+        "options": {
+            "A": "提供詳細生產排程",
+            "B": "製造現場控制",
+            "C": "成本結算",
+            "D": "生產效率控制"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-48",
+        "text": "不論是服務業、買賣業或製造業都有其必須經過的流程，而其流程稱為企業營運的核心，下列哪一項不是核心流程？",
+        "options": {
+            "A": "接單",
+            "B": "出貨",
+            "C": "收款",
+            "D": "驗收"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-49",
+        "text": "在 ERP 系統中，銷售與配銷模組定義了各式的企業情境以符合企業組織的需求。在銷售與配銷模組中的各項功能都有記錄其相關的交易文件，下列哪一項不是文件型式的區分方式之一？",
+        "options": {
+            "A": "銷售",
+            "B": "配銷",
+            "C": "請款",
+            "D": "送貨"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-50",
+        "text": "銷售訂單（Sales Order）是一種契約性的確認協議，用來約定賣方在既定的數量、價格與時間內，將指定的產品或服務運送給買方。下列哪些為銷售訂單的產生方式？(複選)",
+        "options": {
+            "A": "報價單",
+            "B": "採購單",
+            "C": "合約訂單",
+            "D": "送貨單"
+        },
+        "answer": [
+            "A",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-51",
+        "text": "下列哪一個主檔資料不是 ERP 系統在產生銷售訂單時，會參考其相關資料轉置而來的資料？",
+        "options": {
+            "A": "顧客主檔",
+            "B": "物料主檔",
+            "C": "產品 - 物料主檔",
+            "D": "供應商主檔"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-52",
+        "text": "顧客 - 產品資訊紀錄（Customer-Material Information Records）可以記錄滿足與實現顧客需求的相關資料。下列哪一項不是顧客 - 產品資訊紀錄的項目？",
+        "options": {
+            "A": "顧客產品品名與規格",
+            "B": "特定的配送資料",
+            "C": "產品的詳細描述",
+            "D": "產品的庫存量"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-53",
+        "text": "下列哪些是當顧客訂單訂購的產品品名、規格、數量與日期輸入完成後，系統便會自動地執行的標準功能？(複選)",
+        "options": {
+            "A": "可用量查核（Availability Check）",
+            "B": "出貨排程（Delivery Scheduling）",
+            "C": "顧客信用查核（Credit Check）",
+            "D": "出口執照查核（Export License Check）"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-54",
+        "text": "銷售訂單的內容在單據的表頭部份主要是客戶資料，大多數的 ERP系統都會先將客戶資料建檔（客戶主檔），並經查證後給予其信用額度，以作為接單時審查的基礎。下列哪一項是在客戶資料建立之後必須做的工作？",
+        "options": {
+            "A": "刪除廠商資料",
+            "B": "維護客戶資料",
+            "C": "變更產品資料",
+            "D": "調整庫存數量"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-55",
+        "text": "在客戶資料管理中，核定客戶信用額度是一項很重要的工作項目。然而對於客戶信用評估的方式卻有多種，其中 5C 評估法和信用評分法較為常見。下列哪些為 5C 評估法中的因素？(複選)",
+        "options": {
+            "A": "償債能力（Capability）",
+            "B": "抵押品（Collateral）",
+            "C": "條件（Condition of business）",
+            "D": "信譽（Character）"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-56",
+        "text": "一般來說，會計程序包含下列六個步驟：登記會計分錄（journalizing transaction）、過帳（posting）、試算（proving the ledger）、調整（adjusting the ledger）、編制報表（preparing financial statement）、與結帳（closing the ledger）。下列哪一項不是平常經常性的工作？",
+        "options": {
+            "A": "試算",
+            "B": "過帳",
+            "C": "調整",
+            "D": "登記會計分錄"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-57",
+        "text": "在商業會計法（第 47 條）中，規定固定資產的折舊方法包含平均法、定率遞減法、年數合計法、生產數量法、工作時間法或其他經主管機關核定之折舊方法。下列哪一種方法不是屬於直線折舊法？",
+        "options": {
+            "A": "平均法",
+            "B": "生產數量法",
+            "C": "工作時間法",
+            "D": "定率遞減法"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-58",
+        "text": "管理會計源自成本會計（cost accounting），它擴大了成本會計的範圍，並從企業經營的整體角度來分析會計的相關資訊。下列哪一個方面是由管理會計提供管理者從產品定位、訂價到營運目標決定的相關資訊？",
+        "options": {
+            "A": "控制方面",
+            "B": "領導方面",
+            "C": "組織結構方面",
+            "D": "規劃方面"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-59",
+        "text": "人是企業組織中最有價值的資源，不但是構成組織的基本元素，也是組織中其他資源能否發揮其效益的原動力。人力資源管理包含徵才、選才、用才、育才與留才等五大功能，有關勞資關係是屬於哪一種功能？",
+        "options": {
+            "A": "徵才",
+            "B": "育才",
+            "C": "留才",
+            "D": "用才"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-60",
+        "text": "下列哪些為企業資源規劃系統中人力資源管理模組的基本功能？(複選)",
+        "options": {
+            "A": "教育訓練",
+            "B": "績效管理",
+            "C": "組織發展",
+            "D": "考勤管理"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-61",
+        "text": "人力資源管理其中的核心觀念之一是將人力視為組織的一項資產，並以長期的角度來培育與發展人才，而其中教育訓練扮演了重要的角色。下列哪些為一個理想的教育訓練計畫應包含的項目？(複選)",
+        "options": {
+            "A": "設定目標",
+            "B": "實施訓練",
+            "C": "擬定計畫",
+            "D": "評估結果"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-62",
+        "text": "人力資源管理的功能中，招募是屬於各項功能的先遣功能。下列哪一項不是企業運用各項媒介來招攬、募集與吸引具備資格的求職者之招募工作目的之一？",
+        "options": {
+            "A": "以最有效率的方式吸引求職者",
+            "B": "協助增加甄選的成功機率",
+            "C": "評估各種招募方式的有效性",
+            "D": "建構企業人力資源資料庫的完整性"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-63",
+        "text": "下列哪一項不是企業甄選的選才工具？",
+        "options": {
+            "A": "智力測驗",
+            "B": "性向測驗",
+            "C": "體能測驗",
+            "D": "財力分析"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-64",
+        "text": "薪資管理是合理化釐定、維持與發展薪資制度的一種行政作業。下列哪些不是薪資管理的功能項目？(複選)",
+        "options": {
+            "A": "退休金管理",
+            "B": "工作滿意度調查",
+            "C": "安全衛生",
+            "D": "福利管理"
+        },
+        "answer": [
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-65",
+        "text": "有許多研究指出，企業員工離職異動的主要原因，並非薪資福利等有形的報酬，而是在組織中看不到未來升遷的展望。因此，企業在員工生涯發展管理方面必須包含幾項不同的工作項目。下列哪一個工作項目是協助員工了解組織對員工的評價？",
+        "options": {
+            "A": "定義組織各職系和職級的條件",
+            "B": "建立公平公正的績效評估制度",
+            "C": "說明企業未來發展的願景與藍圖",
+            "D": "提供生涯發展規劃輔導"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-66",
+        "text": "關於 ERP 生產管理模組相關幾個功能模塊（Module）的名詞釋義，下列哪一項錯誤？",
+        "options": {
+            "A": "MPS 意指 Material Production Schedule，為原物料生產排程",
+            "B": "MRP 意指 Material Requirement Planning，為原物料需求規劃",
+            "C": "RCCP 意指 Rough-Cut Capacity Planning，為粗略產能規劃",
+            "D": "CRP 意指 Capacity Requirement Planning，為產能需求規劃"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-67",
+        "text": "在生產循環中用到的資料主檔，下列哪一項較不會用到？",
+        "options": {
+            "A": "原料存貨主檔",
+            "B": "在製品存貨主檔",
+            "C": "製成品存貨主檔",
+            "D": "備用零件存貨主檔"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-68",
+        "text": "自 ERP 銷售與配銷模組的觀點看物流（Logistics）之區分，由供應商至顧客之供應鏈為劃分點，可將物流（Scheer, 1994）區分為下列哪些？(複選)",
+        "options": {
+            "A": "進料物流（Inbound Logistics）",
+            "B": "生產物流（Production Logistics）",
+            "C": "庫存物流（In-stock Logistics）",
+            "D": "出貨物流（Outbound Logistics）"
+        },
+        "answer": [
+            "A",
+            "B",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-69",
+        "text": "傳統 ERP 常見模組有下列哪些？(複選)",
+        "options": {
+            "A": "會計總帳模組",
+            "B": "銷貨、配銷與收款模組",
+            "C": "生產管理模組",
+            "D": "電子商務模組"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-70",
+        "text": "台灣近來有許多新生代實業家，透過網路銷售的訂單確定能力，力求其生產的產品盡可能個人化，亦即其生產的狀況為少量多樣。透過網路與資料庫的運作，除了應快速回應顧客的需求外，另外亦需使製成品的庫存降至最低。除了資訊的基礎建置須健全外，該類公司應採取哪一種模式來生產以反應相關需求？",
+        "options": {
+            "A": "存貨生產（Make to Stock）",
+            "B": "訂單生產（Make to Order）",
+            "C": "訂單組裝（Assembly to Order）",
+            "D": "訂單設計（Design to Order）"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-71",
+        "text": "對應客戶對成品需求的急切程度與相關生產的模式，Higgins（1996）等人依據供應鏈中的原材料、零組件、半成品與製成品等項目，區分了各種生產模式下顧客訂單之分歧點（Decoupling Point）。其中哪種型式的生產，其分歧點離供應商最近，而離顧客方最遠？",
+        "options": {
+            "A": "存貨生產（Make to Stock）",
+            "B": "訂單生產（Make to Order）",
+            "C": "訂單組裝（Assembly to Order）",
+            "D": "接單後設計（Engineer to Order）"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-72",
+        "text": "在 ERP 之銷售配銷模組中實則多區分為三塊，包括：銷售、配銷及請款。下列哪幾個程序或文件，應屬於銷售作業範疇內之事務？(複選)",
+        "options": {
+            "A": "交貨",
+            "B": "發票",
+            "C": "報價",
+            "D": "契約"
+        },
+        "answer": [
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-73",
+        "text": "ERP 中接觸顧客的先端，並引發後續一連串的產銷活動者，應該是下列哪一個功能？",
+        "options": {
+            "A": "客戶信用管理",
+            "B": "訂單管理",
+            "C": "生產規劃",
+            "D": "採購管理"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-74",
+        "text": "企業為爭取長期客戶，往往會提供價格的優惠或產品提取時間的便利性等有利的條件。其中簽訂長期合約，更是對彼此雙方皆有一定程度保障的舉措。請問就長期合約的分類而言，在金額確定但產品交期皆未確定時，應就採購訂單於範疇內給付後續確定產品的方式為下列哪一項？",
+        "options": {
+            "A": "合約採購",
+            "B": "大宗採購",
+            "C": "分項採購",
+            "D": "計畫採購"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-75",
+        "text": "在企業交易過程中，往往需要採用信用交易的模式，此時授信的查核與徵詢，就變得非常重要。請問 ERP 系統常用到的授信查核的方式，下列哪一項不在其中？",
+        "options": {
+            "A": "系統自我維護信用往來資訊",
+            "B": "第三方公信單位定期徵詢",
+            "C": "要求擔保品",
+            "D": "其他企業或產業提供之信用查核資訊／紀錄"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-76",
+        "text": "基本應收帳款循環通常可分成三大步驟：（1）立帳、（2）收款、（3）沖銷確認，而其目的之敘述下列哪些正確？(複選)",
+        "options": {
+            "A": "即時提供各式應收帳款的資訊報表，以提供管理者作分析決策之用",
+            "B": "使電腦得以自動開立對帳單，讓稽核人員可隨時追蹤應收帳款目前的收帳情況",
+            "C": "提供各種自動或是人為方式的沖帳作業，以利於會計人員能夠順利的進行沖帳處理",
+            "D": "提供帳齡分析以及迅速反應客戶的信用狀況"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-77",
+        "text": "應付帳款是企業在短期內必須償付的帳款，係屬於流動負債的一種。一般在 ERP 的處理上將應付帳款的程序分成五個階段，其順序為下列哪一項？",
+        "options": {
+            "A": "請購 → 採購 → 請款 → 驗收 → 付款",
+            "B": "請購 → 採購 → 驗收 → 請款 → 付款",
+            "C": "採購 → 請購 → 請款 → 驗收 → 付款",
+            "D": "採購 → 請購 → 驗收 → 請款 → 付款"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-78",
+        "text": "人力資源的工作林林總總，而人力資源管理亦多屬支援其他部門功能／工作的角色。一般而言，人力資源工作通常自下列哪一個作業開始？",
+        "options": {
+            "A": "績效評估",
+            "B": "招募訓練",
+            "C": "工作分析",
+            "D": "組織設計"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-79",
+        "text": "在人力資源管理（HRM）系統的發展中，常有謂 c-HR（Computerized HR）、d-HR（Digitalized HR）、e-HR（Electronic & Efficient HR），以及近來常被提及的 HCM（Human Capital Management）。而盡力做好人事管理之「選、用、育、留」四大課題，與 ERP 系統最為密接者為下列哪一項？",
+        "options": {
+            "A": "c-HR",
+            "B": "d-HR",
+            "C": "e-HR",
+            "D": "HCM"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-80",
+        "text": "人力資源再造往往面臨 push 式（功能取向）與 pull 式（流程取向）雙邊的思考，關於功能取向與流程取向兩種人力資源再造的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "功能取向的人力資源再造／改善係以組織觀點將人力資源的作業功能朝精要簡單的目的收斂",
+            "B": "流程取向的人力資源再造／改善傾向以員工賦能、單一業務窗口及工作整合化的業務處理方向加以設計",
+            "C": "功能取向的人力資源再造／改善傾向由上而下管理的觀點（Top-Down Management View）",
+            "D": "流程取向的人力資源再造／改善是從客戶服務觀點（Customer Service Perspective）來思考作業流程"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-81",
+        "text": "關於員工薪資中基本薪資的認定，下述哪一項不應列於其中？",
+        "options": {
+            "A": "職務為基礎的給付",
+            "B": "績效為基礎的給付",
+            "C": "關係為基礎的給付",
+            "D": "能力為基礎的給付"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-82",
+        "text": "ERP 中的人力資源管理模組（HR），其相關功能應包含下列哪些功能模組？(複選)",
+        "options": {
+            "A": "工資核算",
+            "B": "工時管理",
+            "C": "招募管理",
+            "D": "差勤計算"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-83",
+        "text": "企業所辦理的訓練依時機與方式來區分，通常可分為三種。指派主管或老鳥來帶領與指導菜鳥屬於下列哪一項？",
+        "options": {
+            "A": "職前訓練",
+            "B": "在職訓練",
+            "C": "職能訓練",
+            "D": "職外訓練"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-84",
+        "text": "工作流程系統（Workflow System）及自助服務（Self-service）常常是人力資源再造與 e 化常考慮到的設計基礎。自助服務的導入，有機會帶給人力資源模組甚或其他模組在功能展現上的一些助益，下列哪些是自助服務可能引發的好處？(複選)",
+        "options": {
+            "A": "在管理上提供員工賦能（Employee Empowerment）的機會",
+            "B": "可以確保資料品質（Data Quality）",
+            "C": "可以提升作業品質及效率，進而達到流程改善（Process Improvement）的目的",
+            "D": "或可直接或間接提升人力資源管理的策略價值（Strategic Value）"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-85",
+        "text": "物料需求規劃（MRP）和主生產排程（MPS）在展算順序上的關係是下列哪一項？",
+        "options": {
+            "A": "先進行 MRP 再進行 MPS",
+            "B": "先進行 MPS 再進行 MRP",
+            "C": "MRP 和 MPS 可以同時進行",
+            "D": "MRP 和 MPS 的進行沒有關係"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-86",
+        "text": "物料需求規劃（MRP）是一套計算哪一種需求的技術？",
+        "options": {
+            "A": "獨立需求",
+            "B": "相依需求",
+            "C": "客戶需求",
+            "D": "產品需求"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-87",
+        "text": "驅動整個企業流程運作的根源是下列哪一項？",
+        "options": {
+            "A": "銷售與配銷模組",
+            "B": "採購模組",
+            "C": "生產規劃與控制模",
+            "D": "組財務會計模組"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-88",
+        "text": "在接受客戶訂單後可以在最短時間內滿足客戶需求，但需要對市場需求進行預測的需求反應策略是下列哪一項？",
+        "options": {
+            "A": "存貨生產（MTS）",
+            "B": "接單後生產（MTO）",
+            "C": "接單後組裝（ATO）",
+            "D": "接單後設計（ETO）"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-89",
+        "text": "在銷售與配銷模組中哪些單據屬於售前文件？(複選)",
+        "options": {
+            "A": "客戶詢價單（Inquiry）",
+            "B": "公司報價單（Quotation）",
+            "C": "公司銷售訂單（Sales Order）",
+            "D": "交貨文件（Delivery）"
+        },
+        "answer": [
+            "A",
+            "B"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-90",
+        "text": "下列哪些資料會出現在揀貨單（Picking List）的內容中？(複選)",
+        "options": {
+            "A": "產品名稱與規格",
+            "B": "數量",
+            "C": "倉庫存放位置",
+            "D": "產品價格"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-91",
+        "text": "處理客戶銷售退回的收付款相關文件是下列哪一項？",
+        "options": {
+            "A": "借項通知（Debit Memo）",
+            "B": "貸項通知（Credit Memo）",
+            "C": "出貨通知（Ship Notification）",
+            "D": "付款發票（Invoice）"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-92",
+        "text": "下列哪一種情況下企業可能會向客戶開立借項通知（Debit Memo）？",
+        "options": {
+            "A": "產品品質不符",
+            "B": "產品數量不足",
+            "C": "追加運費",
+            "D": "出貨時間延誤"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-93",
+        "text": "在一般商業慣例上，會因不同的付款時間而給予不同的條件，稱之為下列哪一項？",
+        "options": {
+            "A": "付款條件",
+            "B": "付款方法",
+            "C": "交貨條件",
+            "D": "付款通知"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-94",
+        "text": "下列哪些是 ERP 系統中財務會計作業的主要效益？(複選)",
+        "options": {
+            "A": "提供整合性的資訊",
+            "B": "提供正確性的資訊",
+            "C": "提供即時性的資訊",
+            "D": "提供分析性的資訊"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "3-95",
+        "text": "在 ERP 系統中，通常較為獨立、與其他模組資料交換較少的模組是下列哪一項？",
+        "options": {
+            "A": "銷售模組",
+            "B": "財務模組",
+            "C": "製造模組",
+            "D": "人力資源模組"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-96",
+        "text": "企業整體人力資源績效的發揮依賴下列哪一項？",
+        "options": {
+            "A": "人力資源部門的能力",
+            "B": "事業單位管理者的能力",
+            "C": "人力資源單位與部門及事業單位經理人協同合作",
+            "D": "員工個人的能力"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-97",
+        "text": "組織對員工的甄選作業，大多數 ERP 系統所處理的範圍包含下列哪一項？",
+        "options": {
+            "A": "直接由 ERP 系統來甄選員工",
+            "B": "由 ERP 系統來協助甄選員工",
+            "C": "ERP 系統記錄甄選過程與結果",
+            "D": "由 ERP 系統來通知員工甄選的結果"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-98",
+        "text": "在人力資源管理方面，大多數的 ERP 系統都將下列哪一項設為基本配備？",
+        "options": {
+            "A": "薪資管理",
+            "B": "生涯發展",
+            "C": "員工招募",
+            "D": "工作分析"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-99",
+        "text": "大多數的 ERP 系統在員工績效管理方面可以提供的為下列哪一項？",
+        "options": {
+            "A": "績效評量工具的開發",
+            "B": "進行實際評量的工作",
+            "C": "績效評量結果的紀錄",
+            "D": "績效評量結果的回饋"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "3-100",
+        "text": "一般認為組織中最重要的資源是下列哪一項？",
+        "options": {
+            "A": "人力資源",
+            "B": "財務資源",
+            "C": "物料資源",
+            "D": "設備資源"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-01",
+        "text": "傳統的企業中，往往為了效率提升而將作業程序切割成許多零碎片段，再為了達成整合的目的，再將這些零碎的片段組合回去。從企業流程再造的角度來看，過多不必要的分工將導致手續繁瑣、流程時間變得冗長。因此通常會採用下列哪一種手法，減少流程時間的浪費？",
+        "options": {
+            "A": "作業程序的取消",
+            "B": "作業的合併",
+            "C": "改為平行作業",
+            "D": "作業的分散"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-02",
+        "text": "學者列溫（Kurt Lewin）提出的組織變革三部曲的順序為下列哪一項？",
+        "options": {
+            "A": "凍結 → 變革 → 解凍",
+            "B": "變革 → 凍結 → 解凍",
+            "C": "解凍 → 變革 → 再凍結",
+            "D": "解凍 → 再凍結 → 變革"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-03",
+        "text": "對於資訊安全的風險評估與管理的敘述，下列哪一項錯誤？",
+        "options": {
+            "A": "風險評鑑是根據資訊安全管理系統範圍內的資產，評鑑其風險等級",
+            "B": "針對高風險資產做風險處理，降低其風險，使其一旦發生風險時，仍然在可接受範圍內",
+            "C": "評鑑資產風險時，不必進行資產的分類與盤點，只需針對高風險做風險處理，減少不必要的工作",
+            "D": "資訊科技的風險是可以被量化的，唯有量化才能感覺出其重要性"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-04",
+        "text": "下列哪一種狀況適用於「繞過電腦查核」（電腦外為審計）？",
+        "options": {
+            "A": "輸入系統的原始資料可以取得，同時其存在的資料格式並非只有機器才有辦法閱讀",
+            "B": "電腦資訊系統具高複雜度，且使用及影響範圍相當廣泛",
+            "C": "查核成本與時間考量",
+            "D": "無原始憑證情況下，查核人員需測試軟體程式，以決定系統控制和處理是可靠正確的"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-05",
+        "text": "ERP 系統專案維護階段包含下列哪些項目？(複選)",
+        "options": {
+            "A": "專案檢討",
+            "B": "維護管理與升級",
+            "C": "專案的後續工作",
+            "D": "資訊安全維護"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-06",
+        "text": "為加強流程處理之效率、成果、可維護性以及更貼近使用者之需求，亦即改善程式的成本效益，使其更符合使用者的需求，是屬於下列哪一種維護管理活動類型？",
+        "options": {
+            "A": "更正型維護管理活動（Corrective Maintenance）",
+            "B": "調整型維護管理活動（Adaptive Maintenance）",
+            "C": "完備型維護管理活動（Perfective Maintenance）",
+            "D": "持續型維護管理活動（Sustained Maintenance）"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-07",
+        "text": "下列哪些敘述對於 ERP 系統的導入，結合企業流程再造，哪一項錯誤？",
+        "options": {
+            "A": "可以實現資訊科技的組織績效",
+            "B": "會產生劇烈的組織變革",
+            "C": "需要組織各部門的通力合作",
+            "D": "使 ERP 系統更加符合企業流程"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-08",
+        "text": "學者 Kurt Lewin 提出組織變革的三部曲，所指的是下列哪些？(複選)",
+        "options": {
+            "A": "解凍",
+            "B": "變革",
+            "C": "再凍結",
+            "D": "加強溝通"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-09",
+        "text": "下列哪些是國際上通行的 IT 治理標準？(複選)",
+        "options": {
+            "A": "COCOMO",
+            "B": "ISO／IEC17799",
+            "C": "ITIL",
+            "D": "PRINCE2"
+        },
+        "answer": [
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-10",
+        "text": "下列哪一項不是電腦稽核的目標？",
+        "options": {
+            "A": "保衛資產",
+            "B": "維護資料完整性",
+            "C": "系統的時效性",
+            "D": "系統效率之目標"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-11",
+        "text": "下列哪一項非 ERP 系統導入績效的評估指標？",
+        "options": {
+            "A": "系統建置績效",
+            "B": "資訊應用績效",
+            "C": "營運作業績效",
+            "D": "人員流動比率"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-12",
+        "text": "下列哪一項不是 ERP 系統導入的成功關鍵因素？",
+        "options": {
+            "A": "在訂單旺季時導入",
+            "B": "高階主管的支持",
+            "C": "明確的導入目標",
+            "D": "準備充分的財力"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-13",
+        "text": "下列哪一項非 IT 治理的原則？",
+        "options": {
+            "A": "選擇正確的時間進行 IT 治理設計",
+            "B": "制訂例外處理流程",
+            "C": "基層人員的參與",
+            "D": "為 IT 治理安排所有權和責任"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-14",
+        "text": "下列敘述哪一項錯誤？",
+        "options": {
+            "A": "企業可先執行 BPR 後，再導入 ERP 系統",
+            "B": "企業可在導入 ERP 系統後，再進行 BPR",
+            "C": "所有使用 ERP 系統的企業，皆必須進行 BPR",
+            "D": "企業可同時進行 BPR 與 ERP 系統的導入"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-15",
+        "text": "下列哪一項非 Hammer 與 Champy 所提出的 BPR 四大要素？",
+        "options": {
+            "A": "組織學習",
+            "B": "根本",
+            "C": "徹底",
+            "D": "戲劇性"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-16",
+        "text": "下列關於 ERP 系統專案的後續工作的敘述，哪一項錯誤？",
+        "options": {
+            "A": "須執行系統效益評估",
+            "B": "須檢視系統的資訊安全",
+            "C": "須進行系統的稽核工作",
+            "D": "ERP 系統專案的正式上線，即宣告專案結束"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-17",
+        "text": "下列哪一項不屬於『流程分析』必須達成的任務？",
+        "options": {
+            "A": "建模（Modeling）",
+            "B": "監控（Monitoring）",
+            "C": "整合（Integrating）",
+            "D": "修補（Fixing）"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-18",
+        "text": "關於企業流程管理（Business Process Management, BPM）的敘述，下列哪些正確？(複選)",
+        "options": {
+            "A": "可透過主從架構（Client-server architecture）整合地域分散的資源以集中控管",
+            "B": "企業變革屬於 BPM 的微觀層次，而流程設計屬於宏觀層次",
+            "C": "企業流程規劃之初，必須先統一定義企業內各種用詞及術語，以利各部門之間的溝通",
+            "D": "應用物件導向方法論（Object-Oriented Methodologies,OOM）是聯結流程設計與 ERP 配置的最佳途徑，能降低導入時間與成本，有益於分析的品質及彈性"
+        },
+        "answer": [
+            "A",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-19",
+        "text": "要評估 ERP 系統導入是否成功，除了當初個別公司所設定目標的檢驗以外，還有主要的四個績效指標層次可以使用，下列哪一項不屬於此四項績效指標之一？",
+        "options": {
+            "A": "資訊應用績效",
+            "B": "企業經營績效",
+            "C": "營運作業績效",
+            "D": "系統改造績效"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-20",
+        "text": "資訊科技（Information Technology, IT）治理協會制定了 IT 治理框架，下列哪一項不包含在內？",
+        "options": {
+            "A": "成本的傳遞",
+            "B": "資源管理",
+            "C": "風險管理",
+            "D": "策略的一致性"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-21",
+        "text": "假設某甲公司因為產品設計瑕疵問題，引起國內各大媒體爭相報導，因此預估此負面消息會導致公司財物損失大約為新台幣五千萬元。就風險的評量標準來看，甲公司此次的風險評量應屬於下列哪一級分類標準？",
+        "options": {
+            "A": "等級 1 輕微",
+            "B": "等級 2 嚴重",
+            "C": "等級 3 輕微",
+            "D": "等級 1 非常嚴重"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-22",
+        "text": "Hammer 和 Champy 兩位企業流程再造（BPR）大師指出企業唯有從根本重新設計工作流程並創造突破性的改善，才能真正掌握企業成功的關鍵，以應付來自多方面的壓力。下列哪一項不是壓力之一？",
+        "options": {
+            "A": "顧客",
+            "B": "改變",
+            "C": "競爭",
+            "D": "供應商"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-23",
+        "text": "ERP 系統可為企業帶來許多效益，而評估 ERP 系統導入之績效有許多方法。近年來平衡計分卡（BSC）為管理界熱門討論的方法之一，下列哪些為平衡計分卡（BSC）的步驟？(複選)",
+        "options": {
+            "A": "制定實施計畫",
+            "B": "建立對策略目標的共識",
+            "C": "建立方案的目標與策略",
+            "D": "回饋與學習"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-24",
+        "text": "下列哪些為 ERP 系統導入後對企業的可能影響結果？(複選)",
+        "options": {
+            "A": "整合公司資源的應用，以達規模經濟",
+            "B": "整合資訊的擷取更為快速與正確",
+            "C": "簡化企業作業流程、縮短溝通與作業時間",
+            "D": "精確地計算出成本"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-25",
+        "text": "企業實施 ERP 資訊系統經常會導致許多的風險產生，而這些風險不僅出現在 ERP 系統中，而是與組織整體營運、文化、人力資源等風險相關。下列哪些為產生風險的項目？(複選)",
+        "options": {
+            "A": "職責集中化",
+            "B": "交易由電腦自動產生或執行",
+            "C": "通訊系統或伺服器的損壞",
+            "D": "缺乏交易軌跡"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-26",
+        "text": "企業流程再造有其必要但其收效未必如預期的遠大，BPR 學者立意甚佳卻也因其倡言的門檻甚高而令企業裹足不前。所幸近來資訊技術與網路科技的高度發展，漸次得以減抑若干 BPR 工作的困難程度。透過現場填入部分資料，以及爾後網路修改並新增其他資料，並配合協同合作的運行由其他人／部門增益與審核修正此項資料，最後讓資料逐漸完整，如此的過程猶如 BPR 常用的五種流程改善方式中的哪一項？",
+        "options": {
+            "A": "作業的合併",
+            "B": "作業程序的取消",
+            "C": "作業的分散",
+            "D": "作業的抽離"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-27",
+        "text": "ERP 專案大多為企業型的專案，僅有極少部分為就某些 IT 需求而做部分調整更動的作法。若 ERP 專案為企業型專案，那麼專案目標的訂定就極為重要。下列訂定專案目標的要點中，哪些正確？(複選)",
+        "options": {
+            "A": "清楚且簡單易懂",
+            "B": "意涵宜深遠，包含項目愈完整愈多愈好",
+            "C": "最好可以量測或有具象的標準或目標得以比對",
+            "D": "可以評估成本效益且可實現"
+        },
+        "answer": [
+            "A",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "4-28",
+        "text": "ISO 國際標準組織（International Organization for Standardization）眾所周知為世界標準的制定機構。在企業相關領域，如：ISO 14000 為針對企業環境管理所制定的系列標準，而ISO 26000 則是針對企業社會責任（Corporate Social Responsibility, CSR）的相關準繩。對於 ERP 專案導入與控管過程中，風險管理、資訊安全管理、品質管理與 IT 服務管理可分別對應下列哪四項 ISO 標準？",
+        "options": {
+            "A": "ISO 20000、27001、9000 及 31000",
+            "B": "ISO 27001、31000、9000 及 20000",
+            "C": "ISO 20000、31000、9000 及 27001",
+            "D": "ISO 31000、27001、9000 及 20000"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-29",
+        "text": "針對數種電腦輔助稽核的作法，其中繞過電腦的稽核，僅確認輸入出資料是否與預期吻合的作法，往往常為下列哪一種稽核狀況所用？",
+        "options": {
+            "A": "內部稽核",
+            "B": "外部稽核",
+            "C": "抽驗稽核",
+            "D": "組織稽核"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-30",
+        "text": "Hammer 和 Champy 所提出的企業流程再造的要素是下列哪一項？",
+        "options": {
+            "A": "客戶、改變和競爭",
+            "B": "根本、徹底、顯著和流程",
+            "C": "生產、行銷、人事、研發和財務",
+            "D": "策略、管理和作業"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-31",
+        "text": "在國際電腦稽核協會（ISACA）的 IT 治理框架中，強調要確保企業和 IT 計劃的連結，使 IT 和企業經營有一致性的行動的是下列哪一項？",
+        "options": {
+            "A": "策略一致性",
+            "B": "價值的傳遞",
+            "C": "資源管理",
+            "D": "績效的衡量"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "4-32",
+        "text": "稽核人員利用人工或電腦系統蒐集證據，以決定委託人電子資料處理系統是否能達成組織目標的過程即為下列哪一項？",
+        "options": {
+            "A": "電腦稽核",
+            "B": "風險查核",
+            "C": "績效查核",
+            "D": "會計審計"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-01",
+        "text": "下列關於 ERP II 的敘述，哪一項錯誤？",
+        "options": {
+            "A": "ERP II 包含許多系統，如顧客關係管理、供應鏈管理、商業智慧…等",
+            "B": "ERP II 為一個企業策略和一組特定產業領域專屬的應用系統",
+            "C": "從內部產生和使用的資料，變成內、外部共享的資料",
+            "D": "應用領域僅限於製造業中，其他領域的產業並不適用"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-02",
+        "text": "下列關於產業資訊電子化的敘述，哪些正確？(複選)",
+        "options": {
+            "A": "企業電子化為一企業應用整合性資訊系統規劃與執行關於採購、生產、銷售及服務等前台與內部的作業",
+            "B": "電子化企業其所涉及之領域包括電子交易以及徹底利用電子設備重新界定自身經營模式，以創造顧客價值",
+            "C": "SCM 為針對自供應商到顧客的整體流程，規劃、執行與控制有關物流、資訊流、金流的各種活動，進而與其他跨供應階層的企業成員統合為自原料到最終產品的價值鏈",
+            "D": "電子商務為一企業利用通訊網路對消費者（B2C）以及對其他企業傳遞資訊、銷售商品或提供服務"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "5-03",
+        "text": "下列哪一項不是商業智慧（Business Intelligence）之特色？",
+        "options": {
+            "A": "結構化資料",
+            "B": "以資料庫或資料倉儲來儲存",
+            "C": "全文檢索、規則比對",
+            "D": "特定圖表"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-04",
+        "text": "平衡計分卡常運用在哪一個系統模組中作為提供管理工具？",
+        "options": {
+            "A": "顧客關係管理（CRM）",
+            "B": "商業智慧（BI）",
+            "C": "供應鏈管理（SCM）",
+            "D": "資料倉儲（DW）"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-05",
+        "text": "下列有關供應鏈管理（SCM）的敘述哪些是正確的？(複選)",
+        "options": {
+            "A": "供應鏈操作參考模型（SCOR）將組織分成五個商業流程，分別是計劃、資源、製造、運送與回收",
+            "B": "SCM 供應商所提供的產品都包含供應鏈規劃與供應鏈執行",
+            "C": "在 SCM 中，是以協同規劃來解決長鞭效應的問題，進而對整個供應鏈的資源做最佳的安排，以提高總體存貨水準",
+            "D": "先進規劃排程是以無限產能的觀點來進行生產排程"
+        },
+        "answer": [
+            "A",
+            "B"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "5-06",
+        "text": "下列敘述哪些正確？(複選)",
+        "options": {
+            "A": "顧客關係管理（CRM）= 資訊科技 + 銷售活動",
+            "B": "知識創造的種類有社會化（socialization）、整合化（combination）、外部化（externalization）和內部化（internalization）",
+            "C": "資料探勘、線上分析處理、深層分析（drill down）與平衡計分卡是常見的商業智慧工具",
+            "D": "產品生命週期管理的功能包括了產品結構管理、零組件與組態管理、工作流程與程序管理、文件管理、產品發展專案排程管理以及資料安全管理"
+        },
+        "answer": [
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "5-07",
+        "text": "下列哪一項非資料倉儲（data warehouse）所擁有的特性？",
+        "options": {
+            "A": "主題導向",
+            "B": "整合性",
+            "C": "時間變動性",
+            "D": "可揮發性"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-08",
+        "text": "下列哪一項不屬於第二代企業資源規劃的範疇？",
+        "options": {
+            "A": "SCM",
+            "B": "BI",
+            "C": "TOC",
+            "D": "CRM"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-09",
+        "text": "下列關於顧客關係管理系統之敘述哪一項正確？",
+        "options": {
+            "A": "一個完整的顧客關係管理系統至少包含三個部分，前端使用者介面、中間顧客關係管理活動的支援與後端顧客關係資料的管理",
+            "B": "前端顧客接觸主要包含了行銷、銷售與服務",
+            "C": "中端顧客關係活動主要包括資料倉儲、資料探勘與線上即時分析處理",
+            "D": "後端顧客關係資料管理包含客服中心、網站、傳真以及 PDA"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-10",
+        "text": "目前企業電子化的重點除在 ERP（企業資源規劃）外，主要著重在四個方面：SCM（供應鏈管理）、CRM（顧客關係管理）、KM（知識管理）和 BI（商業智慧），關於以下四點的敘述，哪一項錯誤？",
+        "options": {
+            "A": "SCM：整合採購、生產和顧客服務的整合流程，以提供顧客相關產品及服務的採購、生產和配送等活動",
+            "B": "KM：具備智慧型內容的共同資訊存取平台，並針對組織性的知識進行個人化及可攜式存取的單一定點",
+            "C": "CRM：強調顧客與企業間流程之自動化，以做到一對一的行銷",
+            "D": "BI：包含資料倉儲、線上分析處理以及資料探勘的技術架構，用以調整企業營運策略方針的輔助工具"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-11",
+        "text": "企業 E 化程度主要分為四個階段：E 化萌芽期、E 化導入期、E化整合期、全面 E 化期，下列哪一項 E 化項目不屬於在第二階段的 E 化導入期內？",
+        "options": {
+            "A": "網站設置",
+            "B": "ERP 系統導入",
+            "C": "初期建構知識庫",
+            "D": "初步導入線上交易"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-12",
+        "text": "知識管理（Knowledge Management, KM）包含以下四個程序，請選出正確順序者？( 1)知識擴散、(2)知識轉換、(3)知識應用、(4)知識獲得",
+        "options": {
+            "A": "4231",
+            "B": "4321",
+            "C": "4213",
+            "D": "4312"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-13",
+        "text": "美國研究機構 Gartner Group 定義 ERP II 為一個企業策略和一組特定產業領域專屬的應用資訊系統，並拿 ERP II 和 ERP 比較，列出六大特性：角色、領域、功能、程序、架構與資料。從傳統的製造、配銷和財務會計，擴張到包含特定產業、產業部門及跨產業的資訊處理是屬於哪一種特性？",
+        "options": {
+            "A": "架構",
+            "B": "角色",
+            "C": "功能",
+            "D": "領域"
+        },
+        "answer": [
+            "C"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-14",
+        "text": "根據全球供應鏈論壇（GSCF）定義：供應鏈是指從原料供應商到顧客一連串提供為顧客加值的產品、服務和資訊流程的整合。供應鏈管理（SCM）主要是以數量技巧來處理供應鏈系統上的主要決策，下列哪些為主要決策項目？(複選)",
+        "options": {
+            "A": "位置",
+            "B": "生產",
+            "C": "存貨",
+            "D": "運輸"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "5-15",
+        "text": "一個完整的顧客關係管理系統至少包含前端、中間與後端等三個部分，下列哪一項不屬於前述的部分？",
+        "options": {
+            "A": "使用者介面",
+            "B": "顧客關係活動的支援",
+            "C": "顧客關係資料的管理",
+            "D": "供應鏈的供貨行為"
+        },
+        "answer": [
+            "D"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-16",
+        "text": "下列哪一項是正確的知識管理（KM）程序？",
+        "options": {
+            "A": "知識獲得 → 知識轉換 → 知識擴散 → 知識應用",
+            "B": "知識應用 → 知識獲得 → 知識轉換 → 知識擴散",
+            "C": "知識擴散 → 知識應用 → 知識獲得 → 知識轉換",
+            "D": "知識獲得 → 知識轉換 → 知識應用 → 知識擴散"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-17",
+        "text": "資料倉儲（data warehouse）具有主題導向（subject oriented）、整合性（integrated）、時間變動性（time variant）與非揮發性（nonvolatile）等四種特性。以上四種特性中何者為當資料放到資料倉儲中後，不再隨著時間變化而有異動、修正或更新的唯讀（read only）性質？",
+        "options": {
+            "A": "時間變動性",
+            "B": "非揮發性",
+            "C": "整合性",
+            "D": "主題導向"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-18",
+        "text": "電子化企業常有舊系統與新導入系統間的介接整合，業界常用的方式係針對不同功能間會存取的資料格式做一轉換（將功能 A 產出的資料做一合宜的轉換置入功能 B 能讀取的資料表格中，令其讀入後依循處理）抑或是撰寫兩者間的介接程式以達成目的。此類的做法通常被歸屬於下列哪一項？",
+        "options": {
+            "A": "ASP（Application Services Provider）",
+            "B": "EAI（Enterprise Application Integration）",
+            "C": "MDM（Master Data Management）",
+            "D": "BPM（Business Process Management）"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-19",
+        "text": "ERP II 的解釋常從兩個典型的觀點言之，一是 Charles Moller的 ERP II 概念框架，另一則是較常見的 Gartner 公司的說法。根據 Gartner 的說法，ERP II 簡言之是指下列哪一項？",
+        "options": {
+            "A": "電子商務",
+            "B": "協同商務",
+            "C": "網路商務",
+            "D": "行動商務"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-20",
+        "text": "供應鏈管理（SCM）就功能面而言，通常包括計劃、採購（資源）、製造、配送（運送）、退貨（回收）五大基本商業流程。其中具有高度策略意味的環節應在於下列哪一項？",
+        "options": {
+            "A": "計劃",
+            "B": "採購",
+            "C": "製造",
+            "D": "退貨"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-21",
+        "text": "顧客關係管理（CRM）就其運行方式通常分成三種型態，這三種型態是指下列哪一項？",
+        "options": {
+            "A": "操作型、分析型與知識型",
+            "B": "操作型、分析型與協同型",
+            "C": "分析型、知識型與協同型",
+            "D": "操作型、知識型與協同型"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-22",
+        "text": "依據 Arthur Andersen 的企業 E 化四部曲，ERP 系統的導入是在哪一個階段？",
+        "options": {
+            "A": "E 化萌芽期",
+            "B": "E 化導入期",
+            "C": "E 化整合期",
+            "D": "全面 E 化期"
+        },
+        "answer": [
+            "B"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-23",
+        "text": "依據 Inmon 的看法，基本上資料倉儲應該具有哪些特性？(複選)",
+        "options": {
+            "A": "主題導向（Subject Oriented）",
+            "B": "整合性（Integrated）",
+            "C": "非揮發性（Nonvolatile）",
+            "D": "時間變動性（Time Variant）"
+        },
+        "answer": [
+            "A",
+            "B",
+            "C",
+            "D"
+        ],
+        "type": "checkbox"
+    },
+    {
+        "id": "5-24",
+        "text": "顧客關係管理系統（CRM）必須被看成哪三者合為一體的整合？",
+        "options": {
+            "A": "人員、企業流程、系統",
+            "B": "企業、客戶、供應商",
+            "C": "人力、財力、物力",
+            "D": "資料、資訊、系統"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
+    },
+    {
+        "id": "5-25",
+        "text": "在企業電子化各種系統中，哪一種應用的核心是企業對企業（B2B），下列哪一項正確？",
+        "options": {
+            "A": "供應鏈管理",
+            "B": "顧客關係管理",
+            "C": "資料倉儲",
+            "D": "知識管理"
+        },
+        "answer": [
+            "A"
+        ],
+        "type": "radio"
     }
 ];
