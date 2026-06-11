@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企業資源規劃 ERP - 知識整理</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;
+        margin: 0;
+        background: #f4f6f9;
+        color: #2c3e50;
+        line-height: 1.7;
+    }
+    header {
+        background: linear-gradient(135deg, #2c3e50, #4a6fa5);
+        color: #fff;
+        padding: 30px 20px;
+        text-align: center;
+    }
+    header h1 { margin: 0 0 8px; font-size: 1.8em; }
+    header p { margin: 0; opacity: 0.85; font-size: 0.95em; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+    nav.toc {
+        background: #fff;
+        border-radius: 10px;
+        padding: 20px 25px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    nav.toc h2 { margin-top: 0; font-size: 1.2em; color: #2c3e50; border-bottom: 2px solid #4a6fa5; padding-bottom: 8px; }
+    nav.toc ul { columns: 2; -webkit-columns: 2; padding-left: 20px; }
+    nav.toc li { margin-bottom: 6px; }
+    nav.toc a { color: #2c3e50; text-decoration: none; font-weight: bold; }
+    nav.toc a:hover { color: #4a6fa5; text-decoration: underline; }
+    nav.toc .sub { font-weight: normal; font-size: 0.9em; }
+
+    section.category {
+        background: #fff;
+        border-radius: 10px;
+        padding: 25px 30px;
+        margin-bottom: 25px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    section.category > h2 {
+        color: #fff;
+        background: #4a6fa5;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-top: 0;
+    }
+    section.category > h2 small { font-weight: normal; font-size: 0.7em; opacity: 0.85; }
+
+    h3.topic {
+        color: #2c3e50;
+        border-left: 5px solid #4a6fa5;
+        padding-left: 10px;
+        margin-top: 28px;
+        margin-bottom: 10px;
+        font-size: 1.05em;
+    }
+
+    ul.points { padding-left: 22px; }
+    ul.points > li { margin-bottom: 10px; }
+
+    .qid {
+        display: inline-block;
+        background: #e8f0fe;
+        color: #4a6fa5;
+        border: 1px solid #c3d4f0;
+        border-radius: 4px;
+        padding: 1px 7px;
+        font-size: 0.78em;
+        font-weight: bold;
+        margin-right: 6px;
+        white-space: nowrap;
+        font-family: Consolas, monospace;
+    }
+
+    table.compare {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 12px 0 20px;
+        font-size: 0.95em;
+    }
+    table.compare th, table.compare td {
+        border: 1px solid #d8e0ec;
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: top;
+    }
+    table.compare th { background: #eaf0fb; color: #2c3e50; }
+    table.compare tr:nth-child(even) td { background: #f8fafd; }
+
+    .note {
+        background: #fff8e6;
+        border-left: 4px solid #f0ad4e;
+        padding: 8px 12px;
+        margin: 10px 0;
+        font-size: 0.9em;
+        border-radius: 4px;
+    }
+
+    .back-top { display: block; text-align: right; font-size: 0.85em; margin-top: 10px; }
+    .back-top a { color: #4a6fa5; text-decoration: none; }
+    .back-top a:hover { text-decoration: underline; }
+
+    footer { text-align: center; padding: 20px; color: #888; font-size: 0.85em; }
+
+    @media (max-width: 600px) {
+        nav.toc ul { columns: 1; }
+        section.category { padding: 18px 15px; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>企業資源規劃（ERP）知識整理</h1>
+    <p>依題庫五大類別整理之知識點摘要，每項知識點均標示對應題號，方便對照複習</p>
+</header>
+
+<div class="container">
+
+<nav class="toc" id="top">
+    <h2>目錄</h2>
+    <ul>
+        <li><a href="#cat1">第一類：ERP 系統基礎概念</a> <span class="sub">(1-01～1-38)</span></li>
+        <li><a href="#cat2">第二類：ERP 系統導入程序</a> <span class="sub">(2-01～2-55)</span></li>
+        <li><a href="#cat3">第三類：ERP 系統模組與功能</a> <span class="sub">(3-01～3-100)</span></li>
+        <li><a href="#cat4">第四類：ERP 系統與組織管理</a> <span class="sub">(4-01～4-32)</span></li>
+        <li><a href="#cat5">第五類：未來展望</a> <span class="sub">(5-01～5-25)</span></li>
+    </ul>
+</nav>
+
+<!-- ============ 第一類 ============ -->
+<section class="category" id="cat1">
+    <h2>第一類：ERP 系統基礎概念 <small>(1-01～1-38，共 38 題)</small></h2>
+
+    <h3 class="topic">1. ERP 的定義與發展沿革</h3>
+    <ul class="points">
+        <li><span class="qid">1-01, 1-07</span> ERP 系統發展演進歷程：<strong>MRP I → MRP II → ERP → EERP（Extended ERP，延伸式 ERP）</strong>。</li>
+        <li><span class="qid">1-15</span> ERP 演化可分四階段：1970～1980 年代為 MRP 時期；1980～1990 年代為 MRP II 時期；1990～2000 年代為 ERP 時期，強調滿足顧客多樣化需求、走向大量客製化生產；2000 年以後則進入 EERP 時期。</li>
+        <li><span class="qid">1-22</span> ERP 的發展源頭多數認為是 MRP（物料需求規劃），但 ERP 進一步整合企業財務、生產、銷售、人力資源、配銷等五大管理功能，形成整體性的資訊系統。</li>
+        <li><span class="qid">1-05, 1-10, 1-21</span> 美國作業管理學會（APICS）將 ERP 定義為：一個<strong>「會計（財務會計）導向」</strong>的資訊系統，用以規劃和確認接受、製造、運送、結算客戶訂單所需的整個企業資源。</li>
+        <li><span class="qid">1-03</span> 依 APICS 定義，ERP 與傳統 MRP II 的不同之處在於：採用<strong>關聯式資料庫、第四代程式語言、主從式架構</strong>；並非「點對點架構」。</li>
+        <li><span class="qid">1-04</span> <strong>封閉迴路 MRP（Closed-loop MRP）</strong>：在傳統 MRP 的基礎上，加入<strong>產能需求規劃（CRP）</strong>，用以檢視排程的合理性與可行性。</li>
+        <li><span class="qid">1-06</span> MRP（物料需求規劃）主要依據三項資料：<strong>主生產排程（MPS）、物料庫存資料、物料表（BOM）</strong>；「生產排程」本身是 MRP 的產出而非依據。</li>
+        <li><span class="qid">1-14</span> MRP 的四個基本功能包含：<strong>工單管理、物料清單展開（BOM explosion）、經濟訂購量（EOQ）</strong>；不含「即時生產系統（JIT）」。</li>
+    </ul>
+
+    <h3 class="topic">2. ERP 系統的架構與技術特性</h3>
+    <ul class="points">
+        <li><span class="qid">1-08</span> ERP 系統的特性（複選）包含：<strong>即時性、整合性、多層式主從架構（Client-Server）、多模組資訊系統</strong>。</li>
+        <li><span class="qid">1-18, 1-36</span> 目前 ERP 系統的技術主流為「多層式主從架構」，且此架構是建立在傳統主從式架構（Client/Server）的基礎之上。</li>
+        <li><span class="qid">1-32</span> ERP 系統三層式架構（3-Tier）：
+            <ul>
+                <li><strong>展示層（Presentation Tier）</strong>：使用者介面，例如工作機檯的觸控操作、表單輸入。</li>
+                <li><strong>商業層／應用層（Business / Application Tier）</strong>：負責運算邏輯，例如安全存量的運算。</li>
+                <li><strong>資料層（Data Tier）</strong>：負責資料儲存，例如訂單資料的存放。</li>
+            </ul>
+        </li>
+        <li><span class="qid">1-20</span> ERP 系統功能架構：<strong>網路伺服器</strong>讓使用者透過瀏覽器存取系統；<strong>資料庫伺服器</strong>儲存企業營運相關資料；<strong>應用程式伺服器</strong>是各模組安裝之處，且其數量「可以」視需要擴充以分擔系統負荷。</li>
+        <li><span class="qid">1-31</span> ERP 常用架構層次規劃要點：連線至底層的通道常以 <strong>VPN</strong> 來保障財務與商業機密資料的安全；辦公室作業流程常以 <strong>workflow（工作流程）</strong>取代 e-mail，以提升傳遞與確認的可靠性；作業系統的<strong>建置與維護成本</strong>也應納入 ERP 導入決策的整體考量。</li>
+        <li><span class="qid">1-28</span> 第三代 ERP 的技術特色：常採用<strong>主從式架構</strong>與<strong>第四代程式語言</strong>，重視組織間協調以追求企業最佳化實務；
+            <span class="note">易混淆點：第三代 ERP 並<strong>未主張</strong>以「XML 化物件導向資料庫」取代常見的關聯式資料庫——關聯式資料庫至今仍是主流。</span>
+        </li>
+    </ul>
+
+    <h3 class="topic">3. ERP 的整合特性</h3>
+    <ul class="points">
+        <li><span class="qid">1-37</span> ERP 的整合特性主要包含兩個層面：<strong>資料的整合</strong>與<strong>資料與流程的整合</strong>。</li>
+        <li><span class="qid">1-33</span> <strong>「資訊孤島」</strong>問題：各部門各自獨立發展的 MIS 系統即使做到極致，對公司整體利益未必有幫助；透過 ERP 整體性規劃，較能達成<strong>「資訊的分享」</strong>，進而追求公司整體最大利益。</li>
+        <li><span class="qid">1-23</span> 在 ERP 即時整合的特性下，企業典型的作業流程順序為：<strong>接單 → 排程 → 採購 → 驗收 → 付款 → 發料 → 製造 → 出貨</strong>。</li>
+        <li><span class="qid">1-27</span> 若 ERP 系統涵蓋「訂單 → 採購 → 存貨 → 出貨 → 收款」的產銷循環，此屬於<strong>「買賣業」</strong>的功能完整性範疇。</li>
+        <li><span class="qid">1-35</span> ERP 的主要功能之一：將企業營運流程中產生的資料即時整合，並匯入<strong>「會計模組」</strong>。</li>
+    </ul>
+
+    <h3 class="topic">4. ERP 導入的效益（有形與無形）</h3>
+    <ul class="points">
+        <li><span class="qid">1-02</span> ERP 導入帶來的效益包含：企業流程自動化、可即時存取管理資訊，並可運用電子通訊與電子商務改善供應鏈管理。</li>
+        <li><span class="qid">1-11</span> ERP 導入效益（複選）：<strong>增加營業收入與利潤、提升資金週轉率、增加交貨準確率</strong>；「加強系統整合以減少 IT 花費」並非主要效益描述。</li>
+        <li><span class="qid">1-12</span> ERP 最佳化實務（Best Practice）的效益：因資訊整合，可<strong>縮短決策所需的時間</strong>。</li>
+        <li><span class="qid">1-16</span> 「企業流程與系統作業之整合性」屬於 ERP 的<strong>無形效益</strong>，並非有形效益。</li>
+        <li><span class="qid">1-24</span> 依 Callaway（1999）分類：<strong>「提升生產力」屬於有形效益</strong>；無形效益則包含「即時取得管理決策資訊」「資訊收集的正確性與完整性」「企業流程與系統作業的整合性」等。</li>
+        <li><span class="qid">1-29</span> 依 Shang &amp; Seddon（2000），ERP 效益可分為五大面向：<strong>管理面、組織面、策略面、營運面、IT 基礎建設面</strong>；其中營運面效益應為「<strong>降低</strong>成本、<strong>縮短</strong>存貨周轉時間與銷貨反應時間」（並非「延長」）。</li>
+        <li><span class="qid">1-38</span> ERP 與企業利潤的關係：ERP 可提升營運效率與企業競爭力，使企業能滿足客戶並超越競爭者，進而<strong>提升獲利能力</strong>（並非導入後利潤即自動增加）。</li>
+    </ul>
+
+    <h3 class="topic">5. ERP 的延伸功能與供應商</h3>
+    <ul class="points">
+        <li><span class="qid">1-17</span> 與 ERP 搭配以提升附加價值的主要延伸功能為：<strong>供應鏈管理（SCM）、顧客關係管理（CRM）、電子商務（EC）</strong>；「數位學習（e-Learning）」並非主要延伸功能。</li>
+        <li><span class="qid">1-09</span> 常見的 ERP 系統供應商：<strong>SAP、Oracle、鼎新、漢康</strong>。</li>
+    </ul>
+
+    <h3 class="topic">6. ERP 導入失敗原因與風險</h3>
+    <ul class="points">
+        <li><span class="qid">1-13</span> ERP 導入可能失敗的原因：導入時<strong>未考量公司整體策略</strong>、<strong>僅由資訊部門主導</strong>而缺乏高層支持與使用者參與。</li>
+        <li><span class="qid">1-19</span> 依台灣調查，企業導入 ERP 最常面臨的問題是：<strong>「使用單位未能明確說明其需求」</strong>。</li>
+        <li><span class="qid">1-25</span> ERP 系統失敗的原因之一：<strong>企業人事流動率高</strong>，導致know-how流失與導入經驗無法延續。</li>
+        <li><span class="qid">1-26</span> 在 ERP 專案風險分類中，會直接影響「公司競爭力與獲利」的風險類別為：<strong>整體企業策略所使用的技術過於集中</strong>。</li>
+        <li><span class="qid">1-30</span> ERP 導入常見失敗因素：<strong>高階主管不支持、教育訓練不足、顧問專業或經驗不足、企業需求分析不完善</strong>等；「流程考量過於嚴謹耗時」並非典型失敗因素的正確描述。</li>
+        <li><span class="qid">1-34</span> ERP 系統能否成功導入，與下列相關人員的投入息息相關：<strong>高階主管、建置顧問、使用者、專案主持人</strong>。</li>
+    </ul>
+
+    <p class="back-top"><a href="#top">回目錄 ↑</a></p>
+</section>
+
+<!-- ============ 第二類 ============ -->
+<section class="category" id="cat2">
+    <h2>第二類：ERP 系統導入程序 <small>(2-01～2-55，共 55 題)</small></h2>
+
+    <h3 class="topic">1. 導入七階段／三階段與系統建置順序</h3>
+    <ul class="points">
+        <li><span class="qid">2-11</span> ERP 系統導入七階段順序：<strong>初始評估 → 專案準備 → 企業藍圖規劃 → 系統建置 → 系統上線規劃 → 系統上線 → 持續改善</strong>。</li>
+        <li><span class="qid">2-38</span> ASAP（Oracle/SAP 常見導入方法論）導入期程順序與上述七階段相同：<strong>初始評估 → 專案準備 → 企業藍圖規劃 → 系統建置 → 系統上線規劃 → 持續改善 → 系統上線</strong>（注意：本題選項排列為「持續改善」在「系統上線」之前，需依題目選項判讀）。</li>
+        <li><span class="qid">2-22</span> ERP 導入可概分為三大階段：<strong>系統評選決策 → 系統建置過程 → 運作及持續改進</strong>。</li>
+        <li><span class="qid">2-21</span> ERP 系統建置程序順序：<strong>規劃運算架構 → 軟硬體安裝 → 將所需資料輸入系統 → 配合企業流程選擇模組並設定參數 → 系統測試與準備上線</strong>。</li>
+        <li><span class="qid">2-43</span> 傳統 ERP 系統建置程序順序：<strong>建構整體資訊作業環境 → 定義資料表格及作業流程 → 測試與轉換 → 建立報表</strong>。</li>
+        <li><span class="qid">2-15</span> （附圖題）ERP 系統導入專案管理流程八大步驟，依圖示順序排列。</li>
+    </ul>
+
+    <h3 class="topic">2. 各導入階段的工作內容</h3>
+    <ul class="points">
+        <li><span class="qid">2-04</span> 「<strong>專案規劃階段</strong>」的工作包含：<strong>訂定專案範圍、訓練種子人員</strong>；而「組織專案團隊」「評估顧問公司」則不屬於此階段。</li>
+        <li><span class="qid">2-40, 2-54</span> ERP 專案小組（專案組織）應於<strong>「專案準備期」</strong>建立。</li>
+        <li><span class="qid">2-41, 2-53</span> <strong>「企業藍圖規劃期」</strong>是妥善決策並確認企業流程的關鍵期程，重點在確認<strong>「未來」</strong>的營運模式與組織架構。</li>
+        <li><span class="qid">2-01, 2-07</span> <strong>細部設計（Detailed Design）</strong>內容包含模組功能、資料模式、使用者介面，常用工具如<strong>資料流程圖（DFD）、實體關聯模型（ER-Model）、IDEF、ARIS、OOA/OOD</strong>；不含「PERT」（PERT 屬於專案排程管理工具）。</li>
+        <li><span class="qid">2-28</span> <strong>系統規劃階段</strong>：為整個 ERP 建置專案擬定詳細完整計畫，提出涵蓋所有階段過程的計畫書。</li>
+        <li><span class="qid">2-13</span> <strong>系統「建置」</strong>：指將 ERP 系統安裝於硬體設備上，依企業作業流程啟動模組、設定參數、建立基本資料，多在顧問公司輔導下進行，且建置合約簽訂後即可開始；
+            <span class="note">易混淆點：「將使用者需求轉化為系統規格文件」屬於<strong>系統設計階段</strong>，並非建置階段的工作。</span>
+        </li>
+        <li><span class="qid">2-44</span> 在<strong>系統設計開發（建置）期間</strong>，「系統流程確認與差異比對」並不適合在此期間進行——該項工作屬於<strong>企業藍圖規劃期</strong>。</li>
+        <li><span class="qid">2-45</span> ERP 功能模組的細部參數調校（如安全存量、前置時間調整），應在<strong>「持續改善期」</strong>配合應用顧問與技術顧問進行。</li>
+        <li><span class="qid">2-26</span> <strong>系統轉移階段</strong>：將新系統安裝於組織實際作業環境中，並進行<strong>接收測試（Acceptance Test）</strong>。</li>
+        <li><span class="qid">2-52</span> ERP 建議安裝<strong>三套系統</strong>：<strong>開發用系統、測試用系統、正式運作系統</strong>；不含「教育訓練用系統」。</li>
+    </ul>
+
+    <h3 class="topic">3. 三種導入策略比較：逐步式 vs 大躍進式 vs 複製式</h3>
+    <table class="compare">
+        <tr><th>導入策略</th><th>特性／優點</th><th>缺點或限制</th><th>題號</th></tr>
+        <tr>
+            <td><strong>逐步式（Step by Step）</strong><br>逐功能／模組分批導入</td>
+            <td>對組織資源的協調與控制較有利；適合高度網路化、組織非以地域性為主的企業</td>
+            <td>新舊模組銜接會耗費較多時間與成本，整體導入時程較長</td>
+            <td><span class="qid">2-37, 2-48, 2-51</span></td>
+        </tr>
+        <tr>
+            <td><strong>大躍進式（Big-Bang）</strong><br>所有模組同時上線</td>
+            <td>可縮短整個專案時間、整合效用立即顯現、專案成員衝勁與動機較高、所需時程較短</td>
+            <td>並非「人力資源所需較少」——人力需求反而集中且龐大</td>
+            <td><span class="qid">2-29, 2-49</span></td>
+        </tr>
+        <tr>
+            <td><strong>複製式 / 滾動式（Roll-Out）</strong><br>先建立模板再依據點推展</td>
+            <td>成本較易控制、可累積經驗助於後續推展、整體風險較低</td>
+            <td>容易忽略各據點的特有流程；導入速度較慢，專案成員激勵動機未必最大</td>
+            <td><span class="qid">2-12, 2-50</span></td>
+        </tr>
+    </table>
+
+    <h3 class="topic">4. 評選 ERP 供應商與顧問</h3>
+    <ul class="points">
+        <li><span class="qid">2-05</span> 完整的 ERP 評選過程包含六個步驟：<strong>建立企業願景與策略 → 建立導入目標 → 收集供應商資料 → 評選供應商 → 評選導入顧問公司 → 簽訂導入合約</strong>。</li>
+        <li><span class="qid">2-17</span> ERP 系統供應商評選：應成立<strong>評選委員會</strong>廣納各方意見，以投票或共識決選出後再交由高階主管裁決；最重要的考量為<strong>組織與人員、方法或程序、評選標準</strong>三項，並應結合企業作業流程與公司願景策略；
+            <span class="note">易混淆點：不應「僅以資訊人員的技術考量為唯一依據」，也不應排除使用者需求。</span>
+        </li>
+        <li><span class="qid">2-23</span> 評選 ERP 系統供應商的考量因素：<strong>組織與人員、方法或程序、內容和標準</strong>；不含「品牌知名度」。</li>
+        <li><span class="qid">2-18, 2-24</span> 評選 ERP 建置顧問的考量因素：<strong>對系統的熟悉程度、對產業的了解程度、是否同時進行 BPR</strong>；不含「人事費用是否符合預算」，也不含「導入企業不可更換指派的建置顧問」這類不合理限制。</li>
+        <li><span class="qid">2-46</span> 評選 ERP 系統時應將「供應商長期競爭力」納入考量，因為應將 ERP 系統的選購視為<strong>建立長期經營夥伴關係</strong>，而非一次性採購。</li>
+        <li><span class="qid">2-08</span> ERP 導入專案團隊職責：<strong>專案委員會</strong>由具統籌決策權責人員組成（通常為總經理及各事業部主管）；<strong>專案經理</strong>須通盤了解作業需求並具決策能力；<strong>模組負責人</strong>通常由處級或理級主管擔任；
+            <span class="note">易混淆點：「End User（最終使用者）需對該模組上線成敗負全責」是錯誤敘述——此責任過重，不應由 End User 獨自承擔。</span>
+        </li>
+    </ul>
+
+    <h3 class="topic">5. 導入方法論與生命週期</h3>
+    <ul class="points">
+        <li><span class="qid">2-27</span> Oracle 發展出 <strong>AIM（Advance Implementation Method）</strong>線上輔助工具，協助企業導入 ERP。</li>
+        <li><span class="qid">2-39</span> 常見 ERP 軟體供應商與其導入方法論的對應：<strong>Oracle—AIM、安達信（Anderson）—BIM、J.D. Edwards—REP、鼎新—TIM</strong>。</li>
+        <li><span class="qid">2-25</span> ERP 系統開發生命週期包含：<strong>規劃、分析、設計、建構、運作維護</strong>；鼎新公司的導入步驟並<strong>不包含「系統精進」</strong>這個獨立步驟。</li>
+    </ul>
+
+    <h3 class="topic">6. 客製化、系統彈性與 BPR</h3>
+    <ul class="points">
+        <li><span class="qid">2-02</span> 企業應避免 ERP 客製化的主要原因：<strong>與原系統的整合性問題、增加導入與軟體成本、額外耗費人力維護客製化內容</strong>；並非「會增加風險管理上的不便」。</li>
+        <li><span class="qid">2-31</span> 一般應盡量避免客製化，<strong>除非</strong>企業有非常特殊的作業程序，且該程序與企業核心競爭力高度相關。</li>
+        <li><span class="qid">2-55</span> ERP 系統彈性需求的達成方式：<strong>模組選擇、參數設定、客製化程式</strong>；不含「維護合約」。</li>
+        <li><span class="qid">2-36</span> ERP 系統需具備良好的<strong>「彈性（Flexibility）」</strong>，以因應市場快速變化的需求。</li>
+        <li><span class="qid">2-09</span> <strong>BPR（企業流程再造）</strong>是複雜且工程浩大的工作，推動 BPR 需要投入<strong>額外的人力與成本</strong>（並非不需要）。</li>
+        <li><span class="qid">2-47</span> ERP 與 BPR 較合理的執行順序為：<strong>先進行 BPR，再導入 ERP</strong>。</li>
+    </ul>
+
+    <h3 class="topic">7. 教育訓練、成本與風險管理</h3>
+    <ul class="points">
+        <li><span class="qid">2-30</span> 專案小組教育訓練中，<strong>「企業流程」訓練</strong>的重點在於教導<strong>最新的經營管理觀念</strong>。</li>
+        <li><span class="qid">2-35</span> ERP 導入可量化成本中，與「使用者抗拒」較密切相關的兩項為：<strong>訓練與變革管理成本、企業流程再造成本</strong>；軟硬體成本與數據資料轉換成本則與此較無直接關聯。</li>
+        <li><span class="qid">2-10</span> 專案風險管理的正確步驟順序：<strong>風險認定 → 風險評估 → 風險排序 → 風險規劃 → 風險解決 → 風險追蹤</strong>。</li>
+        <li><span class="qid">2-14</span> 委外服務類型：<strong>合包（Co-sourcing）</strong>為長期合作關係，雙方先共同投資，再依協議分享利益；<strong>服務外包（Outsourcing）</strong>則是仔細選擇外部供應商，並隨服務經驗累積逐漸擴大委外的服務層面。</li>
+    </ul>
+
+    <h3 class="topic">8. 上線後維運與專案控管</h3>
+    <ul class="points">
+        <li><span class="qid">2-32</span> ERP 正式營運後仍需持續進行：<strong>使用者意見收集、系統維護與調整、系統績效評量、系統改進與擴充計畫</strong>。</li>
+        <li><span class="qid">2-20</span> ERP 售後服務應包含：<strong>問題分析與解決、新增修補程式（Patch）、使用者社群、員工持續教育訓練</strong>。</li>
+        <li><span class="qid">2-03</span> ERP 導入專案控管的循環步驟：<strong>訂定目標 → 離差測量 → 檢討與修正 → 學習提升</strong>。</li>
+        <li><span class="qid">2-33</span> 在「離差測量」階段常用的輔助工具為：<strong>定期開會、導入排程計劃</strong>；「意見回饋」「加強學習」則屬於其他階段的工具。</li>
+        <li><span class="qid">2-19</span> ERP 導入成功關鍵：<strong>管理階層參與支持、確實規劃資料轉換、訂定簡單清楚且可量測的目標</strong>；專案組織不宜過於繁複。</li>
+        <li><span class="qid">2-34</span> ERP 導入成功關鍵因素：<strong>專職專案成員、有效的變革管理、落實教育訓練、高階主管參與支持</strong>。</li>
+        <li><span class="qid">2-16</span> 企業導入 ERP 系統的可能原因：<strong>改善資訊正確性與及時性、有助於上市上櫃、同業已導入類似系統、進行企業流程再造</strong>。</li>
+        <li><span class="qid">2-06</span> 「<strong>營運作業績效</strong>」並<strong>不包含</strong>「跨部門分享資訊」——該項屬於「資訊應用績效」層次。</li>
+    </ul>
+
+    <h3 class="topic">9. 其他相關知識</h3>
+    <ul class="points">
+        <li><span class="qid">2-42</span> 在以 XML 為基礎的共通電子商務應用標準中，<strong>HL7（Health Level Seven）</strong>對應的產業為<strong>「醫療業」</strong>。</li>
+    </ul>
+
+    <p class="back-top"><a href="#top">回目錄 ↑</a></p>
+</section>
+
+<!-- ============ 第三類 ============ -->
+<section class="category" id="cat3">
+    <h2>第三類：ERP 系統模組與功能 <small>(3-01～3-100，共 100 題)</small></h2>
+
+    <h3 class="topic">1. 生產與物料管理（MRP／BOM／途程／在製品）</h3>
+    <ul class="points">
+        <li><span class="qid">3-66</span> 重要英文縮寫對照：<strong>MPS = Master Production Schedule（主生產排程）</strong>、<strong>MRP = Material Requirement Planning（物料需求規劃）</strong>、<strong>RCCP = 粗略產能規劃</strong>、<strong>CRP = 產能需求規劃</strong>。</li>
+        <li><span class="qid">3-85, 3-86</span> MRP 是計算<strong>「相依需求」</strong>的技術；展算順序為<strong>先進行 MPS（主生產排程），再展開 MRP</strong>。</li>
+        <li><span class="qid">3-03</span> MRP 運算所需資料包含：<strong>物料庫存資料、主生產排程（MPS）、產品結構（BOM）</strong>；<strong>不含「在製品情況」</strong>。</li>
+        <li><span class="qid">3-02</span> <strong>重規劃（Regenerative Planning）</strong>：無論供需是否改變，所有物料都會<strong>重新規劃並重新推算</strong>。</li>
+        <li><span class="qid">3-01</span> <strong>途程單（Routing）</strong>：記錄產品的製造過程，記載所需的人力與機器設備，並以「<strong>作業（Operation）</strong>」為基本單位描述加工過程；
+            <span class="note">易混淆點：途程單主要用於<strong>產能需求規劃（CRP）</strong>，並<strong>非</strong>用來計算 RCCP（粗略產能規劃）下主生產排程的可行性。</span>
+        </li>
+        <li><span class="qid">3-05, 3-13, 3-26</span> <strong>物料表（BOM）依用途分類</strong>：製造用 BOM、計畫用 BOM（Planning BOM，包含模組物件表 Modular BOM、共用件物料表 Common Parts BOM、選配件等）、工程用 BOM（Engineering BOM，是 BOM 的基礎）；不含「修繕用 BOM」「報關用 BOM」。物料主檔以<strong>「料件（Item）」</strong>為處理單位。</li>
+        <li><span class="qid">3-06</span> <strong>EOQ（經濟訂購量）</strong>屬於<strong>「定量訂購模式」</strong>與<strong>「定期訂購模式」</strong>下的存量管理方式之一。</li>
+        <li><span class="qid">3-37</span> <strong>ATP（可承諾量，Available to Promise）</strong>計算公式：<strong>ATP = 現有存貨 + 計畫收料 − 計畫扣料</strong>（範例：79 + 10 − 55 = 34）。</li>
+        <li><span class="qid">3-47</span> 在製品（WIP）管理的基本目標：<strong>提供詳細生產排程、製造現場控制、成本結算、生產效率控制</strong>。</li>
+        <li><span class="qid">3-14</span> <strong>JIT（即時生產）</strong>是以<strong>「拉式管理」</strong>為基礎，<strong>並非</strong>以零工式生產（Job Shop）為基礎。</li>
+        <li><span class="qid">3-15</span> <strong>維修工單</strong>並非「將產品拆解回原物料的工單」——維修工單是用於<strong>修理產品</strong>；製令的來源通常為 MRP 產生的<strong>預排製令（Planned Order）</strong>，又稱<strong>標準工單（Standard Work Order）</strong>。</li>
+        <li><span class="qid">3-67</span> 生產循環中常用主檔包含：原料存貨主檔、在製品存貨主檔、製成品存貨主檔；<strong>「備用零件存貨主檔」較不會用到</strong>。</li>
+        <li><span class="qid">3-46</span> 鼎新 ERP 系統在進行需求規劃時，<strong>不會以模組來區分計畫物料表（PBOM）</strong>的應用。</li>
+        <li><span class="qid">3-12</span> 料件檢驗等級分類：<strong>全檢、抽檢、免檢</strong>；<strong>不含「待檢」</strong>。</li>
+    </ul>
+
+    <h3 class="topic">2. 採購與應付帳款流程</h3>
+    <ul class="points">
+        <li><span class="qid">3-04, 3-16</span> 選擇原物料供應商的考量因素：<strong>產品供貨能力、管理制度、技術能力</strong>；<strong>不含</strong>「供應商之規模」與「佣金回扣」。</li>
+        <li><span class="qid">3-10, 3-36, 3-74</span> 採購類型：<strong>合約採購</strong>不限定特定商品，但採購金額達一定門檻即享優惠；<strong>計畫採購（長期合約）</strong>較不需明訂單筆「採購訂單」，但需明訂金額、產品、交期；若「金額確定但交期未確定」，屬於<strong>「合約採購」</strong>。SAP R/3 將要項協議分為<strong>顧客契約</strong>與<strong>出貨協議</strong>。</li>
+        <li><span class="qid">3-27</span> ERP 採購系統的完整流程順序：<strong>確認請購需求 → 決定供應來源 → 選定供應商 → 採購單處理 → 追蹤採購單處理流程 → 採購品收訖 → 確認發票 → 付款</strong>。</li>
+        <li><span class="qid">3-77</span> 應付帳款作業的五個階段順序：<strong>請購 → 採購 → 驗收 → 請款 → 付款</strong>。</li>
+        <li><span class="qid">3-21</span> 應付帳款管理工作<strong>不含「結算作業」</strong>（包含：立帳、付款作業、追蹤）。</li>
+        <li><span class="qid">3-48</span> 企業核心流程（接單、出貨、收款）<strong>不含「驗收」</strong>。</li>
+        <li><span class="qid">3-19</span> 收款程序包含：<strong>開立發票、收款、請款</strong>；<strong>不含「清算」</strong>。</li>
+    </ul>
+
+    <h3 class="topic">3. 銷售與配銷模組</h3>
+    <ul class="points">
+        <li><span class="qid">3-73</span> 引發後續一連串產銷活動、最早接觸顧客的先端功能：<strong>訂單管理</strong>。</li>
+        <li><span class="qid">3-87</span> 驅動整個企業流程運作的根源模組：<strong>銷售與配銷模組</strong>（接單帶動後續生產、採購、財務等活動）。</li>
+        <li><span class="qid">3-50</span> <strong>銷售訂單（Sales Order）</strong>是賣方承諾在既定數量、價格與時間內將產品／服務運送給買方的契約性確認協議；其產生方式包含<strong>「報價單」</strong>與<strong>「合約訂單」</strong>。</li>
+        <li><span class="qid">3-89</span> 銷售與配銷模組的「售前文件」包含：<strong>客戶詢價單（Inquiry）</strong>、<strong>報價單（Quotation）</strong>；交貨文件與銷售訂單則不屬於售前文件。</li>
+        <li><span class="qid">3-72</span> 銷售配銷模組三大範疇：<strong>銷售（如報價、契約）、配銷（如交貨）、請款（如發票）</strong>。</li>
+        <li><span class="qid">3-49</span> 銷售配銷模組文件型式的區分方式<strong>不含「送貨」</strong>。</li>
+        <li><span class="qid">3-39</span> 顧客契約除「主約（Master Contract）」外，可再細分為：<strong>服務契約（Service Contract）、數量契約（Quantity Contract）、價值契約（Value Contract）</strong>。</li>
+        <li><span class="qid">3-51</span> 系統產生銷售訂單時會參考的主檔：<strong>顧客主檔、物料主檔、產品-物料主檔</strong>；<strong>不含「供應商主檔」</strong>。</li>
+        <li><span class="qid">3-41</span> 顧客主檔的三大資料結構：<strong>一般性資料（General Data）、公司代碼資料（Company Code Data）、銷售與配銷資料（Sales and Distribution Data）</strong>；<strong>不含「產品與服務資料」</strong>。</li>
+        <li><span class="qid">3-52</span> 顧客-產品資訊紀錄（Customer-Material Information Records）內容：顧客方對產品的品名規格、特定配送資料、產品詳細描述；<strong>不含「產品的庫存量」</strong>。</li>
+        <li><span class="qid">3-53</span> 顧客訂單輸入完成（品名、規格、數量、日期）後，系統會自動執行：<strong>可用量查核（Availability Check）、出貨排程（Delivery Scheduling）、顧客信用查核（Credit Check）、出口執照查核（Export License Check）</strong>。</li>
+        <li><span class="qid">3-54</span> 客戶資料建檔並核定信用額度後，仍須持續<strong>「維護客戶資料」</strong>。</li>
+        <li><span class="qid">3-55</span> 客戶信用評估常用的<strong>「5C 評估法」</strong>：<strong>償債能力（Capability）、抵押品（Collateral）、條件（Condition of Business）、信譽（Character）</strong>等構面。</li>
+        <li><span class="qid">3-75</span> ERP 系統常見的授信查核方式：<strong>系統自我維護的信用資訊、第三方公信單位徵詢、其他企業／產業的信用查核</strong>；<strong>不含「要求擔保品」</strong>。</li>
+        <li><span class="qid">3-90</span> <strong>揀貨單（Picking List）</strong>內容包含：產品名稱與規格、數量、倉庫存放位置；<strong>不含「產品價格」</strong>。</li>
+        <li><span class="qid">3-43</span> 交貨方式：<strong>訂單合併（Order Combination）</strong>是將多張訂單轉至同一交貨文件；<strong>完全交貨（Complete Delivery）</strong>是將一張訂單的數量完全轉到同一交貨文件；<strong>局部交貨（Partial Delivery）</strong>是將「<strong>一張</strong>訂單」切分為數張不同的交貨文件（並非「多張訂單」切分）。</li>
+        <li><span class="qid">3-91, 3-92</span> 處理客戶銷售退回時開立的單據為<strong>「貸項通知（Credit Memo）」</strong>；若需向客戶<strong>「追加運費」</strong>等費用，則開立<strong>「借項通知（Debit Memo）」</strong>。</li>
+        <li><span class="qid">3-93</span> <strong>付款條件（Payment Terms）</strong>：依不同的付款時間給予不同的折扣或條件。</li>
+        <li><span class="qid">3-42</span> 銷售資訊系統在 ERP 中屬於<strong>「物流資訊系統」</strong>的次系統之一。</li>
+        <li><span class="qid">3-68</span> 物流的分類（Scheer, 1994）：<strong>進料物流（Inbound）、生產物流（Production）、出貨物流（Outbound）</strong>；<strong>不含「庫存物流」</strong>。</li>
+        <li><span class="qid">3-38</span> （附圖題）出貨排程相關時間項目：<strong>運輸規劃前置時間、裝載時間、運送時間</strong>。</li>
+    </ul>
+
+    <h3 class="topic">4. 需求反映策略：MTS / MTO / ATO / ETO</h3>
+    <table class="compare">
+        <tr><th>策略</th><th>全名</th><th>特性</th><th>題號</th></tr>
+        <tr>
+            <td><strong>MTS</strong></td>
+            <td>存貨生產（Make to Stock）</td>
+            <td>提供顧客最佳服務水準，訂單滿足前置時間最短</td>
+            <td><span class="qid">3-40, 3-88</span></td>
+        </tr>
+        <tr>
+            <td><strong>MTO</strong></td>
+            <td>接單後生產（Make to Order）</td>
+            <td>依顧客功能需求量身訂做生產</td>
+            <td><span class="qid">3-40</span></td>
+        </tr>
+        <tr>
+            <td><strong>ATO</strong></td>
+            <td>接單後裝配（Assemble to Order）</td>
+            <td>少量多樣、快速回應顧客需求，並可降低成品庫存</td>
+            <td><span class="qid">3-40, 3-70</span></td>
+        </tr>
+        <tr>
+            <td><strong>ETO</strong></td>
+            <td>接單後設計（Engineer to Order）</td>
+            <td>分歧點（Decoupling Point）離供應商最近、離顧客最遠</td>
+            <td><span class="qid">3-71</span></td>
+        </tr>
+    </table>
+
+    <h3 class="topic">5. 財務與會計模組</h3>
+    <ul class="points">
+        <li><span class="qid">3-07</span> 會計作業流程的正確順序：<strong>登記會計分錄 → 過帳 → 試算 → 調整 → 結帳 → 編制報表</strong>。</li>
+        <li><span class="qid">3-56</span> 在會計六步驟中，<strong>「調整」並非平常經常性的工作</strong>，而是屬於期末作業。</li>
+        <li><span class="qid">3-08</span> <strong>標準成本法</strong>：以預先指定的材料、直接人工、製造費用標準分攤率，依既定標準直接計算生產成本。</li>
+        <li><span class="qid">3-22</span> 應收帳款相關概念：「月結 60 天」指應收帳款成立 60 天後即應向顧客收款；應收帳款平均收回時間過長會增加壞帳風險；採標準成本企業<strong>出貨時</strong>分錄為「借：銷貨成本／貸：存貨」；<strong>收款時</strong>分錄應為「借：現金或銀行存款／貸：應收帳款」（並非「借：銷貨收入／貸：應收帳款」）。</li>
+        <li><span class="qid">3-76</span> 應收帳款循環（立帳、收款、沖銷確認）的目的：即時提供應收帳款報表供決策、自動開立對帳單供稽核追蹤、提供自動／人工沖帳作業、提供帳齡分析以反映客戶信用狀況。</li>
+        <li><span class="qid">3-23</span> 固定資產管理：取得方式包含購買、自建、租賃；折舊是將成本分攤於受益期間；處分方式主要為報廢；<strong>製造業固定資產通常占資產比重「高」</strong>（並非不高）。</li>
+        <li><span class="qid">3-29, 3-57</span> 折舊法分類：<strong>直線法</strong>包含平均法、生產數量法、工作時間法；<strong>「定率遞減法」屬於非直線法（加速折舊法）</strong>。計算範例：原值 20 萬元、耐用年限 5 年、每年遞減率 30%，則第三年折舊金額為 <strong>2.94 萬元</strong>。</li>
+        <li><span class="qid">3-28</span> <strong>管理會計</strong>源自成本會計但範圍更廣，從企業整體角度分析；除了成本數量管理外，<strong>也注重成本的「前因後果追蹤」</strong>，這也是管理會計與傳統會計的重要差異之一。</li>
+        <li><span class="qid">3-58</span> 管理會計提供管理者「<strong>規劃方面</strong>」的資訊，例如產品定位、訂價到營運目標的決定。</li>
+        <li><span class="qid">3-94</span> ERP 財務會計模組的主要效益：提供具<strong>整合性、正確性、即時性</strong>的資訊；<strong>不含「分析性」</strong>。</li>
+        <li><span class="qid">3-09</span> 工作說明書（Job Description）內容：<strong>關係與職責、工作摘要、績效標準</strong>；<strong>不含「企業組織架構」</strong>。</li>
+    </ul>
+
+    <h3 class="topic">6. 人力資源管理（HR）模組</h3>
+    <ul class="points">
+        <li><span class="qid">3-25, 3-78</span> 人力資源管理工作通常從<strong>「組織設計」</strong>開始，<strong>並非</strong>從「招募」開始。</li>
+        <li><span class="qid">3-59</span> 人力資源管理五大功能（徵才、選才、用才、育才、留才）中，<strong>「勞資關係」屬於「留才」</strong>。</li>
+        <li><span class="qid">3-60</span> HR 模組基本功能包含：<strong>教育訓練、績效管理、組織發展、考勤計算</strong>。</li>
+        <li><span class="qid">3-82</span> HR 模組相關功能：<strong>工資核算、工時管理、招募管理、差勤計算</strong>。</li>
+        <li><span class="qid">3-31, 3-61</span> 完整的教育訓練計畫步驟：<strong>評估需求 → 設定目標 → 擬定計畫 → 實施訓練 → 評估結果</strong>（不含獨立的「事前分析」「事後分析」步驟）。</li>
+        <li><span class="qid">3-62</span> <strong>招募（Recruitment）</strong>的工作目的：以最有效率的方式吸引求職者、協助提升甄選成功機率、評估各種招募方式的有效性；<strong>不含</strong>「建構企業人力資源資料庫的完整性」。</li>
+        <li><span class="qid">3-63</span> 常見<strong>選才工具</strong>：<strong>智力測驗、性向測驗、體能測驗</strong>；<strong>不含「財力分析」</strong>。</li>
+        <li><span class="qid">3-64</span> <strong>薪資管理</strong>功能項目包含：<strong>退休金管理、福利管理</strong>；<strong>不含</strong>「工作滿意度調查」與「安全衛生」。</li>
+        <li><span class="qid">3-32</span> <strong>自助式福利計畫（Cafeteria Benefit Plan）</strong>：員工可從組織提供的各種福利項目中，自行選擇組成最符合自身需求的福利組合。</li>
+        <li><span class="qid">3-33</span> <strong>績效評估（Performance Evaluation）</strong>步驟：<strong>決定績效標準 → 評估績效 → 提供回饋</strong>；<strong>不含「確認企業目標」</strong>。</li>
+        <li><span class="qid">3-65</span> 協助員工了解組織對其工作表現的評價，屬於生涯發展管理的工作之一：<strong>建立公平公正的績效評估制度</strong>。</li>
+        <li><span class="qid">3-81</span> 員工基本薪資的認定範圍：<strong>職務基礎給付、績效基礎給付、能力基礎給付</strong>；<strong>不含「關係為基礎的給付」</strong>。</li>
+        <li><span class="qid">3-83</span> 企業訓練依時機可分三種：<strong>職前訓練、在職訓練（由資深員工帶領新進員工）、職外訓練</strong>。</li>
+        <li><span class="qid">3-30</span> <strong>組織發展（Organization Development）</strong>：因應內外環境變化的監測調控過程，常配合<strong>變革管理、工作設計、工作滿意度調查、組織氣候調查</strong>等措施進行。</li>
+        <li><span class="qid">3-79</span> 在人力資源管理發展（c-HR、d-HR、e-HR、HCM）中，與 ERP 系統「選、用、育、留」最密切相關的階段為：<strong>e-HR</strong>。</li>
+        <li><span class="qid">3-80</span> 人力資源再造取向：<strong>功能取向（Push 式）</strong>傾向以「組織」觀點朝精簡收斂、屬 Top-Down 管理觀點；<strong>流程取向（Pull 式）</strong>則強調員工賦能、單一窗口、工作整合化設計，從客戶服務觀點思考流程。</li>
+        <li><span class="qid">3-84</span> 導入<strong>自助服務（Self-service）</strong>的好處：提供員工賦能機會、確保資料品質、提升作業品質與效率以達流程改善、提升人力資源管理的策略價值。</li>
+        <li><span class="qid">3-34, 3-95</span> <strong>HRIS（人力資源資訊系統）</strong>：可結合門禁管制與薪資自動轉帳系統；並非企業必備模組（員工人數不多時可用人工方式管理）；<strong>與其他模組的整合性相對「不高」，是 ERP 系統中較為獨立、與其他模組資料交換較少的模組</strong>，<strong>並非</strong>核心模組之一。</li>
+        <li><span class="qid">3-35</span> 薪資是大多數員工加入組織的主要目的之一，但薪資與福利並<strong>非</strong>留住人才的唯一憑藉；員工協助與訓練則有助於了解組織運作及員工表現，作為改進人事作業的參考。</li>
+        <li><span class="qid">3-96</span> 企業整體人力資源績效的發揮，依賴<strong>人力資源單位與部門及事業單位經理人的「協同合作」</strong>。</li>
+        <li><span class="qid">3-97</span> 大多數 ERP 系統處理員工甄選作業的範圍主要為：<strong>記錄甄選過程與結果</strong>（並非由系統直接執行甄選或通知結果）。</li>
+        <li><span class="qid">3-98</span> 大多數 ERP 系統將<strong>「薪資管理」</strong>列為人力資源模組的基本配備。</li>
+        <li><span class="qid">3-99</span> 大多數 ERP 系統在員工績效管理方面主要提供：<strong>績效評量結果的紀錄</strong>（而非開發評量工具、執行評量或提供回饋）。</li>
+        <li><span class="qid">3-100</span> 一般認為組織中最重要的資源是：<strong>人力資源</strong>。</li>
+        <li><span class="qid">3-45</span> 在 ERP 各模組導入順序中，<strong>「人力資源模組」通常較其他模組為晚導入</strong>。</li>
+    </ul>
+
+    <p class="back-top"><a href="#top">回目錄 ↑</a></p>
+</section>
+
+<!-- ============ 第四類 ============ -->
+<section class="category" id="cat4">
+    <h2>第四類：ERP 系統與組織管理 <small>(4-01～4-32，共 32 題)</small></h2>
+
+    <h3 class="topic">1. 企業流程再造（BPR）</h3>
+    <ul class="points">
+        <li><span class="qid">4-15, 4-30</span> Hammer 與 Champy 提出 BPR 的四大要素：<strong>根本（Fundamental）、徹底（Radical）、顯著／戲劇性（Dramatic）、流程（Process）</strong>；<strong>不含「組織學習」</strong>。</li>
+        <li><span class="qid">4-22</span> 依 Hammer &amp; Champy 提出的「3C」，BPR 須面對的多方壓力來自：<strong>顧客（Customer）、改變（Change）、競爭（Competition）</strong>；<strong>不含「供應商」</strong>。</li>
+        <li><span class="qid">4-01</span> BPR 五種流程改善方式之一：減少不必要的分工以避免流程冗長，可採用<strong>「作業的合併」</strong>。</li>
+        <li><span class="qid">4-26</span> 透過現場人員填寫資料、後續再以網路修改／新增、並由其他人員協同審核修正以逐漸完整資料的做法，屬於 BPR 中的<strong>「作業的分散」</strong>。</li>
+        <li><span class="qid">4-14</span> ERP 與 BPR 的關係相當彈性：可先 BPR 後 ERP、可先 ERP 後 BPR，也可同時進行；但<strong>並非所有導入 ERP 的企業都必須進行 BPR</strong>。</li>
+        <li><span class="qid">4-07</span> ERP 導入結合 BPR：可實現 IT 的組織績效、可能帶來劇烈的組織變革、需要各部門通力合作；
+            <span class="note">易混淆點：結合 BPR 的目的並非「使 ERP 系統更加遷就既有的企業流程」——正確做法應是調整企業流程以配合 ERP 系統的最佳實務（Best Practice）。</span>
+        </li>
+        <li><span class="qid">4-17</span> 「流程分析」必須達成的任務：<strong>建模（Modeling）、監控（Monitoring）、整合（Integrating）</strong>；<strong>不含「修補（Fixing）」</strong>。</li>
+        <li><span class="qid">4-18</span> 企業流程管理（BPM）：可透過主從式架構整合地域分散的資源以集中控管；流程規劃之初須先統一定義企業內各種用詞與術語；應用<strong>物件導向方法論（OOM）</strong>是聯結流程設計與 ERP 配置的最佳途徑，有助於降低時間成本並提升分析品質與彈性；
+            <span class="note">易混淆點：「企業變革屬於微觀層次、流程設計屬於宏觀層次」是錯誤敘述，兩者層次關係相反。</span>
+        </li>
+    </ul>
+
+    <h3 class="topic">2. 組織變革管理</h3>
+    <ul class="points">
+        <li><span class="qid">4-02, 4-08</span> 學者 <strong>Kurt Lewin</strong> 提出的組織變革三部曲：<strong>解凍（Unfreezing） → 變革（Changing） → 再凍結（Refreezing）</strong>。</li>
+        <li><span class="qid">4-06</span> <strong>完備型維護（Perfective Maintenance）</strong>：旨在加強系統流程效率、改善成果與可維護性，使系統更貼近使用者需求並改善程式的成本效益。</li>
+    </ul>
+
+    <h3 class="topic">3. IT 治理與電腦稽核</h3>
+    <ul class="points">
+        <li><span class="qid">4-09</span> 國際間通行的 IT 治理相關標準：<strong>ISO/IEC 17799、ITIL、PRINCE2</strong>；<strong>不含「COCOMO」</strong>（COCOMO 是軟體成本估算模型，非治理標準）。</li>
+        <li><span class="qid">4-13</span> IT 治理的設計原則：選擇正確的時間點進行 IT 治理設計、制訂例外處理流程、明確安排 IT 治理的所有權與責任；<strong>不含「基層人員的參與」</strong>。</li>
+        <li><span class="qid">4-20, 4-31</span> IT 治理協會（ITGI）提出的 IT 治理框架五大構面：<strong>策略一致性、價值的傳遞、風險管理、資源管理、績效衡量</strong>；<strong>不含「成本的傳遞」</strong>。</li>
+        <li><span class="qid">4-10</span> 電腦稽核的目標：<strong>保衛資產、維護資料完整性、達成系統效率目標</strong>；<strong>不含「系統的時效性」</strong>。</li>
+        <li><span class="qid">4-32</span> <strong>電腦稽核</strong>：稽核人員利用人工或電腦系統蒐集證據，據以判斷電子資料處理系統是否達成組織目標的過程。</li>
+        <li><span class="qid">4-04, 4-29</span> <strong>「繞過電腦查核」（電腦外稽核）</strong>：適用於輸入系統的原始資料可取得、且資料格式並非僅機器可讀的情境；此方式（僅比對輸入與輸出資料是否吻合）常用於<strong>「外部稽核」</strong>。</li>
+        <li><span class="qid">4-03</span> 資訊安全風險評估：應先進行<strong>資產分類與盤點</strong>，再據以執行風險評鑑；資訊科技風險是<strong>可被量化</strong>的。</li>
+        <li><span class="qid">4-28</span> ISO 標準對應：<strong>風險管理 → ISO 31000；資訊安全管理 → ISO 27001；品質管理 → ISO 9000；IT 服務管理 → ISO 20000</strong>。</li>
+        <li><span class="qid">4-21</span> 風險評量等級範例：若負面消息預估造成之財物損失約為新台幣 5,000 萬元，依風險評量表應屬於<strong>「等級 2：嚴重」</strong>。</li>
+    </ul>
+
+    <h3 class="topic">4. ERP 導入績效評估與專案管理</h3>
+    <ul class="points">
+        <li><span class="qid">4-19, 4-11</span> 評估 ERP 導入成功的四個績效指標層次：<strong>系統建置績效、資訊應用績效、營運作業績效、企業經營績效</strong>；<strong>不含「系統改造績效」</strong>，「人員流動比率」也不屬於此導入績效評估指標。</li>
+        <li><span class="qid">4-23</span> <strong>平衡計分卡（BSC）</strong>的執行步驟：<strong>建立對策略目標的共識 → 建立方案的目標與策略 → 制定實施計畫 → 回饋與學習</strong>。</li>
+        <li><span class="qid">4-05</span> ERP 系統<strong>專案維護階段</strong>包含：<strong>專案檢討、維護管理與升級、專案的後續工作</strong>。</li>
+        <li><span class="qid">4-16</span> ERP 系統<strong>專案的後續工作</strong>須執行：<strong>系統效益評估、檢視系統資訊安全、進行系統稽核工作</strong>；<strong>「正式上線」並不代表專案的結束</strong>。</li>
+        <li><span class="qid">4-12</span> ERP 導入成功關鍵因素中，<strong>「在訂單旺季時導入」並非有利做法</strong>——應避開營運尖峰期進行系統切換。</li>
+        <li><span class="qid">4-27</span> ERP 導入專案目標訂定要點：應<strong>清楚簡單易懂、可量測或有具象標準可比對、可評估成本效益且具可實現性</strong>；<strong>不宜</strong>追求「意涵深遠、項目越完整越多越好」。</li>
+        <li><span class="qid">4-24</span> ERP 導入後對企業的可能影響：<strong>整合公司資源以達規模經濟、整合資訊使擷取更快更正確、簡化作業流程以縮短溝通與作業時間、可精確計算成本</strong>。</li>
+        <li><span class="qid">4-25</span> ERP 導入相關的潛在風險項目：<strong>職責集中化、交易由電腦自動產生或執行、通訊系統或伺服器損壞、缺乏交易軌跡</strong>。</li>
+    </ul>
+
+    <p class="back-top"><a href="#top">回目錄 ↑</a></p>
+</section>
+
+<!-- ============ 第五類 ============ -->
+<section class="category" id="cat5">
+    <h2>第五類：未來展望 <small>(5-01～5-25，共 25 題)</small></h2>
+
+    <h3 class="topic">1. ERP II 與企業電子化</h3>
+    <ul class="points">
+        <li><span class="qid">5-01</span> <strong>ERP II</strong>：包含 CRM、SCM、BI 等系統，是企業策略與特定產業領域專屬應用系統的組合；資料的運用從「內部產生使用」轉變為「內外部共享」；其應用領域<strong>並不限於製造業</strong>，其他產業領域同樣適用。</li>
+        <li><span class="qid">5-08</span> 第二代企業資源規劃（ERP II）的範疇包含：<strong>SCM（供應鏈管理）、BI（商業智慧）、CRM（顧客關係管理）</strong>；<strong>不含「TOC（限制理論）」</strong>。</li>
+        <li><span class="qid">5-13</span> 在 ERP II 的六大特性（角色、領域、功能、程序、架構、資料）中，「從傳統的製造、配銷、財務會計，擴張到包含特定產業／部門及跨產業的資訊處理」屬於<strong>「領域」</strong>特性。</li>
+        <li><span class="qid">5-19</span> 依 Gartner 的定義，ERP II 簡言之即為：<strong>「協同商務」</strong>。</li>
+        <li><span class="qid">5-02</span> 企業電子化相關定義：<strong>企業電子化</strong>是應用整合性資訊系統，規劃與執行採購、生產、銷售、服務等前後台作業；<strong>電子化企業</strong>涉及電子交易，並利用電子設備重新界定經營模式以創造顧客價值；<strong>SCM</strong>是針對「從供應商到顧客」的整體流程進行規劃、執行與控制（涵蓋物流、資訊流、金流）；<strong>電子商務</strong>則是利用通訊網路，對消費者（B2C）及企業（B2B）傳遞資訊、銷售商品並提供服務。</li>
+        <li><span class="qid">5-11, 5-22</span> 依 Arthur Andersen 提出的<strong>企業 E 化四階段</strong>：<strong>E 化萌芽期 → E 化導入期 → E 化整合期 → 全面 E 化期</strong>；其中「網站設置」屬於<strong>萌芽期</strong>而非導入期；<strong>ERP 系統的導入屬於「E 化導入期」</strong>。</li>
+        <li><span class="qid">5-18</span> <strong>EAI（Enterprise Application Integration，企業應用整合）</strong>：用於新舊系統間的介接整合，將某功能 A 產出的資料轉換為功能 B 可讀取的格式，或撰寫專屬的介接程式以串接系統。</li>
+    </ul>
+
+    <h3 class="topic">2. 供應鏈管理（SCM）</h3>
+    <ul class="points">
+        <li><span class="qid">5-05, 5-20</span> <strong>SCOR 模型</strong>將供應鏈組織劃分為五大商業流程：<strong>計劃（Plan）、採購／資源（Source）、製造（Make）、配送／運送（Deliver）、退貨／回收（Return）</strong>；其中<strong>「計劃」最具高度策略意味</strong>。SCM 供應商的產品通常包含「供應鏈規劃」與「供應鏈執行」兩大類；<strong>先進規劃排程（APS）</strong>是以「<strong>有限產能</strong>」的觀點進行排程（並非無限產能）；SCM 透過協同規劃可解決長鞭效應問題，最佳化供應鏈資源安排，並有助於降低（而非提高）整體存貨水準。</li>
+        <li><span class="qid">5-14</span> SCM 的主要決策項目包含：<strong>位置（Location）、生產（Production）、存貨（Inventory）、運輸（Transportation）</strong>。</li>
+        <li><span class="qid">5-25</span> 企業對企業（<strong>B2B</strong>）應用的核心：<strong>供應鏈管理（SCM）</strong>。</li>
+    </ul>
+
+    <h3 class="topic">3. 顧客關係管理（CRM）</h3>
+    <ul class="points">
+        <li><span class="qid">5-09, 5-15</span> 一個完整的 <strong>CRM</strong> 系統至少應包含三部分：<strong>前端使用者介面、中間 CRM 活動支援、後端顧客關係資料管理</strong>。</li>
+        <li><span class="qid">5-21</span> CRM 的三種運行型態：<strong>操作型（Operational）、分析型（Analytical）、協同型（Collaborative）</strong>。</li>
+        <li><span class="qid">5-24</span> CRM 的成功推動，必須整合<strong>「人員、企業流程、系統」</strong>三者。</li>
+        <li><span class="qid">5-10</span> 在 SCM／KM／CRM／BI 等概念辨析題中，<strong>「具備智慧型內容的共同資訊存取平台，針對組織性知識進行個人化及可攜式存取的單一定點」</strong>是<strong>知識管理（KM）</strong>的描述，而非 CRM。</li>
+    </ul>
+
+    <h3 class="topic">4. 知識管理（KM）與商業智慧（BI）／資料倉儲</h3>
+    <ul class="points">
+        <li><span class="qid">5-06</span> 知識管理（KM）的知識轉換種類包含：<strong>社會化（Socialization）、整合化（Combination）、外部化（Externalization）、內部化（Internalization）</strong>；常見 BI 工具包含：資料探勘、線上分析處理（OLAP）、深層分析（Drill Down）、平衡計分卡。</li>
+        <li><span class="qid">5-12, 5-16</span> 知識管理（KM）的正確程序：<strong>知識獲得 → 知識轉換 → 知識擴散 → 知識應用</strong>。</li>
+        <li><span class="qid">5-03</span> <strong>商業智慧（BI）</strong>的特色：處理<strong>結構化資料</strong>，以資料庫／資料倉儲儲存，並以特定圖表呈現分析結果；<strong>不含</strong>「全文檢索、規則比對」等非結構化處理方式。</li>
+        <li><span class="qid">5-04</span> <strong>平衡計分卡</strong>常被運用於<strong>「商業智慧（BI）」</strong>模組中，作為管理工具之一。</li>
+        <li><span class="qid">5-07, 5-23</span> <strong>資料倉儲（Data Warehouse）</strong>四大特性：<strong>主題導向（Subject Oriented）、整合性（Integrated）、時間變動性（Time Variant）、非揮發性（Nonvolatile）</strong>；<strong>不含「可揮發性」</strong>。</li>
+        <li><span class="qid">5-17</span> 資料倉儲的<strong>「非揮發性」</strong>特性：資料存入後即不再隨時間變化而異動、修正或更新，具有唯讀的性質。</li>
+    </ul>
+
+    <p class="back-top"><a href="#top">回目錄 ↑</a></p>
+</section>
+
+</div>
+
+<footer>
+    依據 113 年企業資源規劃 ERP 學科題庫整理製作，共涵蓋 250 題對應知識點，僅供複習參考。
+</footer>
+
+</body>
+</html>
