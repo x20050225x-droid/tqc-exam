@@ -1,5 +1,9 @@
-// TQC 資料庫設計與應用 - 題庫 Part 3
-// 來源檔案: 3.pdf (5-01 ~ 5-47) & 4.pdf (5-48 ~ 6-25)
+/**
+ * TQC 資料庫設計與應用 - 題庫 Part 3
+ * 範圍：第 5 章 ~ 第 6 章（題號 5-01 至 6-25）
+ * 來源：3.pdf、4.pdf
+ * 欄位說明：id=題號, text=題目, options=選項, answer=正確答案, type=radio(單選)/checkbox(複選)
+ */
 
 const questions_part3 = [
     // --- 第五類: 函數 (5-01 ~ 5-70) ---

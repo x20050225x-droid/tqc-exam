@@ -1,5 +1,9 @@
-// TQC 資料庫設計與應用 - 題庫 Part 2
-// 來源檔案: 2.pdf (3-30 ~ 4-21) & 3.pdf (4-22 ~ 4-68)
+/**
+ * TQC 資料庫設計與應用 - 題庫 Part 2
+ * 範圍：第 3 章 ~ 第 4 章（題號 3-30 至 4-68）
+ * 來源：2.pdf、3.pdf
+ * 欄位說明：id=題號, text=題目, options=選項, answer=正確答案, type=radio(單選)/checkbox(複選)
+ */
 
 const questions_part2 = [
     // --- 第三類: 結構化查詢語言 (接續 Part 1) ---

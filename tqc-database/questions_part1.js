@@ -1,5 +1,9 @@
-// TQC 資料庫設計與應用 - 題庫 Part 1
-// 來源檔案: 1.pdf (涵蓋 1-01 至 3-29)
+/**
+ * TQC 資料庫設計與應用 - 題庫 Part 1
+ * 範圍：第 1 章 ~ 第 3 章（題號 1-01 至 3-29）
+ * 來源：1.pdf
+ * 欄位說明：id=題號, text=題目, options=選項, answer=正確答案, type=radio(單選)/checkbox(複選)
+ */
 
 const questions_part1 = [
     // --- 第一類: 資料庫概論 ---
