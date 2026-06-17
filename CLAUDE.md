@@ -28,6 +28,7 @@ tqc-exam/
 | `tqc-database/` | TQC 資料庫設計與應用 | 智慧測驗 | `tqc_db_exam_weights` | `questions`（由 4 個 part 合併） |
 | `supply-chain/` | SUP-SC 供應鏈管理 | 備考系統 | `exem_data_sup_sc` | `questions_sup_sc` → `questions` |
 | `logistics/` | 國際貨櫃+物流 | 極速測驗 | 無 | `sourceQuestions`（內嵌） |
+| `research-method/` | 高階調查與研究方法分析師 | 智慧測驗 | `rm_exam_weights` | `questions` |
 | `ec/` | 跨境電商 | **尚無測驗頁面** | — | `questions_ec` |
 | `pm/` | 專案管理 | **尚無測驗頁面** | — | `questions_pm` |
 
@@ -174,6 +175,7 @@ localStorage.removeItem('ds_exam_weights')
 | `erp_smart_data` | 學習進度 | erp/ 備考系統 |
 | `tqc_db_exam_weights` | 錯題權重 | tqc-database/ |
 | `exem_data_sup_sc` | 學習進度 | supply-chain/ |
+| `rm_exam_weights` | 錯題權重 | research-method/ |
 
 命名規則：`{科目縮寫}_exam_weights`（測驗模式）或 `{科目縮寫}_smart_data`（備考模式）。
 
