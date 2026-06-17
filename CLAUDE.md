@@ -30,7 +30,8 @@ tqc-exam/
 | `logistics/` | 國際貨櫃+物流 | 極速測驗 | 無 | `sourceQuestions`（內嵌） |
 | `research-method/` | 高階調查與研究方法分析師 | 智慧測驗（index）+ 備考（study） | `rm_exam_weights` / `rm_smart_data` | `questions` |
 | `ec/` | 跨境電商 | **尚無測驗頁面** | — | `questions_ec` |
-| `pm/` | 專案管理 | **尚無測驗頁面** | — | `questions_pm` |
+| `pm/` | 專案管理（噓版） | 智慧測驗（index）+ 備考（study） | `pm_exam_weights` / `pm_smart_data` | `questions` |
+| `pm/` | 專案管理（合併版） | 智慧測驗（full）+ 備考（full-study） | `pm_full_exam_weights` / `pm_full_smart_data` | `questions`（由 questions_full.js 載入） |
 
 ---
 
@@ -177,6 +178,10 @@ localStorage.removeItem('ds_exam_weights')
 | `exem_data_sup_sc` | 學習進度 | supply-chain/ |
 | `rm_exam_weights` | 錯題權重 | research-method/ 智慧測驗 |
 | `rm_smart_data` | 學習進度 | research-method/ 備考系統 |
+| `pm_exam_weights` | 錯題權重 | pm/ 智慧測驗（噓版） |
+| `pm_smart_data` | 學習進度 | pm/ 備考系統（噓版） |
+| `pm_full_exam_weights` | 錯題權重 | pm/ 智慧測驗（合併版） |
+| `pm_full_smart_data` | 學習進度 | pm/ 備考系統（合併版） |
 
 命名規則：`{科目縮寫}_exam_weights`（測驗模式）或 `{科目縮寫}_smart_data`（備考模式）。
 
